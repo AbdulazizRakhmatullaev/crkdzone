@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function Squad() {
   return (
@@ -12,9 +12,7 @@ export default function Squad() {
           src="/squad.jpg"
           alt="img"
           className="hd_img"
-          priority={false}
-          loading="lazy"
-          decoding="async"
+          priority={true}
           width={485} // Placeholder values
           height={190} // Placeholder values
         />

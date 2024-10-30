@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function Missions() {
   return (
@@ -13,9 +13,7 @@ export default function Missions() {
           src="/missions.jpg"
           alt="img"
           className="hd_img"
-          priority={false}
-          loading="lazy"
-          decoding="async"
+          priority={true}
           width={485} // Placeholder values
           height={190} // Placeholder values
         />

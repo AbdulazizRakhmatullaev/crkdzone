@@ -63,11 +63,7 @@ export default function RootLayout({
   }, []);
 
   const setPlatformStyle = () => {
-    if (platform === "ios" || platform === "android") {
-      return "phn";
-    } else {
-      return "dsk";
-    }
+    return platform === "ios" || platform === "android" ? "phn" : "dsk";
   };
 
   return (
