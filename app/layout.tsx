@@ -39,16 +39,27 @@ export default function RootLayout({
   const [platform, setPlatform] = useState<string | null>(null);
 
   useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const webApp = window.Telegram.WebApp;
+    // Create script element and load it
+    const script = document.createElement("script");
+    script.src = "https://telegram.org/js/telegram-web-app.js";
+    script.async = true;
 
-      setPlatform(webApp.platform);
+    script.onload = () => {
+      if (window.Telegram?.WebApp) {
+        const webApp = window.Telegram.WebApp;
+        setPlatform(webApp.platform);
+        webApp.expand();
+        webApp.disableVerticalSwipes();
+      }
+      setLoading(false);
+    };
 
-      webApp.expand();
-      webApp.disableVerticalSwipes();
-    }
+    document.head.appendChild(script);
 
-    setLoading(false);
+    // Cleanup function to remove script if component unmounts
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   const setPlatformStyle = () => {
@@ -62,10 +73,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <script
-          src="https://telegram.org/js/telegram-web-app.js"
-          async
-        ></script>
+        <title>Crackedzone</title>
       </Head>
       <body>
         {" "}

@@ -44,9 +44,7 @@ export default function Rankings() {
           src="/rankings.jpeg"
           alt="img"
           className="hd_img"
-          priority={false}
-          loading="lazy"
-          decoding="async"
+          priority={true}
           width={495} // Placeholder values
           height={190} // Placeholder values
         />
@@ -66,6 +64,7 @@ export default function Rankings() {
             className="pp"
             width={40}
             height={40}
+            priority={true}
           />
           <div className="rpl-usrnm">Username</div>
         </div>
