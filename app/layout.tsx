@@ -12,6 +12,7 @@ interface HapticFeedback {
 
 // Define types for Telegram and WebApp
 interface TelegramWebApp {
+  initData: string;
   ready(callback: () => void): void;
   expand(): void;
   disableVerticalSwipes(): void;
@@ -37,6 +38,7 @@ export default function RootLayout({
 }>) {
   const [loading, setLoading] = useState(true);
   const [platform, setPlatform] = useState<string | null>(null);
+  const [initData, setInitData] = useState<string | null>(null);
 
   useEffect(() => {
     // Create script element and load it
@@ -50,6 +52,8 @@ export default function RootLayout({
         setPlatform(webApp.platform);
         webApp.expand();
         webApp.disableVerticalSwipes();
+
+        setInitData(webApp.initData);
       }
       setLoading(false);
     };
@@ -106,6 +110,7 @@ export default function RootLayout({
         ) : (
           <div id="main">
             <div id="mainCon" className={setPlatformStyle()}>
+              {initData}
               {children}
               <ToTopBtn />
             </div>
