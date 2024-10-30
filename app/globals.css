@@ -1,0 +1,470 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Hitmarker Regular";
+  src: url("./fonts/HitmarkerRegular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hitmarker Bold";
+  src: url("./fonts/HitmarkerBold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hitmarker Condensed Black";
+  src: url("./fonts/HitmarkerCondensed-Black.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --bg: rgba(34, 34, 34, 0.6);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  font-family: "Hitmarker Regular", Arial;
+  font-size: 15px;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.fl {
+  display: flex;
+  gap: 10px;
+}
+
+.hr {
+  right: 50%;
+  height: 1px;
+  width: 100%;
+  background-color: #fff;
+  margin: 15px 0;
+}
+
+.hrV {
+  position: fixed;
+  top: 0;
+  right: 50%;
+  width: 1px;
+  height: 100%;
+  background-color: red;
+}
+
+#main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
+  overscroll-behavior-y: none;
+}
+
+#main::-webkit-scrollbar {
+  width: 12px;
+}
+
+#main::-webkit-scrollbar-thumb {
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #787c7f;
+}
+
+#mainCon {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+#mainCon.dsk {
+  padding: 70px 20px 70px;
+}
+
+#mainCon.phn {
+  padding: 70px 20px 90px;
+}
+
+#navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding-top: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(22px);
+  border-top: 1px solid rgb(47, 51, 54);
+}
+
+#navbar.dsk {
+  height: 50px;
+}
+
+#navbar.phn {
+  height: 80px;
+}
+
+.navrow {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0 20px;
+  gap: 10px;
+}
+
+.lnk {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.lnk svg {
+  color: #787c7f;
+  fill: #787c7f;
+  height: 24px;
+  width: 24px;
+}
+
+.actlnk svg {
+  color: #fff;
+  fill: #fff;
+}
+
+.homcon {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 600px;
+  flex-grow: 1;
+}
+
+.balance {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wallet,
+.lig {
+  background: rgba(250, 250, 250, 0.12);
+  padding: 7px 14px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 2px solid #fff;
+}
+
+.coinscnt {
+  font-size: 36px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1;
+}
+
+.coinscnt span {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  background: radial-gradient(#344d5fc7, #273842a1 80%);
+  backdrop-filter: blur(22px);
+  box-shadow: inset 0px -2px 4px -1px #1e6fa7;
+  font-family: "Hitmarker Condensed Black", Arial;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #72cff0;
+  text-shadow: 0px 0px 1.5px #8ce1ffd4;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, #0000000f 1px, transparent 1px),
+    linear-gradient(to bottom, #0000000f 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+.tRow {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.pp {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 25px;
+  border-radius: 50%;
+  border: 1px solid rgb(47, 51, 54);
+}
+
+.usn {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.header {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hd_img {
+  position: relative;
+  height: 190px;
+  width: 100%;
+  object-fit: cover;
+  border: 1px solid #fff;
+  clip-path: polygon(0 20%, 10% 0, 100% 0, 100% 80%, 90% 100%, 0% 100%);
+}
+
+.hd_desc {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.crkdlg {
+  margin-top: 20px;
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+}
+
+.pgres {
+  font-family: "Hitmarker Bold", Arial;
+  margin: 70px 0 20px;
+  text-align: center;
+}
+
+.frns {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.frn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.frinf {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.frpp {
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #009ad8;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 17px;
+  border: 1px solid rgba(250, 250, 250, 0.12);
+}
+
+.frusn {
+  font-weight: 500;
+}
+
+.frpts {
+  font-weight: 600;
+}
+
+.loadcol {
+  background: #000;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.misCat {
+  font-family: "Hitmarker Bold", Arial;
+  margin: 30px 0 10px;
+}
+
+.mis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: var(--bg);
+  backdrop-filter: blur(22px);
+}
+
+.misT {
+  font-family: "Hitmarker Bold", Arial;
+}
+
+.misDesc {
+  font-size: 13px;
+  color: #03fffc;
+}
+
+.misProg {
+  background: #fff;
+  padding: 6px 15px;
+  border: 1px solid #000;
+  font-family: "Hitmarker Bold", Arial;
+  font-size: 15px;
+  color: #000;
+}
+
+#toTop {
+  position: fixed;
+  bottom: 70px;
+  right: 25px;
+  z-index: 1000;
+  border: none;
+  outline: none;
+  background: var(--bg);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgb(47, 51, 54);
+  color: white;
+  cursor: pointer;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  opacity: 0;
+  display: grid;
+  place-items: center;
+  transition: 0.2s;
+  visibility: hidden;
+}
+
+#toTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#toTop:hover {
+  background: rgba(51, 51, 51, 0.7);
+}
+
+#toTop svg {
+  height: 22px;
+  width: 22px;
+  vertical-align: middle;
+}
+
+.mpl {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: var(--bg);
+  backdrop-filter: blur(22px);
+}
+
+.rts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rpl {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: var(--bg);
+  backdrop-filter: blur(22px);
+}
+
+.rpl-usr {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rpl-txt {
+  font-family: "Hitmarker Condensed Black", Arial;
+}
