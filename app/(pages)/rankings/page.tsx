@@ -85,18 +85,18 @@ export default function Rankings() {
               cx="16"
               cy="16"
               fill="none"
-              r="14"
-              strokeWidth="4"
-              style={{ stroke: "rgb(29, 155, 240)", opacity: 0.2 }}
+              r="10"
+              strokeWidth="2"
+              style={{ stroke: "rgb(255, 255, 255)", opacity: 0.2 }}
             ></circle>
             <circle
               cx="16"
               cy="16"
               fill="none"
-              r="14"
-              strokeWidth="4"
+              r="10"
+              strokeWidth="2"
               style={{
-                stroke: "rgb(29, 155, 240)",
+                stroke: "rgb(255, 255, 255)",
                 strokeDasharray: 80,
                 strokeDashoffset: 60,
               }}

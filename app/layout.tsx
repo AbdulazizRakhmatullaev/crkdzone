@@ -6,31 +6,6 @@ import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 
-interface HapticFeedback {
-  impactOccurred(type: "light" | "medium" | "heavy"): void;
-}
-
-// Define types for Telegram and WebApp
-interface TelegramWebApp {
-  initData: string;
-  ready(callback: () => void): void;
-  expand(): void;
-  disableVerticalSwipes(): void;
-  platform: string;
-  HapticFeedback: HapticFeedback;
-}
-
-interface Telegram {
-  WebApp: TelegramWebApp;
-}
-
-// Extend the global window object
-declare global {
-  interface Window {
-    Telegram: Telegram;
-  }
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,7 +13,8 @@ export default function RootLayout({
 }>) {
   const [loading, setLoading] = useState(true);
   const [platform, setPlatform] = useState<string | null>(null);
-  const [initData, setInitData] = useState<string | null>(null);
+  const [tgId, setTgId] = useState<number>(0);
+  const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
     // Create script element and load it
@@ -48,14 +24,23 @@ export default function RootLayout({
 
     script.onload = () => {
       if (window.Telegram?.WebApp) {
-        const webApp = window.Telegram.WebApp;
-        setPlatform(webApp.platform);
+        const webApp = window.Telegram?.WebApp; 
         webApp.expand();
         webApp.disableVerticalSwipes();
 
-        setInitData(webApp.initData);
+        const initData = webApp?.initData;
+
+        if (initData) {
+          const params = new URLSearchParams(initData);
+          const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+          const username = params.get("username") ? JSON.parse(params.get("username")!) : null;
+
+          setTgId(userId);
+          setUsername(username);
+        }
+
+        setPlatform(webApp.platform);
       }
-      setLoading(false);
     };
 
     document.head.appendChild(script);
@@ -65,6 +50,38 @@ export default function RootLayout({
       document.head.removeChild(script);
     };
   }, []);
+
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      const createUser = async () => {
+        try {
+          const res = await fetch("/api/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              tg_id: tgId,
+              username: username
+            })
+          });
+
+          if (!res.ok) {
+            throw new Error("Failed to create a user.")
+          }
+
+          const data = await res.json();
+          console.log(data.message);
+        } catch (err) {
+          console.error("Failed to create a user", err);
+        }
+      }
+
+      createUser();
+    }
+
+    setLoading(false);
+  }, [tgId, username]);
 
   const setPlatformStyle = () => {
     return platform === "ios" || platform === "android" ? "phn" : "dsk";
@@ -90,17 +107,17 @@ export default function RootLayout({
                 cy="16"
                 fill="none"
                 r="14"
-                strokeWidth="4"
-                style={{ stroke: "rgb(29, 155, 240)", opacity: 0.2 }}
+                strokeWidth="2"
+                style={{ stroke: "rgb(255, 255, 255)", opacity: 0.2 }}
               ></circle>
               <circle
                 cx="16"
                 cy="16"
                 fill="none"
                 r="14"
-                strokeWidth="4"
+                strokeWidth="2"
                 style={{
-                  stroke: "rgb(29, 155, 240)",
+                  stroke: "rgb(255, 255, 255)",
                   strokeDasharray: 80,
                   strokeDashoffset: 60,
                 }}
@@ -110,7 +127,8 @@ export default function RootLayout({
         ) : (
           <div id="main">
             <div id="mainCon" className={setPlatformStyle()}>
-              {initData}
+                {tgId}
+                {username}
               {children}
               <ToTopBtn />
             </div>
