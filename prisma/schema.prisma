@@ -10,15 +10,14 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 model User {
   id Int @id @default(autoincrement())
   tg_id Int
-  username String?
+  username String
   authDate DateTime
-
   balance Int
   friends Int
 }

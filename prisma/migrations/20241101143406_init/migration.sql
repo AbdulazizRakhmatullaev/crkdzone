@@ -2,7 +2,7 @@
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "tg_id" INTEGER NOT NULL,
-    "username" TEXT,
+    "username" TEXT NOT NULL,
     "authDate" TIMESTAMP(3) NOT NULL,
     "balance" INTEGER NOT NULL,
     "friends" INTEGER NOT NULL,

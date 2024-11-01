@@ -33,7 +33,7 @@ export default function RootLayout({
         if (initData) {
           const params = new URLSearchParams(initData);
           const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-          const username = params.get("username") ? JSON.parse(params.get("username")!) : null;
+          const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
           setTgId(userId);
           setUsername(username);
