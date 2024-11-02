@@ -5,26 +5,22 @@ import Head from "next/head";
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
+import { UserProvider, useUser } from "./components/user";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const UserInitializer = () => {
+  const { setUser } = useUser();
   const [loading, setLoading] = useState(true);
-  const [platform, setPlatform] = useState<string | null>(null);
-  const [tgId, setTgId] = useState<number>(0);
+  const [tgId, setTgId] = useState<number | null>(null);
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    // Create script element and load it
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
     script.async = true;
 
     script.onload = () => {
       if (window.Telegram?.WebApp) {
-        const webApp = window.Telegram?.WebApp; 
+        const webApp = window.Telegram.WebApp;
         webApp.expand();
         webApp.disableVerticalSwipes();
 
@@ -38,107 +34,99 @@ export default function RootLayout({
           setTgId(userId);
           setUsername(username);
         }
-
-        setPlatform(webApp.platform);
       }
     };
 
     document.head.appendChild(script);
 
-    // Cleanup function to remove script if component unmounts
     return () => {
       document.head.removeChild(script);
     };
   }, []);
 
   useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const createUser = async () => {
-        try {
-          const res = await fetch("/api/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              tg_id: tgId,
-              username: username
-            })
-          });
+    if (tgId && username) {
+      const initializeUser = async () => {
+        const res = await fetch("/api/check-user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ tgId, username })
+        });
 
-          if (!res.ok) {
-            throw new Error("Failed to create a user.")
-          }
-
-          const data = await res.json();
-          console.log(data.message);
-        } catch (err) {
-          console.error("Failed to create a user", err);
+        if (!res.ok) {
+          throw new Error("Error checking or creating user");
         }
-      }
 
-      createUser();
+        const userData = await res.json();
+        setUser(userData);
+        setLoading(false);
+      };
+
+      initializeUser();
+    }
+  }, [tgId, username, setUser]);
+
+  return loading ? null : null; // Nothing needs to be rendered
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const [platform, setPlatform] = useState<string | undefined>("");
+
+  useEffect(() => {
+    const setPlatformStyle = () => {
+      const platform = window.Telegram?.WebApp?.platform;
+      if (platform === "ios" || platform === "android") {
+        setPlatform("phn")
+      }
+      else {
+        setPlatform("dsk");
+      }
     }
 
-    setLoading(false);
-  }, [tgId, username]);
-
-  const setPlatformStyle = () => {
-    return platform === "ios" || platform === "android" ? "phn" : "dsk";
-  };
+    setPlatformStyle();
+  }, [])
 
   return (
-    <html lang="en">
-      <Head>
-        <title>Crackedzone</title>
-      </Head>
-      <body>
-        {" "}
-        {loading ? (
-          <div className="loadcol">
-            <svg
-              className="spinner"
-              height="100%"
-              viewBox="0 0 32 32"
-              width="100%"
-            >
-              <circle
-                cx="16"
-                cy="16"
-                fill="none"
-                r="14"
-                strokeWidth="2"
-                style={{ stroke: "rgb(255, 255, 255)", opacity: 0.2 }}
-              ></circle>
-              <circle
-                cx="16"
-                cy="16"
-                fill="none"
-                r="14"
-                strokeWidth="2"
-                style={{
-                  stroke: "rgb(255, 255, 255)",
-                  strokeDasharray: 80,
-                  strokeDashoffset: 60,
-                }}
-              ></circle>
-            </svg>
-          </div>
-        ) : (
+    <UserProvider>
+      <UserInitializer />
+      <html lang="en">
+        <Head>
+          <title>Crackedzone</title>
+        </Head>
+        <body>
           <div id="main">
-            <div id="mainCon" className={setPlatformStyle()}>
-                {tgId}
-                {username}
+            <div id="mainCon" className={platform}>
+              <UserDisplay />
               {children}
               <ToTopBtn />
             </div>
-            <nav id="navbar" className={setPlatformStyle()}>
+            <nav id="navbar" className={platform}>
               <div className="navgrid"></div>
               <Navbar />
             </nav>
           </div>
-        )}
-      </body>
-    </html>
+        </body>
+      </html>
+    </UserProvider>
   );
 }
+
+const UserDisplay = () => {
+  const { user } = useUser();
+
+  return (
+    <>
+      {user?.tg_id}
+      {user?.username}
+      {user?.balance}
+      {user?.friends}
+      {user?.authDate ? user.authDate.toLocaleDateString() : 'N/A'}
+    </>
+  );
+};

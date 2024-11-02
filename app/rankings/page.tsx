@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useUser } from '../components/user';
 
 type User = {
   id: number;
@@ -12,6 +13,7 @@ type User = {
 export default function Rankings() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
 
   useEffect(() => {
     // Fetch user data and handle loading state
@@ -66,9 +68,9 @@ export default function Rankings() {
             height={40}
             priority={true}
           />
-          <div className="rpl-usrnm">Username</div>
+          <div className="rpl-usrnm">{user?.username}</div>
         </div>
-        <div className="rpl-txt">#3</div>
+        <div className="rpl-txt">{user?.balance}</div>
       </div>
 
       <div className="hr"></div>

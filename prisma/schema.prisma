@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  tg_id Int
+  tg_id Int @unique
   username String
   authDate DateTime
   balance Int
