@@ -98,7 +98,7 @@ export default function RootLayout({
       <html lang="en">
         <Head>
           <title>Crackedzone</title>
-          <script src="https://telegram.org/js/telegram-web-app.js"></script>
+          <script src="https://telegram.org/js/telegram-web-app.js" async></script>
         </Head>
         <body>
         {loading ? (
