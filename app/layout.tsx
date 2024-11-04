@@ -128,7 +128,7 @@ export default function RootLayout({
                   {dataUnsafe?.user?.language_code} <br />
                   {dataUnsafe?.user?.photo_url} <br />
 
-                  {dataUnsafe?.user?.username} - {noUsername}
+                  {dataUnsafe?.user?.username} - {noUsername} <br />
                   {dataUnsafe?.auth_date} <br />
                   {dataUnsafe?.query_id} <br />
                   {children}
