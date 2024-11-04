@@ -1,19 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { useUser } from '../components/user';
+import { UserContext } from "@/app/layout";
 
 type User = {
   id: number;
+  tg_id: number;
   username: string;
   balance: number;
+  friends: number;
+  authDate: Date;
 };
 
 export default function Rankings() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser();
+  const user = useContext(UserContext)
 
   useEffect(() => {
     // Fetch user data and handle loading state

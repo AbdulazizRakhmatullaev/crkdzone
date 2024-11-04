@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { LargeNumberLike } from 'crypto';
 
 declare global {
     var prisma: PrismaClient | undefined; // Allow it to be undefined initially
