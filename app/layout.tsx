@@ -36,7 +36,7 @@ export default function RootLayout({
   // const [username, setUsername] = useState<string | null>(null);
   const [initData, setInitData] = useState<string | null>(null);
   const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
-  const [noUsername, setNoUsername] = useState<string | null>(null);
+  const [noUsername, setNoUsername] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -52,7 +52,7 @@ export default function RootLayout({
         const initData = webApp?.initData;
         const dataUnsafe = webApp?.initDataUnsafe;
 
-        if (dataUnsafe.user?.username === undefined || "") setNoUsername("null");
+        if (dataUnsafe.user?.username === undefined) setNoUsername("null");
 
         setInitData(initData);
         setDataUnsafe(dataUnsafe)
