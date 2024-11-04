@@ -18,6 +18,22 @@ interface User {
   authDate: Date;
 }
 
+interface WebAppUser {
+  id: number;
+  username: string;
+  first_name: string;
+  last_name?: string;
+  photo_url?: string;
+  language_code?: string;
+}
+
+interface initDataUnsafe {
+  user?: WebAppUser;
+  query_id?: string;
+  auth_date?: number;
+  hash?: string;
+}
+
 export const UserContext = createContext<User | null>(null);
 
 export default function RootLayout({
@@ -30,6 +46,7 @@ export default function RootLayout({
   // const [tgId, setTgId] = useState<number | null>(null);
   // const [username, setUsername] = useState<string | null>(null);
   const [initData, setInitData] = useState<string | null>(null);
+  const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -43,7 +60,10 @@ export default function RootLayout({
         webApp.disableVerticalSwipes();
 
         const initData = webApp?.initData;
+        const dataUnsafe = webApp?.initDataUnsafe;
+
         setInitData(initData);
+        setDataUnsafe(dataUnsafe)
 
         // if (initData) {
         //   const params = new URLSearchParams(initData);
@@ -110,6 +130,15 @@ export default function RootLayout({
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
                   {initData}
+                  -
+                  {dataUnsafe?.user?.first_name}
+                  {dataUnsafe?.user?.id}
+                  {dataUnsafe?.user?.language_code}
+                  {dataUnsafe?.user?.last_name}
+                  {dataUnsafe?.user?.photo_url}
+                  {dataUnsafe?.user?.username}
+                  {dataUnsafe?.auth_date}
+                  {dataUnsafe?.query_id}
                   {children}
                 <ToTopBtn />
               </div>
