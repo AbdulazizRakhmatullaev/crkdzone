@@ -8,6 +8,7 @@ import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./components/user"
+import { init } from "next/dist/compiled/webpack/webpack";
 
 interface User {
   id: number;
@@ -29,6 +30,7 @@ export default function RootLayout({
   const [platform, setPlatform] = useState<string | null>(null);
   // const [tgId, setTgId] = useState<number | null>(null);
   // const [username, setUsername] = useState<string | null>(null);
+  const [initData, setInitData] = useState<string | null>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -41,7 +43,8 @@ export default function RootLayout({
         webApp.expand();
         webApp.disableVerticalSwipes();
 
-        // const initData = webApp?.initData;
+        const initData = webApp?.initData;
+        setInitData(initData);
 
         // if (initData) {
         //   const params = new URLSearchParams(initData);
@@ -107,6 +110,7 @@ export default function RootLayout({
             <UserProvider>
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
+                  {initData}
                   {children}
                 <ToTopBtn />
               </div>
