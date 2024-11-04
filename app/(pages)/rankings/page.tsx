@@ -22,7 +22,8 @@ export default function Rankings() {
     // Fetch user data and handle loading state
     const fetchUsers = async () => {
       try {
-        const res = await fetch("/api/users");
+        const res = await fetch("/api/users")
+
         if (!res.ok) {
           throw new Error("Failed to fetch users");
         }
