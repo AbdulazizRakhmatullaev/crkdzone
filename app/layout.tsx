@@ -98,14 +98,13 @@ export default function RootLayout({
         <title>Crackedzone</title>
         </Head>
         <body>
+        <UserContext.Provider value={user}>
         {loading ? (
           <Loading />
         ) : (
             <div id="main">
-              <div id="mainCon" className={setPlatformStyle()}>
-                <UserContext.Provider value={user}>
+                <div id="mainCon" className={setPlatformStyle()}>
                   {children}
-                </UserContext.Provider>
                 <ToTopBtn />
               </div>
               <nav id="navbar" className={setPlatformStyle()}>
@@ -113,6 +112,7 @@ export default function RootLayout({
               </nav>
             </div>
         )}
+        </UserContext.Provider>
         </body>
     </html>
   );
