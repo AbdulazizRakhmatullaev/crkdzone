@@ -38,7 +38,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            if (username !== null) {
+            if (username !== "") {
                 try {
                     const res = await fetch('/api/check-user', {
                         method: "POST",
