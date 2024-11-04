@@ -52,7 +52,7 @@ export default function RootLayout({
         const initData = webApp?.initData;
         const dataUnsafe = webApp?.initDataUnsafe;
 
-        if (dataUnsafe.user?.username === null) setNoUsername("null");
+        if (dataUnsafe.user?.username === undefined || "") setNoUsername("null");
 
         setInitData(initData);
         setDataUnsafe(dataUnsafe)
