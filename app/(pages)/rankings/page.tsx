@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { UserContext } from "@/app/layout";
+import { UserContext } from "@/app/components/user";
 
 type User = {
   id: number;
@@ -72,9 +72,9 @@ export default function Rankings() {
             height={40}
             priority={true}
           />
-          <div className="rpl-usrnm">{user?.username} - {user?.tg_id}</div>
+          <div className="rpl-usrnm">{user?.user?.username} - {user?.user?.tg_id}</div>
         </div>
-        <div className="rpl-txt">{user?.authDate.toLocaleDateString()}</div>
+        <div className="rpl-txt">{user?.user?.authDate.toLocaleDateString()}</div>
       </div>
 
       <div className="hr"></div>

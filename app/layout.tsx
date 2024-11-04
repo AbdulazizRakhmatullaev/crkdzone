@@ -1,7 +1,7 @@
 // app/layout.tsx
 "use client";
 
-import React, { createContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Loading from './components/loading';
 import Navbar from "./components/navbar";
@@ -9,18 +9,9 @@ import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./components/user"
 
-interface User {
-  id: number;
-  tg_id: number;
-  username: string;
-  balance: number;
-  friends: number;
-  authDate: Date;
-}
-
 interface WebAppUser {
   id: number;
-  username: string;
+  username: string | null;
   first_name: string;
   last_name?: string;
   photo_url?: string;
@@ -34,8 +25,6 @@ interface initDataUnsafe {
   hash?: string;
 }
 
-export const UserContext = createContext<User | null>(null);
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,6 +36,7 @@ export default function RootLayout({
   // const [username, setUsername] = useState<string | null>(null);
   const [initData, setInitData] = useState<string | null>(null);
   const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
+  const [noUsername, setNoUsername] = useState<string | null>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -61,6 +51,8 @@ export default function RootLayout({
 
         const initData = webApp?.initData;
         const dataUnsafe = webApp?.initDataUnsafe;
+
+        if (dataUnsafe.user?.username === null) setNoUsername(null);
 
         setInitData(initData);
         setDataUnsafe(dataUnsafe)
@@ -131,12 +123,12 @@ export default function RootLayout({
                 <div id="mainCon" className={setPlatformStyle()}>
                   {initData}
                   -
-                  {dataUnsafe?.user?.first_name} <br />
+                  {dataUnsafe?.user?.first_name} - {dataUnsafe?.user?.last_name} <br />
                   {dataUnsafe?.user?.id} <br />
                   {dataUnsafe?.user?.language_code} <br />
-                  {dataUnsafe?.user?.last_name} <br />
                   {dataUnsafe?.user?.photo_url} <br />
-                  {dataUnsafe?.user?.username} <br />
+
+                  {dataUnsafe?.user?.username} - {noUsername}
                   {dataUnsafe?.auth_date} <br />
                   {dataUnsafe?.query_id} <br />
                   {children}
