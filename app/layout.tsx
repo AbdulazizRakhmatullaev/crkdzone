@@ -8,7 +8,6 @@ import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./components/user"
-import { init } from "next/dist/compiled/webpack/webpack";
 
 interface User {
   id: number;
