@@ -18,6 +18,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | null>(null);
     const [username, setUsername] = useState<string | null>(null);
+    const [noUsername, setNoUsername] = useState(false);
 
     useEffect(() => {
         if (window.Telegram?.WebApp) {
@@ -37,20 +38,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            try {
-                const res = await fetch('/api/check-user', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ tgId, username })
-                });
+            if (username) {
+                try {
+                    const res = await fetch('/api/check-user', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ tgId, username })
+                    });
 
-                if (!res.ok) throw new Error("Error fetching user");
-                const userData = await res.json();
-                setUser(userData); 
-            } catch (err) {
-                console.error("Error fetching user", err);
+                    if (!res.ok) throw new Error("Error fetching user");
+                    const userData = await res.json();
+                    setUser(userData);
+                } catch (err) {
+                    console.error("Error fetching user", err);
+                }
+            } else {
+                setNoUsername(true);
             }
         }
 
@@ -59,7 +64,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {children}
+            {noUsername ? (
+                <div>Soldier, you should a username on your profile <br /> comeback when you are ready.</div>
+            ) : (
+                children
+            )}
         </UserContext.Provider>
     );
 }

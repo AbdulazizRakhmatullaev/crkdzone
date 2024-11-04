@@ -72,9 +72,9 @@ export default function Rankings() {
             height={40}
             priority={true}
           />
-          <div className="rpl-usrnm">{user?.username}</div>
+          <div className="rpl-usrnm">{user?.username} - {user?.tg_id}</div>
         </div>
-        <div className="rpl-txt">{user?.balance}</div>
+        <div className="rpl-txt">{user?.authDate.toLocaleDateString()}</div>
       </div>
 
       <div className="hr"></div>

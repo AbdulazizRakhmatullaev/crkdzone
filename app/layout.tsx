@@ -27,8 +27,8 @@ export default function RootLayout({
 }>) {
   const [loading, setLoading] = useState(true);
   const [platform, setPlatform] = useState<string | null>(null);
-  const [tgId, setTgId] = useState<number | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
+  // const [tgId, setTgId] = useState<number | null>(null);
+  // const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -41,16 +41,16 @@ export default function RootLayout({
         webApp.expand();
         webApp.disableVerticalSwipes();
 
-        const initData = webApp?.initData;
+        // const initData = webApp?.initData;
 
-        if (initData) {
-          const params = new URLSearchParams(initData);
-          const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-          const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
+        // if (initData) {
+        //   const params = new URLSearchParams(initData);
+        //   const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+        //   const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
-          setTgId(userId);
-          setUsername(username);
-        }
+        //   setTgId(userId);
+        //   setUsername(username);
+        // }
 
         setPlatform(webApp.platform);
       }
@@ -107,8 +107,6 @@ export default function RootLayout({
             <UserProvider>
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
-                  {tgId}
-                  {username}
                   {children}
                 <ToTopBtn />
               </div>
