@@ -27,7 +27,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             if (initData) {
                 const params = new URLSearchParams(initData);
                 const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-                const username = params.get("username") ? JSON.parse(params.get("username")!) : null;
+                const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
                 setTgId(userId);
                 setUsername(username);
@@ -48,7 +48,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
                 if (!res.ok) throw new Error("Error fetching user");
                 const userData = await res.json();
-                setUser(userData);
+                setUser(userData); 
             } catch (err) {
                 console.error("Error fetching user", err);
             }

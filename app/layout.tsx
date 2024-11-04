@@ -46,7 +46,7 @@ export default function RootLayout({
         if (initData) {
           const params = new URLSearchParams(initData);
           const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-          const username = params.get("username") ? JSON.parse(params.get("username")!) : null;
+          const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
           setTgId(userId);
           setUsername(username);
@@ -100,11 +100,11 @@ export default function RootLayout({
         <Head>
         <title>Crackedzone</title>
         </Head>
-        <body>
-        <UserProvider>
+      <body>
         {loading ? (
           <Loading />
         ) : (
+            <UserProvider>
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
                   {tgId}
@@ -115,9 +115,9 @@ export default function RootLayout({
               <nav id="navbar" className={setPlatformStyle()}>
                 <Navbar />
               </nav>
-            </div>
-        )}
+              </div>
         </UserProvider>
+        )}
         </body>
     </html>
   );
