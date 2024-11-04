@@ -30,39 +30,37 @@ export default function RootLayout({
   const [username, setUsername] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
-  // Set up Telegram Web App on load
   useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const script = document.createElement("script");
-      script.src = "https://telegram.org/js/telegram-web-app.js";
-      script.async = true;
+    const script = document.createElement("script");
+    script.src = "https://telegram.org/js/telegram-web-app.js";
+    script.async = true;
 
-      script.onload = () => {
-        const webApp = window.Telegram?.WebApp;
-        if (webApp) {
-          webApp.expand();
-          webApp.disableVerticalSwipes();
+    script.onload = () => {
+      if (window.Telegram?.WebApp) {
+        const webApp = window.Telegram?.WebApp; 
+        webApp.expand();
+        webApp.disableVerticalSwipes();
 
-          const initData = webApp.initData;
-          if (initData) {
-            const params = new URLSearchParams(initData);
-            const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-            const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
+        const initData = webApp?.initData;
 
-            setTgId(userId);
-            setUsername(username);
-          }
+        if (initData) {
+          const params = new URLSearchParams(initData);
+          const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+          const username = params.get("username") ? JSON.parse(params.get("username")!) : null;
 
-          setPlatform(webApp.platform);
+          setTgId(userId);
+          setUsername(username);
         }
-      };
 
-      document.head.appendChild(script);
+        setPlatform(webApp.platform);
+      }
+    };
 
-      return () => {
-        document.head.removeChild(script);
-      };
-    }
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   // Fetch user data when tgId and username are set
@@ -97,8 +95,7 @@ export default function RootLayout({
   return (
       <html lang="en">
         <Head>
-          <title>Crackedzone</title>
-          <script src="https://telegram.org/js/telegram-web-app.js" async></script>
+        <title>Crackedzone</title>
         </Head>
         <body>
         {loading ? (
