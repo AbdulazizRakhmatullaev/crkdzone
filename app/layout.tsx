@@ -131,14 +131,14 @@ export default function RootLayout({
                 <div id="mainCon" className={setPlatformStyle()}>
                   {initData}
                   -
-                  {dataUnsafe?.user?.first_name}
-                  {dataUnsafe?.user?.id}
-                  {dataUnsafe?.user?.language_code}
-                  {dataUnsafe?.user?.last_name}
-                  {dataUnsafe?.user?.photo_url}
-                  {dataUnsafe?.user?.username}
-                  {dataUnsafe?.auth_date}
-                  {dataUnsafe?.query_id}
+                  {dataUnsafe?.user?.first_name} <br />
+                  {dataUnsafe?.user?.id} <br />
+                  {dataUnsafe?.user?.language_code} <br />
+                  {dataUnsafe?.user?.last_name} <br />
+                  {dataUnsafe?.user?.photo_url} <br />
+                  {dataUnsafe?.user?.username} <br />
+                  {dataUnsafe?.auth_date} <br />
+                  {dataUnsafe?.query_id} <br />
                   {children}
                 <ToTopBtn />
               </div>
