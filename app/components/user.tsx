@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 
 interface User {
     tg_id: number;
@@ -10,25 +10,32 @@ interface User {
 
 interface UserContextType {
     user: User | null;
-    setUser: Dispatch<SetStateAction<User | null>>;
 }
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+export const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider = ({ children }: { children: ReactNode }) => {
+export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch('/api/check-user');
+
+                if (!res.ok) throw new Error("Error fetching user");
+                const userData = await res.json();
+                setUser(userData);
+            } catch (err) {
+                console.error("Error fetching user", err);
+            }
+        }
+
+        fetchUser();
+    }, [])
+
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user }}>
             {children}
         </UserContext.Provider>
     );
 }
-
-export const useUser = (): UserContextType => {
-    const context = useContext(UserContext);
-    if (context === undefined) {
-        throw new Error("useUser must be used within a UserProvider");
-    }
-    return context;
-};

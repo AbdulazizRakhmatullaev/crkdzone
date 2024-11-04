@@ -3,16 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { tg_id, username } = await req.json();
+    const { tgId, userN } = await req.json();
     const dateTime = new Date();
 
-    let user = await prisma.user.findUnique({ where: { tg_id }, })
+    let user = await prisma.user.findUnique({ where: { tg_id: tgId } })
 
     if (!user) {
       user = await prisma.user.create({
         data: {
-          tg_id,
-          username,
+          tg_id: tgId,
+          username: userN,
           balance: 0,
           friends: 0,
           authDate: dateTime,

@@ -7,6 +7,7 @@ import Loading from './components/loading';
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
+import { UserProvider } from "./components/user"
 
 interface User {
   id: number;
@@ -28,7 +29,6 @@ export default function RootLayout({
   const [platform, setPlatform] = useState<string | null>(null);
   const [tgId, setTgId] = useState<number | null>(null);
   const [username, setUsername] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -54,6 +54,8 @@ export default function RootLayout({
 
         setPlatform(webApp.platform);
       }
+
+      setLoading(false);
     };
 
     document.head.appendChild(script);
@@ -63,30 +65,31 @@ export default function RootLayout({
     };
   }, []);
 
-  // Fetch user data when tgId and username are set
-  useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const initializeUser = async () => {
-        try {
-          const res = await fetch("/api/check-user", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ tgId, username })
-          });
 
-          if (!res.ok) throw new Error("Error checking or creating user");
-          const userData = await res.json();
-          setUser(userData);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+  // // Fetch user data when tgId and username are set
+  // useEffect(() => {
+  //   if (window.Telegram?.WebApp) {
+  //     const initializeUser = async () => {
+  //       try {
+  //         const res = await fetch("/api/check-user", {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify({ tgId, username })
+  //         });
 
-      initializeUser();
-    }
+  //         if (!res.ok) throw new Error("Error checking or creating user");
+  //         const userData = await res.json();
+  //         setUser(userData);
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     };
 
-    setLoading(false);
-  }, [tgId, username]);
+  //     initializeUser();
+  //   }
+
+  //   setLoading(false);
+  // }, [tgId, username]);
 
   const setPlatformStyle = () => {
     return platform === "ios" || platform === "android" ? "phn" : "dsk";
@@ -98,12 +101,14 @@ export default function RootLayout({
         <title>Crackedzone</title>
         </Head>
         <body>
-        <UserContext.Provider value={user}>
+        <UserProvider>
         {loading ? (
           <Loading />
         ) : (
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
+                  {tgId}
+                  {username}
                   {children}
                 <ToTopBtn />
               </div>
@@ -112,7 +117,7 @@ export default function RootLayout({
               </nav>
             </div>
         )}
-        </UserContext.Provider>
+        </UserProvider>
         </body>
     </html>
   );
