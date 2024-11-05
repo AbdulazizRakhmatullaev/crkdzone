@@ -23,10 +23,8 @@ export default function Rankings() {
     const fetchUsers = async () => {
       try {
         const res = await fetch("/api/users")
+        if (!res.ok) throw new Error("Failed to fetch users");
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch users");
-        }
         const users = await res.json();
         setUsers(users);
       } catch (error) {
@@ -72,9 +70,9 @@ export default function Rankings() {
             height={40}
             priority={true}
           />
-          <div className="rpl-usrnm">{user?.user?.username} - {user?.user?.tg_id}</div>
+          <div className="rpl-usrnm">{}</div>
         </div>
-        <div className="rpl-txt">{user?.user?.authDate.toLocaleDateString()}</div>
+        <div className="rpl-txt">{}</div>
       </div>
 
       <div className="hr"></div>
