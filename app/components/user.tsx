@@ -81,7 +81,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return (
         <UserContext.Provider value={{ user }}>
             {dataUnsafe?.user?.username === undefined ? (
-                <div>Soldier, you should a username on your profile <br /> comeback when you are ready.</div>
+                <div className='fl justify-center items-center'>Soldier, you should a username on your profile <br /> comeback when you are ready.</div>
             ) : (
                 children
             )}
