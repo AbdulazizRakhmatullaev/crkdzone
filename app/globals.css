@@ -57,6 +57,9 @@ a {
   color: currentColor;
 }
 
+.h100 {
+  height: 100%;
+}
 .fl {
   display: flex;
   gap: 10px;

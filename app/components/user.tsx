@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
+import Image from 'next/image';
 
 interface User {
     tg_id: number;
@@ -56,7 +57,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            if (dataUnsafe?.user?.username !== undefined) {
+            if (dataUnsafe?.user?.username !== undefined && window.Telegram?.WebApp) {
                 try {
                     const res = await fetch('/api/check-user', {
                         method: "POST",
@@ -80,8 +81,17 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {dataUnsafe?.user?.username === undefined ? (
-                <div className='fl justify-center items-center'>Soldier, you should a username on your profile <br /> comeback when you are ready.</div>
+            {window.Telegram?.WebApp && dataUnsafe?.user?.username === undefined ? (
+                <div className='fl flex-col justify-center items-center h100'>
+                    <Image
+                        src="/soldier_no_username.png"
+                        alt="img"
+                        priority={true}
+                        width={250} // Placeholder values
+                        height={250} // Placeholder values
+                    />
+                    <div className="txt text-center">We can't recognise you, Soldier!<br /> Comeback when you have a nickname.</div>
+                </div>
             ) : (
                 children
             )}
