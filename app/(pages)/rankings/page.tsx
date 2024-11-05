@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { UserContext } from "@/app/components/user";
+// import { UserContext } from "@/app/components/user";
 
 type User = {
   id: number;
@@ -16,7 +16,7 @@ type User = {
 export default function Rankings() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const user = useContext(UserContext)
+  // const user = useContext(UserContext)
 
   useEffect(() => {
     // Fetch user data and handle loading state
