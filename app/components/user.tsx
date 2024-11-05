@@ -65,7 +65,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ tg_id: tgId, username: username })
+                        body: JSON.stringify({ "tg_id": tgId, "username": username })
                     });
 
                     if (!res.ok) throw new Error("Error getting or creating user");
