@@ -65,14 +65,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ tgId, username })
+                        body: JSON.stringify({ tg_id: tgId, username: username })
                     });
 
-                    if (!res.ok) throw new Error("Error fetching user");
+                    if (!res.ok) throw new Error("Error getting or creating user");
                     const userData = await res.json();
                     setUser(userData);
                 } catch (err) {
-                    console.error("Error fetching user", err);
+                    console.error("Error getting or creating user", err);
                 }
             } else {
                 console.log("No username for this profile");
