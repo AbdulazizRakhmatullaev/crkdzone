@@ -32,7 +32,6 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
-    const [noUsername, setNoUsername] = useState<string | null>(null);
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | null>(null);
     const [username, setUsername] = useState<string | undefined>(undefined);
@@ -50,9 +49,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
             }
 
             const dataUnsafe = webApp?.initDataUnsafe;
-            if (dataUnsafe.user?.username === undefined) setNoUsername("null");
             setDataUnsafe(dataUnsafe);
-            setUsername(dataUnsafe.user?.username);
+            setUsername(dataUnsafe?.user?.username);
         }
     }, [])
 
@@ -82,7 +80,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {noUsername === undefined ? (
+            {dataUnsafe?.user?.username === undefined ? (
                 <div>Soldier, you should a username on your profile <br /> comeback when you are ready.</div>
             ) : (
                 children
