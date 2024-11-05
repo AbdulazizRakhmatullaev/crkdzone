@@ -39,7 +39,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const [username, setUsername] = useState<string | undefined>(undefined);
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+        if (window.Telegram?.WebApp) {
             setIsTelegram(true);
 
             const webApp = window.Telegram?.WebApp;
@@ -84,7 +84,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {isTelegram && dataUnsafe?.user?.username === 'undefined' ? (
+            {window.Telegram?.WebApp && dataUnsafe?.user?.username === undefined ? (
                 <div className='fl flex-col justify-center items-center h-full'>
                     <Image
                         src="/soldier_no_username.png"

@@ -10,7 +10,9 @@ const Navbar = () => {
   const squad = pathname === "/squad";
 
   const trigHapticFdb = () => {
-    window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred("light");
+    }
   };
 
   return (
