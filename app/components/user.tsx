@@ -81,7 +81,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {window.Telegram?.WebApp && dataUnsafe?.user?.username === undefined ? (
+            {!window.Telegram?.WebApp && dataUnsafe?.user?.username === undefined ? (
                 <div className='fl flex-col justify-center items-center h100'>
                     <Image
                         src="/soldier_no_username.png"
