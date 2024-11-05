@@ -87,10 +87,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         src="/soldier_no_username.png"
                         alt="img"
                         priority={true}
-                        width={250} // Placeholder values
-                        height={250} // Placeholder values
+                        width={250}
+                        height={250}
                     />
-                    <div className="txt text-center">We can't recognise you, Soldier!<br /> Comeback when you have a nickname.</div>
+                    <div className="text-center">We can&apos;t recognise you, Soldier!<br /> Comeback when you have a nickname.</div>
                 </div>
             ) : (
                 children
