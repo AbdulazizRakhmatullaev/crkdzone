@@ -13,26 +13,26 @@ interface UserContextType {
     user: User | null;
 }
 
-interface WebAppUser {
-    id: number;
-    username: string | null;
-    first_name: string;
-    last_name?: string;
-    photo_url?: string;
-    language_code?: string;
-}
+// interface WebAppUser {
+//     id: number;
+//     username: string | undefined;
+//     first_name: string;
+//     last_name?: string;
+//     photo_url?: string;
+//     language_code?: string;
+// }
 
-interface initDataUnsafe {
-    user?: WebAppUser;
-    query_id?: string;
-    auth_date?: number;
-    hash?: string;
-}
+// interface initDataUnsafe {
+//     user?: WebAppUser;
+//     query_id?: string;
+//     auth_date?: number;
+//     hash?: string;
+// }
 
 export const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-    const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
+    // const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | null>(null);
     const [username, setUsername] = useState<string | undefined>(undefined);
@@ -41,23 +41,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
         if (window.Telegram?.WebApp) {
             const webApp = window.Telegram?.WebApp;
             const initData = webApp?.initData;
+            // const dataUnsafe = webApp?.initDataUnsafe;
 
             if (initData) {
                 const params = new URLSearchParams(initData);
                 const userId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+                const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
                 setTgId(userId);
+                setUsername(username);
             }
 
-            const dataUnsafe = webApp?.initDataUnsafe;
-            setDataUnsafe(dataUnsafe);
-            setUsername(dataUnsafe?.user?.username);
+            // setDataUnsafe(dataUnsafe);
         }
     }, [])
 
     useEffect(() => {
         const fetchUser = async () => {
-            if (dataUnsafe?.user?.username !== undefined && window.Telegram?.WebApp) {
+            if (username !== undefined) {
                 try {
                     const res = await fetch('/api/check-user', {
                         method: "POST",
@@ -73,15 +74,17 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 } catch (err) {
                     console.error("Error fetching user", err);
                 }
+            } else {
+                console.log("No username for this profile");
             }
         }
 
         fetchUser();
-    }, [tgId, username, dataUnsafe])
+    }, [tgId, username])
 
     return (
         <UserContext.Provider value={{ user }}>
-            {window.Telegram?.WebApp && dataUnsafe?.user?.username === undefined ? (
+            {window.Telegram?.WebApp && username === undefined ? (
                 <div className='fl flex-col justify-center items-center h-full'>
                     <Image
                         src="/soldier_no_username.png"

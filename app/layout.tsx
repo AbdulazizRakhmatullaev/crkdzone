@@ -18,12 +18,12 @@ export default function RootLayout({
   const [platform, setPlatform] = useState<string | null>(null);
 
   useEffect(() => {
-    if (window.Telegram?.WebApp) {
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
     script.async = true;
 
-      script.onload = () => {
+    script.onload = () => {
+      if (window.Telegram?.WebApp) {
         const webApp = window.Telegram?.WebApp; 
         webApp.expand();
         webApp.disableVerticalSwipes();
@@ -31,14 +31,14 @@ export default function RootLayout({
         setPlatform(webApp.platform);
       }
 
-      document.head.appendChild(script);
-
-      return () => {
-        document.head.removeChild(script);
-      };
+      setLoading(false);
     };
 
-    setLoading(false);
+    document.head.appendChild(script);
+
+    return () => {
+        document.head.removeChild(script);
+    }
   }, []);
 
   const setPlatformStyle = () => {
