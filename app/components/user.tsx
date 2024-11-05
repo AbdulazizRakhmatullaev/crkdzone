@@ -33,15 +33,12 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
-    const [isTelegram, setIsTelegram] = useState(false);
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | null>(null);
     const [username, setUsername] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         if (window.Telegram?.WebApp) {
-            setIsTelegram(true);
-
             const webApp = window.Telegram?.WebApp;
             const initData = webApp?.initData;
 
