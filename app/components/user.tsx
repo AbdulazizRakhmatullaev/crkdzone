@@ -81,7 +81,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         fetchUser();
-    }, [tgId, username])
+    }, [tgId, username, dataUnsafe])
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
