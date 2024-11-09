@@ -70,6 +70,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                     });
 
                     if (!res.ok) throw new Error("Error getting or creating user");
+
                     const userData = await res.json();
                     setUser(userData);
                 } catch (err) {
@@ -86,7 +87,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
             {window.Telegram?.WebApp && username === undefined ? (
-                <div className='fl flex-col justify-center items-center h-full'>
+                <div className='fl flex-col justify-center items-center h-full px-5'>
                     <Image
                         src="/soldier_no_username.png"
                         alt="img"
