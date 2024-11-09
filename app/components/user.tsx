@@ -37,6 +37,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | null>(null);
     const [username, setUsername] = useState<string | undefined>(undefined);
+    const [noUsername, setNoUsername] = useState(false);
 
     useEffect(() => {
         if (window.Telegram?.WebApp) {
@@ -51,6 +52,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
                 setTgId(tgId);
                 setUsername(username);
+                setNoUsername(true);
             }
 
             setDataUnsafe(dataUnsafe);
@@ -86,7 +88,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {window.Telegram?.WebApp && username === undefined ? (
+            {noUsername ? (
                 <div className='fl flex-col justify-center items-center h-full px-5'>
                     <Image
                         src="/soldier_no_username.png"

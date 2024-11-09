@@ -19,7 +19,6 @@ export default function Rankings() {
   const userInfo = useContext(UserContext)
 
   useEffect(() => {
-    // Fetch user data and handle loading state
     const fetchUsers = async () => {
       try {
         const res = await fetch("/api/users")
