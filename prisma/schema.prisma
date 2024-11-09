@@ -4,27 +4,30 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
-}
-
 model User {
-  id Int @id @default(autoincrement())
-  tg_id BigInt @unique
-  username String
-  authDate DateTime
-  balance Int
-  friends Int
+  id          Int @id @default(autoincrement())
+  tg_id       BigInt @unique
+  username    String
+  avatar_url  String
+  balance     Int
+  friends     Int
+  authDate    DateTime
 }
 
 model Task {
-  id Int @id @default(autoincrement())
-  title String
+  id          Int @id @default(autoincrement())
+  title       String
   description String
-  points Int
+  points      Int
 }

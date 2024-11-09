@@ -1,9 +1,9 @@
-import prisma from '@/lib/prismaCli';
+import prisma from '@/lib/db';
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { tg_id, username } = await req.json();
+    const { tg_id, username, avatar_url } = await req.json();
     const dateTime = new Date();
 
     let user = await prisma.user.findUnique({ where: { tg_id }, })
@@ -13,6 +13,7 @@ export async function POST(req: Request) {
         data: {
           tg_id,
           username,
+          avatar_url,
           balance: 0,
           friends: 0,
           authDate: dateTime,

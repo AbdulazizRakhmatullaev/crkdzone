@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-// import { UserContext } from "@/app/components/user";
+import { UserContext } from "@/app/components/user";
 
 type User = {
   id: number;
@@ -16,7 +16,7 @@ type User = {
 export default function Rankings() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  // const user = useContext(UserContext)
+  const userInfo = useContext(UserContext)
 
   useEffect(() => {
     // Fetch user data and handle loading state
@@ -70,9 +70,9 @@ export default function Rankings() {
             height={40}
             priority={true}
           />
-          <div className="rpl-usrnm">{}</div>
+          <div className="rpl-usrnm">{userInfo?.user?.username}</div>
         </div>
-        <div className="rpl-txt">{}</div>
+        <div className="rpl-txt">{userInfo?.user?.authDate.toLocaleDateString()}</div>
       </div>
 
       <div className="hr"></div>

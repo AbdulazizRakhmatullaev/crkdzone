@@ -3,9 +3,10 @@ CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "tg_id" BIGINT NOT NULL,
     "username" TEXT NOT NULL,
-    "authDate" TIMESTAMP(3) NOT NULL,
+    "avatar_url" TEXT NOT NULL,
     "balance" INTEGER NOT NULL,
     "friends" INTEGER NOT NULL,
+    "authDate" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

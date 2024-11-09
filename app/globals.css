@@ -121,14 +121,14 @@ a {
   left: 0;
   right: 0;
   width: 100%;
-  padding-top: 12px;
+  padding: 12px 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(22px);
   border-top: 1px solid rgb(47, 51, 54);
 }
 
 #navbar.dsk {
-  height: 50px;
+  height: auto;
 }
 
 #navbar.phn {
