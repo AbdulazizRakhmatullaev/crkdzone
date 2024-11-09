@@ -6,7 +6,6 @@ export async function GET() {
     const users = await prisma.user.findMany();
     return NextResponse.json(users);
   } catch (err) {
-    console.error("Detailed error:", err);
-    return NextResponse.json({ message: "Error finding users", err }, { status: 500 })
+    return NextResponse.json({ message: "Error getting users", err }, { status: 500 })
   }
 }
