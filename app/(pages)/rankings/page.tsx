@@ -3,11 +3,13 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { UserContext } from "@/app/components/user";
+import prisma from '@/lib/db'
 
 type User = {
   id: number;
-  tg_id: number;
+  tg_id: bigint;
   username: string;
+  avatar_url: string;
   balance: number;
   friends: number;
   authDate: Date;
@@ -21,10 +23,7 @@ export default function Rankings() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch("/api/users")
-        if (!res.ok) throw new Error("Failed to fetch users");
-
-        const users = await res.json();
+        const users = await prisma.user.findMany();
         setUsers(users);
       } catch (error) {
         console.error("Error fetching users:", error);

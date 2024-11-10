@@ -1,9 +1,12 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import Image from 'next/image';
+import prisma from '@/lib/db';
 
 interface User {
-    tg_id: number;
+    id: number
+    tg_id: bigint;
     username: string;
+    avatar_url: string;
     balance: number;
     friends: number;
     authDate: Date;
@@ -35,8 +38,8 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 export function UserProvider({ children }: { children: ReactNode }) {
     const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
     const [user, setUser] = useState<User | null>(null);
-    const [tgId, setTgId] = useState<number | null>(null);
-    const [username, setUsername] = useState<string | undefined>(undefined);
+    const [tgId, setTgId] = useState<number | bigint>(0);
+    const [username, setUsername] = useState<string>("null");
 
     useEffect(() => {
         if (window.Telegram?.WebApp) {
@@ -49,8 +52,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 const tgId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
                 const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
-                setTgId(tgId);
+                if (!username) {
+                    setUsername("null");
+                }
+                
                 setUsername(username);
+                setTgId(tgId);
             }
 
             setDataUnsafe(dataUnsafe);
@@ -59,23 +66,25 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            if (username !== undefined) {
-                try {
-                    const res = await fetch('/api/check-user', {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
+            if (username !== "null") {
+                const dateTime = new Date();
+
+                let user = await prisma.user.findUnique({ where: { tg_id: tgId }, })
+
+                if (!user) {
+                    user = await prisma.user.create({
+                        data: {
+                            tg_id: tgId,
+                            username: username,
+                            avatar_url: dataUnsafe?.user?.photo_url || "null",
+                            balance: 0,
+                            friends: 0,
+                            authDate: dateTime,
                         },
-                        body: JSON.stringify({ tg_id: tgId, username, avatar_url: dataUnsafe?.user?.photo_url })
                     });
-
-                    if (!res.ok) throw new Error("Error getting or creating user");
-
-                    const userData = await res.json();
-                    setUser(userData);
-                } catch (err) {
-                    console.error("Error getting or creating user", err);
                 }
+
+                setUser(user)
             } else {
                 console.log("No username for this profile");
             }
@@ -86,7 +95,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {username === undefined ? (
+            {username === "null" ? (
                 <div className='fl flex-col justify-center items-center h-full px-5'>
                     <Image
                         src="/soldier_no_username.png"
