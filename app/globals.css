@@ -108,11 +108,11 @@ a {
 }
 
 #mainCon.dsk {
-  padding: 70px 20px 70px;
+  padding: 70px 20px 75px;
 }
 
 #mainCon.phn {
-  padding: 70px 20px 90px;
+  padding: 70px 20px 100px;
 }
 
 #navbar {
@@ -132,7 +132,7 @@ a {
 }
 
 #navbar.phn {
-  height: 80px;
+  height: 90px;
 }
 
 .navrow {
@@ -436,7 +436,7 @@ a {
 }
 
 #toTop.phn {
-  bottom: 90px;
+  bottom: 100px;
 }
 
 #toTop.show {
