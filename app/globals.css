@@ -160,11 +160,20 @@ a {
   width: 24px;
 }
 
-.actlnk svg {
+.lnk div {
+  color: #787c7f;
+}
+
+.actlnk svg,
+.actlnk div {
   color: #fff;
   fill: #fff;
 }
 
+.lnktxt {
+  font-size: 11px;
+  text-transform: uppercase;
+}
 .homcon {
   display: flex;
   align-items: center;
@@ -423,12 +432,13 @@ a {
 }
 
 #toTop.dsk {
-  bottom: 60px;
+  bottom: 75px;
 }
 
 #toTop.phn {
   bottom: 90px;
 }
+
 #toTop.show {
   opacity: 1;
   visibility: visible;

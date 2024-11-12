@@ -35,6 +35,7 @@ const Navbar = () => {
             </g>
           </svg>
         )}
+        <div className="lnktxt">Base</div>
       </Link>
       <Link
         href="/equipment"
@@ -72,6 +73,7 @@ const Navbar = () => {
             />
           </svg>
         )}
+        <div className="lnktxt">Equipment</div>
       </Link>
       <Link
         href="/missions"
@@ -111,6 +113,7 @@ const Navbar = () => {
             />
           </svg>
         )}
+        <div className="lnktxt">Missions</div>
       </Link>
       <Link
         href="/rankings"
@@ -148,6 +151,7 @@ const Navbar = () => {
             />
           </svg>
         )}
+        <div className="lnktxt">Rankings</div>
       </Link>
       <Link
         href="/squad"
@@ -167,6 +171,7 @@ const Navbar = () => {
             </g>
           </svg>
         )}
+        <div className="lnktxt">Squad</div>
       </Link>
     </div>
   );
