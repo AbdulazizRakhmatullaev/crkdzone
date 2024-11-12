@@ -33,7 +33,9 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden;
-  background: #000;
+  background: rgba(0, 0, 0, 0.221);
+  background-image: url("/dotbg.jpg");
+  background-blend-mode: multiply;
 }
 
 body {
@@ -174,6 +176,7 @@ a {
   font-size: 11px;
   text-transform: uppercase;
 }
+
 .homcon {
   display: flex;
   align-items: center;
@@ -225,15 +228,16 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 15px 0;
+  padding: 10px 0;
   display: flex;
   align-items: center;
   z-index: 1;
   background: radial-gradient(#344d5fc7, #273842a1 80%);
   backdrop-filter: blur(22px);
-  box-shadow: inset 0px -2px 4px -1px #1e6fa7;
+  /* box-shadow: inset 0px -2px 4px -1px #1e6fa7; */
+  border-bottom: 1px solid #72cff08a;
   font-family: "Hitmarker Condensed Black", Arial;
-  font-size: 24px;
+  font-size: 26px;
   text-transform: uppercase;
   color: #72cff0;
   text-shadow: 0px 0px 1.5px #8ce1ffd4;
@@ -287,7 +291,7 @@ a {
   width: 100%;
   object-fit: cover;
   border: 1px solid #fff;
-  clip-path: polygon(0 20%, 10% 0, 100% 0, 100% 80%, 90% 100%, 0% 100%);
+  /* clip-path: polygon(0 20%, 10% 0, 100% 0, 100% 80%, 90% 100%, 0% 100%); */
 }
 
 .hd_desc {

@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const pathname = usePathname();
+  const pathname  = usePathname();
   const base      = pathname === "/";
-  const equipment = pathname === "/equipment";
+  const store = pathname === "/store";
   const missions  = pathname === "/missions";
-  const rankings  = pathname === "/rankings";
+  const ranking   = pathname === "/ranking";
   const squad     = pathname === "/squad";
 
   const trigHapticFdb = () => {
@@ -38,11 +38,11 @@ const Navbar = () => {
         <div className="lnktxt">Base</div>
       </Link>
       <Link
-        href="/equipment"
-        className={`lnk ${pathname === "/equipment" ? "actlnk" : ""}`}
+        href="/store"
+        className={`lnk ${pathname === "/store" ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
-        {equipment ? (
+        {store ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -73,7 +73,7 @@ const Navbar = () => {
             />
           </svg>
         )}
-        <div className="lnktxt">Equipment</div>
+        <div className="lnktxt">store</div>
       </Link>
       <Link
         href="/missions"
@@ -116,11 +116,11 @@ const Navbar = () => {
         <div className="lnktxt">Missions</div>
       </Link>
       <Link
-        href="/rankings"
-        className={`lnk ${pathname === "/rankings" ? "actlnk" : ""}`}
+        href="/ranking"
+        className={`lnk ${pathname === "/ranking" ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
-        {rankings ? (
+        {ranking ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -151,7 +151,7 @@ const Navbar = () => {
             />
           </svg>
         )}
-        <div className="lnktxt">Rankings</div>
+        <div className="lnktxt">Ranking</div>
       </Link>
       <Link
         href="/squad"

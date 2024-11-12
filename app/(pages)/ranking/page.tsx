@@ -15,7 +15,7 @@ type User = {
   authDate: Date;
 };
 
-export default function Rankings() {
+export default function Ranking() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const userInfo = useContext(UserContext)
@@ -40,7 +40,7 @@ export default function Rankings() {
 
   return (
     <>
-      <Title name="Rankings" />
+      <Title name="Ranking" />
       <div className="header">
         <Image
           src="/rankings.jpeg"
