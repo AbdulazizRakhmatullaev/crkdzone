@@ -403,8 +403,7 @@ a {
 
 #toTop {
   position: fixed;
-  bottom: 70px;
-  right: 25px;
+  right: 15px;
   z-index: 1000;
   border: none;
   outline: none;
@@ -423,6 +422,13 @@ a {
   visibility: hidden;
 }
 
+#toTop.dsk {
+  bottom: 60px;
+}
+
+#toTop.phn {
+  bottom: 90px;
+}
 #toTop.show {
   opacity: 1;
   visibility: visible;

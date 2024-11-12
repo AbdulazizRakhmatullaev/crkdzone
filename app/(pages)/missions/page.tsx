@@ -1,13 +1,10 @@
 import Image from "next/image";
+import Title from "@/app/components/title"
 
 export default function Missions() {
   return (
     <>
-      <div className="title">
-        <div className="grid"></div>
-        <div className="tRow">Missions</div>
-      </div>
-
+      <Title name="Missions"/>
       <div className="header">
         <Image
           src="/missions.jpg"

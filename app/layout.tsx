@@ -1,4 +1,3 @@
-// app/layout.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -59,14 +58,13 @@ export default function RootLayout({
         setInitDataUnsafe(initDataUnsafe);
         setPlatform(webApp.platform);
       }
-
-      setLoading(false);
     };
 
+    setLoading(false);
     document.head.appendChild(script);
 
     return () => {
-        document.head.removeChild(script);
+      document.head.removeChild(script);
     }
   }, []);
 
@@ -87,12 +85,12 @@ export default function RootLayout({
             <UserProvider>
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
-                  {initDataUnsafe?.user?.first_name} - {initDataUnsafe?.user?.last_name} <br />
-                  {initDataUnsafe?.user?.id} <br />
+                  name: {initDataUnsafe?.user?.first_name} {initDataUnsafe?.user?.last_name} <br />
+                  tg_id: {initDataUnsafe?.user?.id} <br />
                   username: {initDataUnsafe?.user?.username} <br />
-                  tg_id: {tgId}
+                  tg_id_initData: {tgId}
                   {children}
-                <ToTopBtn />
+                <ToTopBtn className={setPlatformStyle()}/>
               </div>
               <nav id="navbar" className={setPlatformStyle()}>
                 <Navbar />

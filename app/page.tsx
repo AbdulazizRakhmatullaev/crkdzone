@@ -1,11 +1,10 @@
+import Title from "@/app/components/title"
 
 const Home = () => {
   return (
     <>
-      <div className="title">
-        <div className="grid"></div>
-        <div className="tRow">Base</div>
-      </div>
+      <Title name="Rankings" />
+
       <div className="homcon">
         <div className="balance">
           <div className="coinscnt">Soon</div>

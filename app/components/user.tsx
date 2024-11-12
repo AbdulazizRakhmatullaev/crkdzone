@@ -1,6 +1,4 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import Image from 'next/image';
-import prisma from '@/lib/db';
 
 interface User {
     id: number
@@ -67,23 +65,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const fetchUser = async () => {
             if (username !== "null") {
-                const dateTime = new Date();
+                const res = await fetch("api/check-user");
+                if (!res.ok) throw new Error("Unable to run check-user.");
 
-                let user = await prisma.user.findUnique({ where: { tg_id: tgId }, })
-
-                if (!user) {
-                    user = await prisma.user.create({
-                        data: {
-                            tg_id: tgId,
-                            username: username,
-                            avatar_url: dataUnsafe?.user?.photo_url || "null",
-                            balance: 0,
-                            friends: 0,
-                            authDate: dateTime,
-                        },
-                    });
-                }
-
+                const user = await res.json()
                 setUser(user)
             } else {
                 console.log("No username for this profile");
@@ -95,7 +80,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {username === "null" ? (
+            {/* {username === "null" ? (
                 <div className='fl flex-col justify-center items-center h-full px-5'>
                     <Image
                         src="/soldier_no_username.png"
@@ -111,8 +96,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 </div>
             ) : (
                 children
-            )}
-            {/* {children} */}
+            )} */}
+            {children}
         </UserContext.Provider>
     );
 }

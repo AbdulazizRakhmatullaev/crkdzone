@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { UserContext } from "@/app/components/user";
-import prisma from '@/lib/db'
+import Title from "@/app/components/title";
 
 type User = {
   id: number;
@@ -23,10 +23,13 @@ export default function Rankings() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const users = await prisma.user.findMany();
+        const res = await fetch("api/users");
+        if (!res.ok) throw new Error("Unable to fetch users");
+
+        const users = await res.json();
         setUsers(users);
-      } catch (error) {
-        console.error("Error fetching users:", error);
+      } catch (e) {
+        console.error("Failed to fetch users", e);
       } finally {
         setLoading(false);
       }
@@ -37,10 +40,7 @@ export default function Rankings() {
 
   return (
     <>
-      <div className="title">
-        <div className="grid"></div>
-        <div className="tRow">Rankings</div>
-      </div>
+      <Title name="Rankings" />
       <div className="header">
         <Image
           src="/rankings.jpeg"
@@ -72,9 +72,7 @@ export default function Rankings() {
         </div>
         <div className="rpl-txt">{userInfo?.user?.authDate.toLocaleDateString()}</div>
       </div>
-
       <div className="hr"></div>
-
       {loading ? (
         <div className="flex mt-5 justify-center">
           <svg

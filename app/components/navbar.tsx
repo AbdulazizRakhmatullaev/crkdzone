@@ -1,13 +1,15 @@
+"use client"
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const base = pathname === "/";
+  const base      = pathname === "/";
   const equipment = pathname === "/equipment";
-  const missions = pathname === "/missions";
-  const rankings = pathname === "/rankings";
-  const squad = pathname === "/squad";
+  const missions  = pathname === "/missions";
+  const rankings  = pathname === "/rankings";
+  const squad     = pathname === "/squad";
 
   const trigHapticFdb = () => {
     if (window.Telegram?.WebApp) {
