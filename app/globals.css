@@ -62,6 +62,7 @@ a {
 .h100 {
   height: 100%;
 }
+
 .fl {
   display: flex;
   gap: 10px;
@@ -105,6 +106,7 @@ a {
 }
 
 #mainCon {
+  position: relative;
   margin: 0 auto;
   max-width: 600px;
 }
@@ -114,7 +116,7 @@ a {
 }
 
 #mainCon.phn {
-  padding: 70px 20px 100px;
+  padding: 70px 20px 90px;
 }
 
 #navbar {
@@ -133,7 +135,7 @@ a {
 }
 
 #navbar.phn {
-  height: 90px;
+  height: 80px;
 }
 
 .navrow {
@@ -143,7 +145,6 @@ a {
   margin: 0 auto;
   max-width: 600px;
   padding: 0;
-  /* gap: 10px; */
 }
 
 .lnk {
@@ -160,7 +161,7 @@ a {
 
 .actlnk {
   color: #72cff0;
-  background: linear-gradient(to top, #446382, #000);
+  background: linear-gradient(to top, #446382b0, #000);
   border-color: #ffffffd6;
 }
 
@@ -435,7 +436,7 @@ a {
 }
 
 #toTop.phn {
-  bottom: 100px;
+  bottom: 90px;
 }
 
 #toTop.show {
@@ -485,4 +486,26 @@ a {
 
 .rpl-txt {
   font-family: "Hitmarker Condensed Black", Arial;
+}
+
+.frm {
+  position: fixed;
+  left: 0;
+  bottom: 50px;
+  background: #000;
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.frmBtn {
+  background: #fff;
+  color: #000;
+  padding: 12px 20px;
+  width: 100%;
+  max-width: 600px;
+  font-family: "Hitmarker Bold", Arial;
+  font-size: 17px;
+  border: none;
 }

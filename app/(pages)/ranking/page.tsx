@@ -5,6 +5,7 @@ import Image from "next/image";
 import { UserContext } from "@/app/components/user";
 import Title from "@/app/components/title";
 import Header from "@/app/components/header";
+import rnkimg from "@/public/ranking.jpeg";
 
 type User = {
   id: number;
@@ -44,7 +45,7 @@ export default function Ranking() {
       <Title name="Ranking" />
 
       <Header
-        img_src="/ranking.jpeg"
+        img_src={rnkimg}
         desc={<>
           Put in the effort and prove your worth.
           <br />

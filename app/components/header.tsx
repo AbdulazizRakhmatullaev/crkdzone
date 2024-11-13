@@ -1,8 +1,8 @@
 import React from 'react'
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 interface HeaderProps {
-    img_src: string;
+    img_src: StaticImageData;
     desc: React.ReactNode;
     res: string
 }

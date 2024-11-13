@@ -79,10 +79,10 @@ export default function RootLayout({
         <title>Crackedzone</title>
         </Head>
       <body>
+        <UserProvider>
         {loading ? (
           <Loading />
-        ) : (
-            <UserProvider>
+          ) : (
             <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
                   name: {initDataUnsafe?.user?.first_name} {initDataUnsafe?.user?.last_name} <br />
@@ -96,8 +96,8 @@ export default function RootLayout({
                 <Navbar />
               </nav>
               </div>
+          )}
         </UserProvider>
-        )}
         </body>
     </html>
   );

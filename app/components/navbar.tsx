@@ -5,6 +5,10 @@ import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const base = pathname === "/";
+  const missions = pathname === "/missions";
+  const ranking = pathname === "/ranking";
+  const squad = pathname === "/squad";
 
   const trigHapticFdb = () => {
     if (window.Telegram?.WebApp) {
@@ -16,35 +20,28 @@ const Navbar = () => {
     <div className="navrow">
       <Link
         href="/"
-        className={`lnk ${pathname === "/" ? "actlnk" : ""}`}
+        className={`lnk ${base ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         Base
       </Link>
       <Link
-        href="/store"
-        className={`lnk ${pathname === "/store" ? "actlnk" : ""}`}
-        onClick={trigHapticFdb}
-      >
-        Store
-      </Link>
-      <Link
         href="/missions"
-        className={`lnk ${pathname === "/missions" ? "actlnk" : ""}`}
+        className={`lnk ${missions ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         Missions
       </Link>
       <Link
         href="/ranking"
-        className={`lnk ${pathname === "/ranking" ? "actlnk" : ""}`}
+        className={`lnk ${ranking ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         Ranking
       </Link>
       <Link
         href="/squad"
-        className={`lnk ${pathname === "/squad" ? "actlnk" : ""}`}
+        className={`lnk ${squad ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         Squad

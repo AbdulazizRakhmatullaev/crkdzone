@@ -1,5 +1,6 @@
 import Title from "@/app/components/title"
 import Header from "@/app/components/header";
+import sqdimg from "@/public/squad.jpg";
 
 export default function Squad() {
   return (
@@ -7,7 +8,7 @@ export default function Squad() {
       <Title name="Squad" />
 
       <Header
-        img_src="/squad.jpg"
+        img_src={sqdimg}
         desc={
           <>
             Call your friends to cover your six,

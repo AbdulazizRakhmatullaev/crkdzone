@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
+import Image from 'next/image';
 
 interface User {
     id: number
@@ -80,24 +81,26 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {/* {username === "null" ? (
-                <div className='fl flex-col justify-center items-center h-full px-5'>
+            {username === "null" ? (
+                <div className='fl flex-col justify-center items-center h-full px-5 bg-black'>
                     <Image
-                        src="/soldier_no_username.png"
+                        src="/noUsername.jpg"
                         alt="img"
                         priority={true}
                         width={250}
-                        height={250}
+                        height={150}
+                        className='mb-10'
                     />
+                    <div className='text-xl uppercase'>Soldier!</div>
                     <div className="text-center">
-                        We can&apos;t recognise you, Soldier!
-                        <br /> Come back with your username and earn your freedom.
+                        We can&apos;t recognise you,
+                        <br /> Come back with your username.
                     </div>
                 </div>
             ) : (
                 children
-            )} */}
-            {children}
+            )}
+            {/* {children} */}
         </UserContext.Provider>
     );
 }
