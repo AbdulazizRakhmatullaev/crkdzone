@@ -49,7 +49,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             if (initData) {
                 const params = new URLSearchParams(initData);
                 const tgId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-                const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
+                const username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
 
                 setUsername(username);
                 setTgId(tgId);
@@ -67,8 +67,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
                 const user = await res.json()
                 setUser(user)
-            } else {
-                console.log("No username for this profile");
             }
         }
 
@@ -88,7 +86,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                             height={150}
                             className='mb-10'
                         />
-                        <div className='text-xl uppercase'>Soldier! {username}</div>
+                        <div className='text-xl uppercase'>Soldier! username: {username}</div>
                         <div className="text-center">
                             We can&apos;t recognise you,
                             <br /> Come back with your username.
