@@ -88,7 +88,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                             height={150}
                             className='mb-10'
                         />
-                        <div className='text-xl uppercase'>Soldier!</div>
+                        <div className='text-xl uppercase'>Soldier! {username}</div>
                         <div className="text-center">
                             We can&apos;t recognise you,
                             <br /> Come back with your username.
