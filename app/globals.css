@@ -110,7 +110,7 @@ a {
 }
 
 #mainCon.dsk {
-  padding: 70px 20px 75px;
+  padding: 70px 20px 60px;
 }
 
 #mainCon.phn {
@@ -123,7 +123,6 @@ a {
   left: 0;
   right: 0;
   width: 100%;
-  padding: 12px 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(22px);
   border-top: 1px solid rgb(47, 51, 54);
@@ -143,38 +142,26 @@ a {
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
-  padding: 0 20px;
-  gap: 10px;
+  padding: 0;
+  /* gap: 10px; */
 }
 
 .lnk {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-}
-
-.lnk svg {
   color: #787c7f;
-  fill: #787c7f;
-  height: 24px;
-  width: 24px;
-}
-
-.lnk div {
-  color: #787c7f;
-}
-
-.actlnk svg,
-.actlnk div {
-  color: #fff;
-  fill: #fff;
-}
-
-.lnktxt {
-  font-size: 11px;
+  font-size: 14px;
   text-transform: uppercase;
+  padding: 13px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.actlnk {
+  color: #72cff0;
+  background: linear-gradient(to top, #446382, #000);
+  border-color: #ffffffd6;
 }
 
 .homcon {
@@ -291,7 +278,15 @@ a {
   width: 100%;
   object-fit: cover;
   border: 1px solid #fff;
-  /* clip-path: polygon(0 20%, 10% 0, 100% 0, 100% 80%, 90% 100%, 0% 100%); */
+  clip-path: polygon(0 15%, 5% 0, 100% 0, 100% 85%, 95% 100%, 0% 100%);
+}
+
+#border {
+  border-left: 2px solid #f51c40;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 0px;
 }
 
 .hd_desc {
@@ -436,7 +431,7 @@ a {
 }
 
 #toTop.dsk {
-  bottom: 75px;
+  bottom: 60px;
 }
 
 #toTop.phn {

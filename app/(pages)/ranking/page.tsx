@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { UserContext } from "@/app/components/user";
 import Title from "@/app/components/title";
+import Header from "@/app/components/header";
 
 type User = {
   id: number;
@@ -41,22 +42,16 @@ export default function Ranking() {
   return (
     <>
       <Title name="Ranking" />
-      <div className="header">
-        <Image
-          src="/rankings.jpeg"
-          alt="img"
-          className="hd_img"
-          priority={true}
-          width={495} // Placeholder values
-          height={190} // Placeholder values
-        />
-        <div className="hd_desc">
+
+      <Header
+        img_src="/ranking.jpeg"
+        desc={<>
           Put in the effort and prove your worth.
           <br />
-          rank up and show them what you’re made of!
-        </div>
-      </div>
-      <div className="pgres">Place: 3rd</div>
+          Rank up and show them what you’re made of!
+        </>}
+        res={`Place: ${3}`}
+      />
 
       <div className="mpl">
         <div className="rpl-usr">

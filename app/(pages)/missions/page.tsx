@@ -1,25 +1,21 @@
-import Image from "next/image";
 import Title from "@/app/components/title"
+import Header from "@/app/components/header";
 
 export default function Missions() {
   return (
     <>
       <Title name="Missions"/>
-      <div className="header">
-        <Image
-          src="/missions.jpg"
-          alt="img"
-          className="hd_img"
-          priority={true}
-          width={485} // Placeholder values
-          height={190} // Placeholder values
-        />
-        <div className="hd_desc">
-          Complete the objectives, Soldier.
-          <br /> Extra points are on the line!
-        </div>
-      </div>
-      <div className="pgres">Missions complete: 6</div>
+      <Header
+        img_src="/missions.jpg"
+        desc={
+          <>
+            Complete the objectives, Soldier.
+            <br />
+            Extra points are on the line!
+          </>
+        }
+        res={`Completed missions: ${6}`}
+      />
 
       <div className="misCat">Essentials</div>
       <div className="mis">
