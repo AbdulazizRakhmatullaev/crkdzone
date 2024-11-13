@@ -49,7 +49,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             if (initData) {
                 const params = new URLSearchParams(initData);
                 const tgId = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-                const username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
+                const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
 
                 setUsername(username);
                 setTgId(tgId);
@@ -76,7 +76,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
             {process.env.NODE_ENV === "production" ? (
-                username === undefined ? (
+                dataUnsafe?.user?.username === undefined ? (
                     <div className='fl flex-col justify-center items-center h-full px-5 bg-black'>
                         <Image
                             src="/noUsername.jpg"

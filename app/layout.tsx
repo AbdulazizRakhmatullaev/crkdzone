@@ -44,6 +44,8 @@ export default function RootLayout({
         const webApp = window.Telegram?.WebApp; 
         const initDataUnsafe = webApp.initDataUnsafe;
         const initData = webApp.initData;
+        
+        webApp.expand();
 
         if (initData) {
           const params = new URLSearchParams(initData);
@@ -52,7 +54,6 @@ export default function RootLayout({
           setTgId(tg_id);
         }
 
-        webApp.expand();
         webApp.disableVerticalSwipes();
 
         setInitDataUnsafe(initDataUnsafe);
