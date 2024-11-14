@@ -1,5 +1,6 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import Image from 'next/image';
+import Loading from '../components/loading';
 
 interface User {
     id: number
@@ -56,7 +57,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         setDataUnsafe(dataUnsafe);
-        setLoading(false); // Set loading to false after the initial data is processed
+        setTimeout(() => {
+            setLoading(false); // Set loading to false after the initial data is processed
+        }, 1000);
     }, []);
 
     useEffect(() => {
@@ -90,7 +93,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
             {loading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : userNm === undefined && process.env.NODE_ENV === "production" ? (
                 <div className='fl flex-col justify-center items-center px-5 h-full bg-black'>
                     <Image
@@ -98,12 +101,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         alt="img"
                         priority={true}
                         width={250}
-                        height={150}
+                        ч
                         className='mb-10'
                     />
                     <div className='text-xl uppercase'>Soldier?</div>
                     <div className="text-center">
-                            We are unable to recognize you, 
+                        We are unable to recognize you,
                         <br /> Come back with your username on you!
                     </div>
                 </div>

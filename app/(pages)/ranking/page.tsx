@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { UserContext } from "@/app/components/user";
+import { UserContext } from "@/app/contexts/user";
 import Title from "@/app/components/title";
 import Header from "@/app/components/header";
 import rnkimg from "@/public/ranking.jpeg";
@@ -57,7 +57,7 @@ export default function Ranking() {
       <div className="mpl">
         <div className="rpl-usr">
           <Image
-            src="/rankings.jpeg"
+            src="/ranking.jpeg"
             alt="user_img"
             className="pp"
             width={40}

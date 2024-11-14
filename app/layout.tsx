@@ -6,7 +6,7 @@ import Loading from './components/loading';
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
-import { UserProvider } from "./components/user"
+import { UserProvider } from "./contexts/user"
 
 interface WebAppUser {
   id: number;
