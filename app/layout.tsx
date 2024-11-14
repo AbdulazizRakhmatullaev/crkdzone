@@ -74,12 +74,12 @@ export default function RootLayout({
 
 
   return (
-    <UserProvider>
       <html lang="en">
-        <body>
-          {loading ? (
-            <Loading />
-          ) : (
+      <body>
+        {loading ? (
+          <Loading />
+        ) : (
+            <UserProvider>
               <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
                   name: {initDataUnsafe?.user?.first_name} {initDataUnsafe?.user?.last_name} <br />
@@ -93,9 +93,9 @@ export default function RootLayout({
                   <Navbar />
                 </nav>
               </div>
-          )}
-        </body>
-      </html>
-    </UserProvider>
+            </UserProvider>
+        )}
+      </body>
+    </html>
   );
 }

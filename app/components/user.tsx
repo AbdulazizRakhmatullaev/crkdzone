@@ -77,7 +77,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         <UserContext.Provider value={{ user, dataUnsafe }}>
             {process.env.NODE_ENV === "production" ? (
                 username === undefined ? (
-                    <div className='fl flex-col justify-center items-center h-full px-5 bg-black'>
+                    <div className='fl flex-col justify-center items-center px-5 bg-black'>
                         <Image
                             src="/noUsername.jpg"
                             alt="img"
@@ -86,10 +86,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
                             height={150}
                             className='mb-10'
                         />
-                        <div className='text-xl uppercase'>Soldier!</div>
+                        <div className='text-xl uppercase'>S.. Soldier?</div>
                         <div className="text-center">
-                            We can&apos;t recognise you,
-                            <br /> Come back with your username.
+                            We are unable to recognise you,
+                            <br /> Come back with your username on you!
                         </div>
                     </div>
                 ) : (
