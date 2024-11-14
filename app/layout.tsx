@@ -39,25 +39,23 @@ export default function RootLayout({
     script.async = true;
 
     script.onload = () => {
-      if (window.Telegram?.WebApp) {
-        const webApp = window.Telegram?.WebApp; 
-        const initDataUnsafe = webApp.initDataUnsafe;
-        const initData = webApp.initData;
-        
-        webApp.expand();
+      const webApp = window.Telegram?.WebApp; 
+      const initDataUnsafe = webApp.initDataUnsafe;
+      const initData = webApp.initData;
+      
+      webApp.expand();
 
-        if (initData) {
-          const params = new URLSearchParams(initData);
-          const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+      if (initData) {
+        const params = new URLSearchParams(initData);
+        const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
 
-          setTgId(tg_id);
-        }
-
-        webApp.disableVerticalSwipes();
-
-        setInitDataUnsafe(initDataUnsafe);
-        setPlatform(webApp.platform);
+        setTgId(tg_id);
       }
+
+      webApp.disableVerticalSwipes();
+
+      setInitDataUnsafe(initDataUnsafe);
+      setPlatform(webApp.platform);
     };
 
     setLoading(false);
