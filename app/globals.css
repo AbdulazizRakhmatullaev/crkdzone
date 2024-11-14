@@ -161,7 +161,7 @@ a {
 
 .actlnk {
   color: #72cff0;
-  background: linear-gradient(to top, #446382b0, #000);
+  background: linear-gradient(to top, #446382b0, transparent);
   border-color: #ffffffd6;
 }
 
@@ -503,7 +503,7 @@ a {
 }
 
 #frm.phn {
-  bottom: 90px;
+  bottom: 80px;
 }
 
 .frmBtn {

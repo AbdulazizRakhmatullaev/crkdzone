@@ -38,7 +38,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const [dataUnsafe, setDataUnsafe] = useState<initDataUnsafe | null>(null);
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | bigint>(0);
-    const [username, setUsername] = useState<string | undefined>(undefined);
+    const [userNm, setUserNm] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         const webApp = window.Telegram?.WebApp;
@@ -51,7 +51,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             const username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
 
             setTgId(tgId);
-            setUsername(username);
+            setUserNm(username);
         }
 
         setDataUnsafe(dataUnsafe);
@@ -59,9 +59,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            if (username !== undefined && process.env.NODE_ENV === "production") {
+            if (userNm !== undefined && process.env.NODE_ENV === "production") {
                 const tg_id = tgId;
-                const avatar_url = dataUnsafe?.user?.photo_url
+                const username = userNm;
+                const avatar_url = dataUnsafe?.user?.photo_url;
 
                 const res = await fetch("api/check-user", {
                     method: "POST",
@@ -78,11 +79,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         fetchUser();
-    }, [tgId, username, dataUnsafe])
+    }, [tgId, userNm, dataUnsafe])
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {username === undefined && process.env.NODE_ENV === "production" ? (
+            {userNm === undefined && process.env.NODE_ENV === "production" ? (
                 <div className='fl flex-col justify-center items-center px-5 h-full bg-black'>
                     <Image
                         src="/noUsername.jpg"
