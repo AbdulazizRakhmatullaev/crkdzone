@@ -1,7 +1,5 @@
 "use client";
 
-import Title from "@/app/components/title";
-
 const Home = () => {
 
   const setPlatformStyle = () => {
@@ -11,8 +9,6 @@ const Home = () => {
 
   return (
     <div>
-      <Title name="Base" />
-
       <div id="frm" className={setPlatformStyle()}>
         <button className="frmBtn">Farm</button>
       </div>

@@ -3,7 +3,6 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { UserContext } from "@/app/contexts/user";
-import Title from "@/app/components/title";
 import Header from "@/app/components/header";
 import rnkimg from "@/public/ranking.jpeg";
 
@@ -42,8 +41,6 @@ export default function Ranking() {
 
   return (
     <>
-      <Title name="Ranking" />
-
       <Header
         img_src={rnkimg}
         desc={<>

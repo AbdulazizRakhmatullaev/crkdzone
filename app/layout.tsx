@@ -8,22 +8,6 @@ import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./contexts/user"
 
-interface WebAppUser {
-  id: number;
-  username: string | undefined;
-  first_name: string;
-  last_name?: string;
-  photo_url?: string;
-  language_code?: string;
-}
-
-interface initDataUnsafe {
-  user?: WebAppUser;
-  query_id?: string;
-  auth_date?: number;
-  hash?: string;
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,8 +15,6 @@ export default function RootLayout({
 }>) {
   const [loading, setLoading] = useState(true);
   const [platform, setPlatform] = useState<string | null>(null);
-  const [initDataUnsafe, setInitDataUnsafe] = useState<initDataUnsafe | null>(null);
-  const [tgId, setTgId] = useState<number | null>(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -41,26 +23,15 @@ export default function RootLayout({
 
     script.onload = () => {
       const webApp = window.Telegram?.WebApp; 
-      const initDataUnsafe = webApp.initDataUnsafe;
-      const initData = webApp.initData;
       
       webApp.expand();
-
-      if (initData) {
-        const params = new URLSearchParams(initData);
-        const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-
-        setTgId(tg_id);
-      }
-
       webApp.disableVerticalSwipes();
 
-      setInitDataUnsafe(initDataUnsafe);
       setPlatform(webApp.platform);
     };
 
-    setLoading(false);
     document.head.appendChild(script);
+    setLoading(false);
 
     return () => {
       document.head.removeChild(script);
@@ -84,10 +55,6 @@ export default function RootLayout({
             <UserProvider>
               <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
-                  name: {initDataUnsafe?.user?.first_name} {initDataUnsafe?.user?.last_name} <br />
-                  tg_id: {initDataUnsafe?.user?.id} <br />
-                  username: {initDataUnsafe?.user?.username} <br />
-                  tg_id_initData: {tgId}
                   {children}
                   <ToTopBtn className={setPlatformStyle()} />
                 </div>

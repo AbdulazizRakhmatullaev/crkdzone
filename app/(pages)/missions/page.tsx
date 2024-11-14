@@ -1,11 +1,9 @@
-import Title from "@/app/components/title"
 import Header from "@/app/components/header";
 import misImg from "@/public/missions.jpg";
 
 export default function Missions() {
   return (
     <>
-      <Title name="Missions"/>
       <Header
         img_src={misImg}
         desc={
