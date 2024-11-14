@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Head from "next/head";
 import Loading from './components/loading';
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
