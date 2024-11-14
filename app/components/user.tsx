@@ -75,7 +75,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {username === undefined && process.env.NODE_ENV === "develepment" ? (
+            {dataUnsafe?.user?.username === undefined && process.env.NODE_ENV === "production" ? (
                 <div className='fl flex-col justify-center items-center px-5 h-full bg-black'>
                     <Image
                         src="/noUsername.jpg"
