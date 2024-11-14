@@ -105,7 +105,7 @@ export default function Ranking() {
             <div className="rpl" key={user.id}>
               <div className="rpl-usr">
                 <Image
-                  src="/rankings.jpeg"
+                  src={rnkimg}
                   alt="user_img"
                   className="pp"
                   width={40}

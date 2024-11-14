@@ -89,7 +89,7 @@ export default function RootLayout({
                   name: {initDataUnsafe?.user?.first_name} {initDataUnsafe?.user?.last_name} <br />
                   tg_id: {initDataUnsafe?.user?.id} <br />
                   username: {initDataUnsafe?.user?.username} <br />
-                  tg_id_initData: {tgId}
+                  t g_id_initData: {tgId}
                   {children}
                 <ToTopBtn className={setPlatformStyle()}/>
               </div>
