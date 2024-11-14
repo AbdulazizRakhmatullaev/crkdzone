@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import Loading from './components/loading';
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
@@ -73,6 +74,9 @@ export default function RootLayout({
 
   return (
       <html lang="en">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      </Head>
       <body>
         {loading ? (
           <Loading />
