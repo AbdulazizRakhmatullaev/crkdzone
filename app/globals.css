@@ -488,15 +488,22 @@ a {
   font-family: "Hitmarker Condensed Black", Arial;
 }
 
-.frm {
+#frm {
   position: fixed;
   left: 0;
-  bottom: 50px;
   background: #000;
   width: 100%;
   padding: 12px;
   display: flex;
   justify-content: center;
+}
+
+#frm.dsk {
+  bottom: 50px;
+}
+
+#frm.phn {
+  bottom: 90px;
 }
 
 .frmBtn {

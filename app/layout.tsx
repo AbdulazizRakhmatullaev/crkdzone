@@ -75,31 +75,28 @@ export default function RootLayout({
 
 
   return (
+    <UserProvider>
       <html lang="en">
-        <Head>
-        <title>Crackedzone</title>
-        </Head>
-      <body>
-        {loading ? (
-          <Loading />
+        <body>
+          {loading ? (
+            <Loading />
           ) : (
-            <UserProvider>
-            <div id="main">
+              <div id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
                   name: {initDataUnsafe?.user?.first_name} {initDataUnsafe?.user?.last_name} <br />
                   tg_id: {initDataUnsafe?.user?.id} <br />
                   username: {initDataUnsafe?.user?.username} <br />
-                  t g_id_initData: {tgId}
+                  tg_id_initData: {tgId}
                   {children}
-                <ToTopBtn className={setPlatformStyle()}/>
+                  <ToTopBtn className={setPlatformStyle()} />
+                </div>
+                <nav id="navbar" className={setPlatformStyle()}>
+                  <Navbar />
+                </nav>
               </div>
-              <nav id="navbar" className={setPlatformStyle()}>
-                <Navbar />
-              </nav>
-              </div>
-            </UserProvider>
-        )}
+          )}
         </body>
-    </html>
+      </html>
+    </UserProvider>
   );
 }
