@@ -101,7 +101,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         alt="img"
                         priority={true}
                         width={250}
-                        ч
                         className='mb-10'
                     />
                     <div className='text-xl uppercase'>Soldier?</div>
