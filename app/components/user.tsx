@@ -39,6 +39,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [tgId, setTgId] = useState<number | bigint>(0);
     const [userNm, setUserNm] = useState<string | undefined>(undefined);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const webApp = window.Telegram?.WebApp;
@@ -55,35 +56,42 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         setDataUnsafe(dataUnsafe);
-    }, [])
+        setLoading(false); // Set loading to false after the initial data is processed
+    }, []);
 
     useEffect(() => {
         const fetchUser = async () => {
             if (userNm !== undefined && process.env.NODE_ENV === "production") {
-                const tg_id = tgId;
-                const username = userNm;
-                const avatar_url = dataUnsafe?.user?.photo_url;
+                try {
+                    const tg_id = tgId;
+                    const username = userNm;
+                    const avatar_url = dataUnsafe?.user?.photo_url;
 
-                const res = await fetch("api/check-user", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ tg_id, username, avatar_url })
-                });
-                if (!res.ok) throw new Error("Unable to run check-user.");
+                    const res = await fetch("api/check-user", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ tg_id, username, avatar_url })
+                    });
+                    if (!res.ok) throw new Error("Unable to run check-user.");
 
-                const user = await res.json()
-                setUser(user)
+                    const user = await res.json();
+                    setUser(user);
+                } catch (error) {
+                    console.error(error);
+                }
             }
-        }
+        };
 
         fetchUser();
-    }, [tgId, userNm, dataUnsafe])
+    }, [tgId, userNm, dataUnsafe]);
 
     return (
         <UserContext.Provider value={{ user, dataUnsafe }}>
-            {userNm === undefined && process.env.NODE_ENV === "production" ? (
+            {loading ? (
+                <div>Loading...</div>
+            ) : userNm === undefined && process.env.NODE_ENV === "production" ? (
                 <div className='fl flex-col justify-center items-center px-5 h-full bg-black'>
                     <Image
                         src="/noUsername.jpg"
@@ -95,7 +103,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                     />
                     <div className='text-xl uppercase'>Soldier?</div>
                     <div className="text-center">
-                        We are unable to recognise you tho,
+                            We are unable to recognize you, 
                         <br /> Come back with your username on you!
                     </div>
                 </div>
