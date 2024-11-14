@@ -19,6 +19,7 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
+    const [noUsername, setNoUsername] = useState(true);
 
     useEffect(() => {
         if (window.Telegram?.WebApp) {
@@ -31,6 +32,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
             const username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
 
             if (username !== undefined && process.env.NODE_ENV === "production") {
+                setNoUsername(false);
+
                 const fetchUser = async () => {
                         try {
                         const avatar_url = dataUnsafe?.user?.photo_url;
@@ -57,7 +60,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {user?.username === undefined && process.env.NODE_ENV === "production" ? (
+            {noUsername && process.env.NODE_ENV === "production" ? (
                 <div className='fl flex-col justify-center items-center px-5 h-full bg-black'>
                     <Image
                         src="/noUsername.jpg"
