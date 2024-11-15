@@ -22,7 +22,7 @@ const Loading = () => {
                     height={155}
                 />
             </div>
-            <div className="fl flex-col justify-center items-center font-HitConBlk text-4xl relative">
+            <div className="fl flex-col justify-center items-center font-HitConBlk text-4xl relative text-center">
                 <div className="animate-ping absolute">
                     CRACKEDZONE
                 </div>
