@@ -31,7 +31,11 @@ export default function RootLayout({
     };
 
     document.head.appendChild(script);
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3500);
+
 
     return () => {
       document.head.removeChild(script);

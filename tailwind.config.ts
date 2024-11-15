@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        HitConBlk: ['"Hitmarker Condensed Black"']
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
