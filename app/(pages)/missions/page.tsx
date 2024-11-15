@@ -8,9 +8,9 @@ export default function Missions() {
         img_src={misImg}
         desc={
           <>
-            Complete the objectives, Soldier.
+            Complete all the objectives on time,
             <br />
-            Extra points are on the line!
+            And earn your points, Soldier!
           </>
         }
         res={`Completed missions: ${6}`}
