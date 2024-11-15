@@ -24,7 +24,7 @@ export default function Ranking() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch("api/users");
+        const res = await fetch("/api/users");
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const users = await res.json();

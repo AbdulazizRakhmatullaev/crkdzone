@@ -127,7 +127,7 @@ a {
   width: 100%;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(22px);
-  border-top: 1px solid rgb(47, 51, 54);
+  /* border-top: 1px solid rgb(47, 51, 54); */
 }
 
 #navbar.dsk {
@@ -152,10 +152,10 @@ a {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  color: #787c7f;
-  font-size: 14px;
+  color: #adabab;
+  font-size: 12px;
   text-transform: uppercase;
-  padding: 13px 0;
+  padding: 15px 0;
   border-bottom: 2px solid transparent;
 }
 

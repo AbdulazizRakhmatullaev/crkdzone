@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import Image from 'next/image';
 
 interface User {
@@ -21,23 +21,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [noUsername, setNoUsername] = useState(true);
 
-    if (window.Telegram?.WebApp) {
-        const webApp = window.Telegram.WebApp;
-        const initData = webApp.initData;
-        const dataUnsafe = webApp.initDataUnsafe;
+    useEffect(() => {
+        if (window.Telegram?.WebApp) {
+            const webApp = window.Telegram.WebApp;
+            const initData = webApp.initData;
+            const dataUnsafe = webApp.initDataUnsafe;
 
-        const params = new URLSearchParams(initData);
-        const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-        const username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
+            const params = new URLSearchParams(initData);
+            const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+            const username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
 
-        if (username !== undefined && process.env.NODE_ENV === "production") {
-            setNoUsername(false);
+            if (username !== undefined && process.env.NODE_ENV === "production") {
+                setNoUsername(false);
 
-            const fetchUser = async () => {
-                try {
-                    const avatar_url = dataUnsafe?.user?.photo_url;
+                const fetchUser = async () => {
+                    try {
+                        const avatar_url = dataUnsafe?.user?.photo_url;
 
-                        const res = await fetch("api/check-user", {
+                        const res = await fetch("/api/check-user", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -46,15 +47,17 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         });
                         if (!res.ok) throw new Error("Unable to run check-user.");
 
-                    const user = await res.json();
-                    setUser(user);
-                } catch (error) {
-                    console.error(error);
+                        const user = await res.json();
+                        setUser(user);
+                    } catch (error) {
+                        console.error(error);
+                    }
                 }
-            }
-            fetchUser();
-        };
-    }
+                
+                fetchUser();
+            };
+        }
+    }, [])
 
     return (
         <UserContext.Provider value={{ user }}>

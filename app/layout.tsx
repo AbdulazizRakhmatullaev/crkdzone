@@ -53,7 +53,7 @@ export default function RootLayout({
           <Loading />
         ) : (
             <UserProvider>
-              <div id="main">
+              <main id="main">
                 <div id="mainCon" className={setPlatformStyle()}>
                   {children}
                   <ToTopBtn className={setPlatformStyle()} />
@@ -61,7 +61,7 @@ export default function RootLayout({
                 <nav id="navbar" className={setPlatformStyle()}>
                   <Navbar />
                 </nav>
-              </div>
+              </main>
             </UserProvider>
         )}
       </body>
