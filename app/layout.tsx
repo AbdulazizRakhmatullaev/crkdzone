@@ -64,7 +64,6 @@ export default function RootLayout({
                 </nav>
                 <div id="mainCon" className={setPlatformStyle()}>
                   {children}
-                  <Footer />
                   <ToTopBtn className={setPlatformStyle()} />
                 </div>
               </main>

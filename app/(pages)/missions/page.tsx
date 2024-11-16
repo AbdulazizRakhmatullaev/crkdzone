@@ -6,13 +6,8 @@ export default function Missions() {
     <>
       <Header
         img_src={misImg}
-        desc={
-          <>
-            Complete all the objectives on time,
-            <br />
-            And earn your points, Soldier!
-          </>
-        }
+        title="Missions"
+        desc="Hit every objective like your life depends on it — no excuses, no delays, no second chances! Points don’t come easy, soldier, and this field isn’t forgiving. You either earn ‘em or watch yourself fall behind. Stay sharp and stay ready!"
         res={`Completed missions: ${6}`}
       />
 

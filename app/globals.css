@@ -110,20 +110,20 @@ a {
   position: relative;
   margin: 0 auto;
   max-width: 600px;
-  padding: 80px 20px 0;
+  padding: 20px 20px 0;
 }
 
 #mainCon.dsk {
-  padding-bottom: 160px;
+  padding-bottom: 80px;
 }
 
 #mainCon.phn {
-  padding-bottom: 180px;
+  padding-bottom: 100px;
 }
 
 #navbar {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
@@ -146,7 +146,7 @@ a {
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
-  /* padding: 8px 20px; */
+  padding: 10px 20px;
 }
 
 #footer {
@@ -193,16 +193,24 @@ a {
   flex-grow: 1;
   color: #adabab;
   fill: #adabab;
-  padding: 12px 0;
-  border-bottom: 2px solid transparent;
-  text-transform: uppercase;
 }
 
-.actlnk {
+.lnk svg {
+  height: 22px;
+  width: 22px;
+}
+
+.actlnk svg,
+.actlnk div {
   fill: #72cff0;
   color: #72cff0;
-  background: linear-gradient(to top, #446382b0, transparent);
-  border-color: #ffffffd6;
+  /* background: linear-gradient(to top, #446382b0, transparent); */
+    /* border-color: #ffffffd6; */
+}
+
+.lnktxt {
+  font-size: 12px;
+  text-transform: capitalize;
 }
 
 .homcon {
@@ -308,7 +316,7 @@ a {
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
 }
 
@@ -318,7 +326,7 @@ a {
   width: 100%;
   object-fit: cover;
   border: 1px solid #fff;
-  clip-path: polygon(0 15%, 5% 0, 100% 0, 100% 85%, 95% 100%, 0% 100%);
+  /* clip-path: polygon(0 15%, 5% 0, 100% 0, 100% 85%, 95% 100%, 0% 100%); */
 }
 
 #border {
@@ -329,9 +337,14 @@ a {
   left: 0px;
 }
 
+.hdstp {
+  height: 20px;
+  width: 100%;
+  object-fit: cover;
+}
+
 .hd_desc {
   margin-top: 12px;
-  text-align: center;
 }
 
 .crkdlg {

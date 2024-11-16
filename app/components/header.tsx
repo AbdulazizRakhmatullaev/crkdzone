@@ -3,11 +3,12 @@ import Image, { StaticImageData } from 'next/image';
 
 interface HeaderProps {
     img_src: StaticImageData;
-    desc: React.ReactNode;
+    title: string;
+    desc: string;
     res: string
 }
 
-const Header: React.FC<HeaderProps> = ({ img_src, desc, res }) => {
+const Header: React.FC<HeaderProps> = ({ img_src, title, desc, res }) => {
     return (
         <>
             <div className="header">
@@ -19,6 +20,18 @@ const Header: React.FC<HeaderProps> = ({ img_src, desc, res }) => {
                     width={490}
                     height={190}
                 />
+                <div className="fl items-center mt-5 font-HitConBlk">
+                    <div className='text-3xl uppercase'>{title}</div>
+                    <Image
+                        src="/stripe.png"
+                        alt="img"
+                        className='hdstp'
+                        priority={true}
+                        width={1000}
+                        height={20}
+                        objectFit='cover'
+                    />
+                </div>
                 <div className="hd_desc">
                     {desc}
                 </div>

@@ -43,11 +43,8 @@ export default function Ranking() {
     <>
       <Header
         img_src={rnkimg}
-        desc={<>
-          Put in the effort and prove your worth.
-          <br />
-          Rank up and show them what you’re made of!
-        </>}
+        title="Ranking"
+        desc="Push hard, give it everything you’ve got, and don’t let up until the job’s done! Earn your stripes and make ‘em remember your name in the heat of battle. Prove you belong out here, where only the toughest survive!"
         res={`Place: ${3}`}
       />
 
