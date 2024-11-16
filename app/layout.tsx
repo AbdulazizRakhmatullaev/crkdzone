@@ -7,6 +7,7 @@ import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./contexts/user"
+import Footer from "./components/footer";
 
 export default function RootLayout({
   children,
@@ -34,7 +35,7 @@ export default function RootLayout({
 
     setTimeout(() => {
       setLoading(false);
-    }, 3500);
+    }, 500);
 
 
     return () => {
@@ -58,13 +59,14 @@ export default function RootLayout({
         ) : (
             <UserProvider>
               <main id="main">
-                <div id="mainCon" className={setPlatformStyle()}>
-                  {children}
-                  <ToTopBtn className={setPlatformStyle()} />
-                </div>
                 <nav id="navbar" className={setPlatformStyle()}>
                   <Navbar />
                 </nav>
+                <div id="mainCon" className={setPlatformStyle()}>
+                  {children}
+                  <Footer />
+                  <ToTopBtn className={setPlatformStyle()} />
+                </div>
               </main>
             </UserProvider>
         )}
