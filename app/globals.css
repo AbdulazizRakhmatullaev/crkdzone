@@ -112,7 +112,7 @@ a {
 }
 
 #mainCon.dsk {
-  padding: 10px 20px 60px;
+  padding: 10px 20px 65px;
 }
 
 #mainCon.phn {
@@ -144,7 +144,8 @@ a {
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
-  padding: 8px 20px;
+  padding-top: 6px;
+  /* padding: 8px 20px; */
 }
 
 .lnk {
@@ -155,6 +156,8 @@ a {
   flex-grow: 1;
   color: #adabab;
   fill: #adabab;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
 }
 
 .lnk svg {
@@ -170,8 +173,8 @@ a {
 .actlnk {
   fill: #72cff0;
   color: #72cff0;
-  /* background: linear-gradient(to top, #446382b0, transparent); */
-  /* border-color: #ffffffd6; */
+  background: linear-gradient(to top, #446382b0, transparent);
+  border-color: #ffffffd6;
 }
 
 .homcon {
@@ -523,7 +526,7 @@ a {
 }
 
 #frm.dsk {
-  bottom: 50px;
+  bottom: 55px;
 }
 
 #frm.phn {
