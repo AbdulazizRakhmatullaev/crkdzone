@@ -7,7 +7,6 @@ import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./contexts/user"
-import Footer from "./components/footer";
 
 export default function RootLayout({
   children,
