@@ -9,6 +9,7 @@ const Loading = () => {
                     src="/callcard-4.gif"
                     alt="img"
                     priority={true}
+                    unoptimized={true}
                     width={600}
                     height={155}
                 />
@@ -18,11 +19,12 @@ const Loading = () => {
                     src="/callcard-2.gif"
                     alt="img"
                     priority={true}
+                    unoptimized={true}
                     width={600}
                     height={155}
                 />
             </div>
-            <div className="fl flex-col justify-center items-center font-HitConBlk text-4xl relative text-center">
+            <div className="font-HitConBlk text-4xl">
                 <div className="animate-ping absolute">
                     CRACKEDZONE
                 </div>
@@ -35,6 +37,7 @@ const Loading = () => {
                     src="/callcard-1.webp"
                     alt="img"
                     priority={true}
+                    unoptimized={true}
                     width={600}
                     height={155}
                 />
@@ -44,6 +47,7 @@ const Loading = () => {
                     src="/callcard-3.gif"
                     alt="img"
                     priority={true}
+                    unoptimized={true}
                     width={600}
                     height={155}
                 />
