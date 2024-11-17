@@ -26,12 +26,9 @@ export default function RootLayout({
       const webApp = window.Telegram?.WebApp;
       const pF = webApp.platform;
 
-      webApp.expand();
+      // webApp.expand();
+      webApp.requestFullscreen();
       webApp.disableVerticalSwipes();
-
-      if (pF === "ios" || pF === "android") {
-        webApp.requestFullscreen();
-      }
 
       setPlatform(pF);
     };
