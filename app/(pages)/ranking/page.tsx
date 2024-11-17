@@ -5,6 +5,7 @@ import Image from "next/image";
 import { UserContext } from "@/app/contexts/user";
 import Header from "@/app/components/header";
 import rnkimg from "@/public/ranking.jpeg";
+import { useLayout } from "@/app/contexts/layoutCon";
 
 type User = {
   id: number;
@@ -20,6 +21,11 @@ export default function Ranking() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const userInfo = useContext(UserContext)
+  const { setFullHeight } = useLayout();
+
+  useEffect(() => {
+    setFullHeight(false);
+  }, [setFullHeight]);
 
   useEffect(() => {
     const fetchUsers = async () => {

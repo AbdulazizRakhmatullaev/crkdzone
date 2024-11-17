@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Loading from './components/loading';
+import Loading from "./components/loading";
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
-import { UserProvider } from "./contexts/user"
+import { UserProvider } from "./contexts/user";
+import { LayoutProvider, useLayout } from "./contexts/layoutCon"; // Note: Removed useLayout here
 
 export default function RootLayout({
   children,
@@ -22,12 +23,16 @@ export default function RootLayout({
     script.async = true;
 
     script.onload = () => {
-      const webApp = window.Telegram?.WebApp; 
-      
+      const webApp = window.Telegram?.WebApp;
+      const platform = webApp.platform;
       webApp.expand();
       webApp.disableVerticalSwipes();
 
-      setPlatform(webApp.platform);
+      if (platform === "ios" || platform === "android") {
+        webApp.requestFullScreen()
+      }
+
+      setPlatform(platform);
     };
 
     document.head.appendChild(script);
@@ -36,39 +41,59 @@ export default function RootLayout({
       setLoading(false);
     }, 500);
 
-
     return () => {
       document.head.removeChild(script);
-    }
+    };
   }, []);
 
   const setPlatformStyle = () => {
     return platform === "ios" || platform === "android" ? "phn" : "dsk";
   };
 
-
   return (
-      <html lang="en">
+    <html lang="en">
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <body>
         {loading ? (
           <Loading />
         ) : (
             <UserProvider>
-              <main id="main">
-                <nav id="navbar" className={setPlatformStyle()}>
-                  <Navbar />
-                </nav>
-                <div id="mainCon" className={setPlatformStyle()}>
-                  {children}
-                  <ToTopBtn className={setPlatformStyle()} />
-                </div>
-              </main>
-            </UserProvider>
+            <LayoutProvider>
+              <Content setPlatformStyle={setPlatformStyle}>{children}</Content>
+            </LayoutProvider>
+          </UserProvider>
         )}
       </body>
     </html>
+  );
+}
+
+function Content({
+  setPlatformStyle,
+  children,
+}: {
+  setPlatformStyle: () => string;
+  children: React.ReactNode;
+}) {
+  const { fullHeight } = useLayout();
+
+  return (
+    <main id="main">
+      <nav id="navbar" className={setPlatformStyle()}>
+        <Navbar />
+      </nav>
+      <div
+        id="mainCon"
+        className={`${setPlatformStyle()}${fullHeight ? " h-full" : ""}`}
+      >
+        {children}
+        <ToTopBtn className={setPlatformStyle()} />
+      </div>
+    </main>
   );
 }

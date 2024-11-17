@@ -149,29 +149,14 @@ a {
   padding: 10px 20px;
 }
 
-#footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+#farm {
   width: 100%;
-  padding: 32px;
-  z-index: 2;
 }
 
-#footer.dsk {
-  padding-bottom: 20px;
-}
-
-#footer.phn {
-  padding-bottom: 40px;
-}
-
-.futcol {
+.frmcol {
   max-width: 600px;
   margin: 0 auto;
-  background: #2229;
   backdrop-filter: blur(25px);
-  padding: 20px;
 }
 
 .btn {
@@ -356,7 +341,7 @@ a {
 
 .pgres {
   font-family: "Hitmarker Bold", Arial;
-  margin: 70px 0 20px;
+  margin: 40px 0;
   text-align: center;
 }
 

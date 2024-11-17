@@ -1,7 +1,17 @@
+"use client";
+
+import { useEffect } from 'react';
 import Header from "@/app/components/header";
 import sqdimg from "@/public/squad.jpg";
+import { useLayout } from "@/app/contexts/layoutCon";
 
 export default function Squad() {
+  const { setFullHeight } = useLayout();
+
+  useEffect(() => {
+    setFullHeight(false);
+  }, [setFullHeight]);
+
   return (
     <>
       <Header

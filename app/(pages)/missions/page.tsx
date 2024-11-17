@@ -1,7 +1,17 @@
+"use client";
+
+import { useEffect } from "react";
 import Header from "@/app/components/header";
 import misImg from "@/public/missions.jpg";
+import { useLayout } from "@/app/contexts/layoutCon";
 
 export default function Missions() {
+  const { setFullHeight } = useLayout();
+
+  useEffect(() => {
+    setFullHeight(false);
+  }, [setFullHeight]);
+
   return (
     <>
       <Header
