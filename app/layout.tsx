@@ -65,7 +65,10 @@ export default function RootLayout({
         ) : (
             <UserProvider>
             <LayoutProvider>
-              <Content setPlatformStyle={setPlatformStyle}>{children}</Content>
+                <Content setPlatformStyle={setPlatformStyle}>
+                  {platform}
+                  {children}
+                </Content>
             </LayoutProvider>
           </UserProvider>
         )}
