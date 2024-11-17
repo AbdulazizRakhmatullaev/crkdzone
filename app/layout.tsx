@@ -29,7 +29,7 @@ export default function RootLayout({
       webApp.expand();
       webApp.disableVerticalSwipes();
 
-      if (pF === "ios" || pF === "android") {
+      if (pF !== "macos") {
         webApp.requestFullscreen();
       }
 
@@ -48,7 +48,7 @@ export default function RootLayout({
   }, []);
 
   const setPlatformStyle = () => {
-    return platform === "ios" || platform === "android" ? "phn" : "dsk";
+    return platform !== "macos" ? "phn" : "dsk";
   };
 
   return (
