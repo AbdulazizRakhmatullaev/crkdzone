@@ -28,10 +28,7 @@ export default function RootLayout({
 
       webApp.expand();
       webApp.disableVerticalSwipes();
-
-      if (pF !== "macos") {
-        webApp.requestFullscreen();
-      }
+      webApp.requestFullscreen();
 
       setPlatform(pF);
     };
