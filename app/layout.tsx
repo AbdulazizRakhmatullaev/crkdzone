@@ -29,7 +29,7 @@ export default function RootLayout({
       webApp.disableVerticalSwipes();
 
       if (platform === "ios" || platform === "android") {
-        webApp.requestFullScreen()
+        webApp.requestFullscreen();
       }
 
       setPlatform(platform);
