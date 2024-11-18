@@ -198,7 +198,7 @@ a {
 }
 
 .lnktxt {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: capitalize;
 }
 
@@ -334,6 +334,7 @@ a {
 
 .hd_desc {
   margin-top: 12px;
+  font-size: 13px;
 }
 
 .crkdlg {

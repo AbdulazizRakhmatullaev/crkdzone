@@ -30,7 +30,6 @@ interface TelegramWebApp {
     };
     ready(callback: () => void): void;
     expand(): void;
-    requestFullscreen(): void;
     disableVerticalSwipes(): void;
     platform: string;
     HapticFeedback: HapticFeedback;

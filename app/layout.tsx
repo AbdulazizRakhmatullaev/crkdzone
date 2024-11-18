@@ -28,7 +28,6 @@ export default function RootLayout({
 
         webApp.expand();
         webApp.disableVerticalSwipes();
-        webApp.requestFullscreen();
 
         setPlatform(webApp.platform);
       }
