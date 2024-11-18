@@ -15,13 +15,13 @@ export default function Base() {
   }, [setFullHeight]);
 
   return (
-    <>
+    <div className="h-full fl flex-col items-center justify-center">
       {loading ? (
         <Spinner />
       ) : (
-          <div className="base fl flex-col items-center justify-center h-full">
+          <div className="base fl flex-col items-center justify-center h-full w-full">
             <div className="fl flex-col items-center justify-center h-full">
-              <div className="bal font-HitBld text-4xl">76 570</div>
+              <div className="bal font-HitBld text-4xl text-center">76 570</div>
               <div className="cnN font-HitConBlk text-2xl">$CZP</div>
             </div>
             <div id="farm">
@@ -39,6 +39,6 @@ export default function Base() {
             </div>
           </div>
       )}
-    </>
+    </div>
   );
 };
