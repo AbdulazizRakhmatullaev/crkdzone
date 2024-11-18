@@ -29,6 +29,10 @@
 
 html,
 body {
+  touch-action: pan-y;
+  user-select: none;
+  -ms-touch-action: pan-y;
+  -webkit-touch-callout: none;
   margin: 0;
   padding: 0;
   height: 100%;

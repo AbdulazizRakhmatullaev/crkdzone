@@ -23,29 +23,23 @@ export default function RootLayout({
     script.async = true;
 
     script.onload = () => {
-      const webApp = window.Telegram?.WebApp;
-      const pF = webApp.platform;
+      if (window?.Telegram?.WebApp) {
+        const webApp = window.Telegram?.WebApp;
 
-      webApp.expand();
-      webApp.disableVerticalSwipes();
-      webApp.requestFullscreen();
+        webApp.expand();
+        webApp.disableVerticalSwipes();
+        webApp.requestFullscreen();
 
-      setPlatform(pF);
+        setPlatform(webApp.platform);
+      }
     };
 
     document.head.appendChild(script);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-
-    return () => {
-      document.head.removeChild(script);
-    };
+    setLoading(false);
   }, []);
 
   const setPlatformStyle = () => {
-    return platform !== "macos" ? "phn" : "dsk";
+    return platform === "ios" || platform === "android" ? "phn" : "dsk";
   };
 
   return (
@@ -53,7 +47,11 @@ export default function RootLayout({
       <Head>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="
+            width=device-width, 
+            initial-scale=1.0, 
+            maximum-scale=1.0, 
+            user-scalable=no"
         />
       </Head>
       <body>
@@ -63,7 +61,6 @@ export default function RootLayout({
             <UserProvider>
             <LayoutProvider>
                 <Content setPlatformStyle={setPlatformStyle}>
-                  {platform}
                   {children}
                 </Content>
             </LayoutProvider>
@@ -85,9 +82,6 @@ function Content({
 
   return (
     <main id="main">
-      <nav id="navbar" className={setPlatformStyle()}>
-        <Navbar />
-      </nav>
       <div
         id="mainCon"
         className={`${setPlatformStyle()}${fullHeight ? " h-full" : ""}`}
@@ -95,6 +89,9 @@ function Content({
         {children}
         <ToTopBtn className={setPlatformStyle()} />
       </div>
+      <nav id="navbar" className={setPlatformStyle()}>
+        <Navbar />
+      </nav>
     </main>
   );
 }
