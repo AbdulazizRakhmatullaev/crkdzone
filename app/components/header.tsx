@@ -21,15 +21,14 @@ const Header: React.FC<HeaderProps> = ({ img_src, title, desc, res }) => {
                     height={190}
                 />
                 <div className="fl items-center mt-5 font-HitConBlk">
-                    <div className='text-3xl uppercase'>{title}</div>
+                    <div className='text-2xl uppercase'>{title}</div>
                     <Image
                         src="/stripe.png"
-                        alt="img"
+                        alt="stripe"
                         className='hdstp'
                         priority={true}
                         width={1000}
                         height={20}
-                        objectFit='cover'
                     />
                 </div>
                 <div className="hd_desc">

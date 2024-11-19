@@ -27,12 +27,8 @@ export default function Base() {
             <div id="farm">
               <div className="frmcol">
                 <div className="abt">
-                  <div className="aBtn">
-                    Store
-                  </div>
-                  <div className="aBtn">
-                    Profile
-                  </div>
+                  <div className="aBtn">Store</div>
+                  <div className="aBtn">Profile</div>
                 </div>
                 <button className="btn">Farm</button>
               </div>

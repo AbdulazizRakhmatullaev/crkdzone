@@ -40,13 +40,23 @@ body {
 }
 
 body {
-  background-image: url("/bg-img.jpg");
+  background: url("/bg-img.jpg") repeat-x;
   background-size: cover;
   font-family: "Hitmarker Regular", Arial;
   font-size: 15px;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
+  animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
 
 * {
@@ -117,7 +127,7 @@ a {
 }
 
 #mainCon.dsk {
-  padding-bottom: 80px;
+  padding-bottom: 75px;
 }
 
 #mainCon.phn {
@@ -327,7 +337,7 @@ a {
 }
 
 .hdstp {
-  height: 20px;
+  height: 15px;
   width: 100%;
   object-fit: cover;
 }
@@ -489,7 +499,7 @@ a {
 }
 
 #toTop.dsk {
-  bottom: 60px;
+  bottom: 65px;
 }
 
 #toTop.phn {
