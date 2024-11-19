@@ -47,7 +47,7 @@ body {
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
-  animation: moveBackground 20s linear infinite;
+  animation: moveBackground 30s linear infinite;
 }
 
 @keyframes moveBackground {

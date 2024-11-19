@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { UserContext } from "@/app/contexts/user";
 import Header from "@/app/components/header";
 import rnkimg from "@/public/ranking.jpeg";
+import { useUser } from "@/app/contexts/user";
 import { useLayout } from "@/app/contexts/layoutCon";
 import Spinner from "@/app/components/spinner";
 
@@ -21,7 +21,7 @@ type User = {
 export default function Ranking() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const userInfo = useContext(UserContext)
+  const { user } = useUser();
   const { setFullHeight } = useLayout();
 
   useEffect(() => {
@@ -65,9 +65,9 @@ export default function Ranking() {
             height={40}
             priority={true}
           />
-          <div className="rpl-usrnm">{userInfo?.user?.username}</div>
+          <div className="rpl-usrnm">{user?.username}</div>
         </div>
-        <div className="rpl-txt">{userInfo?.user?.authDate.toLocaleDateString()}</div>
+        <div className="rpl-txt">{user?.authDate.toLocaleDateString()}</div>
       </div>
       <div className="hr"></div>
       {loading ? (
