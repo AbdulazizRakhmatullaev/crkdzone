@@ -17,7 +17,7 @@ export default function Squad() {
       <Header
         img_src={sqdimg}
         title="Squad"
-        desc="Call in your squad and watch each other’s six, because no one makes it through this fight alone. Eyes up, guns ready! This field won’t take prisoners, and you’d better be ready to adapt. Team up, cover your angles, and stack those points with precision, soldier!"
+        desc="Call in your squad and watch each other’s six, no one makes it through this fight alone. Eyes up! This field won’t take prisoners, and you’d better be ready to adapt. Team up, and stack those points with precision, soldier!"
         res={`Soldiers: ${10}`}
       />
     </>

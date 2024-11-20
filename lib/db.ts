@@ -1,14 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+// lib/supabaseClient.ts
+import { createClient } from '@supabase/supabase-js';
 
-let prisma: PrismaClient;
+// Retrieve your environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-if (process.env.NODE_ENV === "development") {
-  prisma = new PrismaClient();
-} else {
-  if (!global.prisma) {
-    global.prisma = new PrismaClient();
-  }
-  prisma = global.prisma;
-}
-
-export default prisma;
+// Initialize the Supabase client
+export const supabase = createClient(supabaseUrl, supabaseKey);
