@@ -75,11 +75,6 @@ a {
   height: 100%;
 }
 
-.fl {
-  display: flex;
-  gap: 10px;
-}
-
 .hr {
   right: 50%;
   height: 1px;

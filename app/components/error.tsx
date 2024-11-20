@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Error() {
     return (
-        <div className='fl flex-col justify-center items-center px-5 h-full bg-black'>
+        <div className='flex flex-col justify-center items-center px-5 h-full bg-black'>
             <Image
                 src="/noUsername.jpg"
                 alt="img"
