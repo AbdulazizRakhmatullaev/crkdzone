@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
     try {
-        let { tg_id } = await req.json()
+        const { tg_id } = await req.json()
 
         const { data, error } = await supabase
             .from("User")
