@@ -45,7 +45,17 @@ export async function POST(req: Request) {
         }
 
         return NextResponse.json(user);
-    } catch (e: any) {
-        return NextResponse.json({ message: "Unable to check or create user", error: e.message }, { status: 500 });
+    } catch (e) {
+        if (e instanceof Error) {
+            return NextResponse.json(
+                { message: "Unable to check or create user", error: e.message },
+                { status: 500 }
+            );
+        }
+
+        return NextResponse.json(
+            { message: "An unexpected error occurred", error: String(e) },
+            { status: 500 }
+        );
     }
 }
