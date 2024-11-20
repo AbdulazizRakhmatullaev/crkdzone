@@ -23,6 +23,7 @@ export default function Ranking() {
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
   const { setFullHeight } = useLayout();
+  const balance = user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
   useEffect(() => {
     setFullHeight(false);
@@ -30,8 +31,9 @@ export default function Ranking() {
 
   useEffect(() => {
     const fetchUsers = async () => {
+      const tg_id = user?.tg_id === undefined ? 0 : user?.tg_id
       try {
-        const res = await fetch(`/api/users?tg_id=${user?.tg_id}`, {
+        const res = await fetch(`/api/users?tg_id=${tg_id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -76,7 +78,7 @@ export default function Ranking() {
           )}
           <div className="rpl-usrnm">{user?.username}</div>
         </div>
-        <div className="rpl-txt">{user?.balance}</div>
+        <div className="rpl-txt">{balance}</div>
       </div>
       <div className="hr"></div>
       {loading ? (
@@ -100,7 +102,7 @@ export default function Ranking() {
                 )}
                 <div className="rpl-usrnm">{user.username}</div>
               </div>
-              <div className="rpl-txt">{user.balance}</div>
+              <div className="rpl-txt">{user.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</div>
             </div>
           ))}
         </div>

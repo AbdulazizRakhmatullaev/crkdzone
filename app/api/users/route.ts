@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
     try {
-        const { tg_id } = await req.json()
+        const url = new URL(req.url);
+        const tg_id = url.searchParams.get("tg_id");
 
         const { data, error } = await supabase
             .from("User")

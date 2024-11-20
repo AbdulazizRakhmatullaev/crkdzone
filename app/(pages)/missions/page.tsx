@@ -25,7 +25,7 @@ export default function Missions() {
       <div className="mis">
         <div className="misInf">
           <div className="misT">TON mission</div>
-          <div className="misDesc">1,000 CDZE</div>
+          <div className="misDesc">1,000 $CZP</div>
         </div>
 
         <button className="misProg">Execute!</button>
@@ -34,7 +34,7 @@ export default function Missions() {
       <div className="mis">
         <div className="misInf">
           <div className="misT">Subscribe to channel</div>
-          <div className="misDesc">700 CDZE</div>
+          <div className="misDesc">700 $CZP</div>
         </div>
 
         <button className="misProg">Execute!</button>
@@ -42,7 +42,7 @@ export default function Missions() {
       <div className="mis">
         <div className="misInf">
           <div className="misT">Subscribe to YouTube</div>
-          <div className="misDesc">700 CDZE</div>
+          <div className="misDesc">700 $CZP</div>
         </div>
 
         <button className="misProg">Execute!</button>
@@ -50,7 +50,7 @@ export default function Missions() {
       <div className="mis">
         <div className="misInf">
           <div className="misT">Subscribe to X</div>
-          <div className="misDesc">700 CDZE</div>
+          <div className="misDesc">700 $CZP</div>
         </div>
 
         <button className="misProg">Execute!</button>
