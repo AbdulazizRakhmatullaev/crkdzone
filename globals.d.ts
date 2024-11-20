@@ -28,7 +28,7 @@ interface TelegramWebApp {
         auth_date?: number;
         hash?: string;
     };
-    ready(callback: () => void): void;
+    ready(): void;
     expand(): void;
     disableVerticalSwipes(): void;
     platform: string;
