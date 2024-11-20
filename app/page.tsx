@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useUser } from "./contexts/user";
 import { useLayout } from "./contexts/layoutCon";
 import Spinner from "./components/spinner";
 
 export default function Base() {
   const { setFullHeight } = useLayout();
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
 
   useEffect(() => {
     setFullHeight(true);
@@ -21,7 +23,7 @@ export default function Base() {
       ) : (
           <div className="base fl flex-col items-center justify-center h-full w-full">
             <div className="fl flex-col items-center justify-center h-full">
-              <div className="bal font-HitBld text-4xl text-center">76 570</div>
+              <div className="bal font-HitBld text-4xl text-center">{user?.balance}</div>
               <div className="cnN font-HitConBlk text-2xl">$CZP</div>
             </div>
             <div id="farm">

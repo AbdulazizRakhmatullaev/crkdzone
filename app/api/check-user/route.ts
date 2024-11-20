@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         if (!existingUser) {
             // If user does not exist, create a new user
             const { data: newUser, error: createError } = await supabase
-                .from('user')
+                .from('User')
                 .insert([
                     {
                         tg_id,
