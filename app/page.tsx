@@ -9,6 +9,7 @@ export default function Base() {
   const { setFullHeight } = useLayout();
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
+  const balance = user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
   useEffect(() => {
     setFullHeight(true);
@@ -23,7 +24,7 @@ export default function Base() {
       ) : (
           <div className="base fl flex-col items-center justify-center h-full w-full">
             <div className="fl flex-col items-center justify-center h-full">
-              <div className="bal font-HitBld text-4xl text-center">{user?.balance}</div>
+              <div className="bal font-HitBld text-4xl text-center">{balance}</div>
               <div className="cnN font-HitConBlk text-2xl">$CZP</div>
             </div>
             <div id="farm">
