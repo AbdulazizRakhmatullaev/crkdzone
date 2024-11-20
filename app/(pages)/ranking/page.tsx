@@ -67,7 +67,7 @@ export default function Ranking() {
           />
           <div className="rpl-usrnm">{user?.username}</div>
         </div>
-        <div className="rpl-txt">{user?.authDate.toLocaleDateString()}</div>
+        <div className="rpl-txt">{user?.balance}</div>
       </div>
       <div className="hr"></div>
       {loading ? (
