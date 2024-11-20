@@ -33,12 +33,7 @@ export default function Ranking() {
     const fetchUsers = async () => {
       const tg_id = user?.tg_id === undefined ? 0 : user?.tg_id
       try {
-        const res = await fetch(`/api/users?tg_id=${tg_id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await fetch(`/api/users?tg_id=${tg_id}`);
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const users = await res.json();
@@ -51,7 +46,7 @@ export default function Ranking() {
     };
 
     fetchUsers();
-  }, []);
+  }, [user?.tg_id]);
 
   return (
     <>
@@ -59,7 +54,6 @@ export default function Ranking() {
         img_src={rnkimg}
         title="Ranking"
         desc="Push hard, give it everything you’ve got, and don’t let up until the job’s done! Earn your stripes and make ‘em remember your name in the heat of battle. Prove you belong out here, where only the toughest survive!"
-        res={`Place: ${3}`}
       />
 
       <div className="mpl">
@@ -74,7 +68,9 @@ export default function Ranking() {
             priority={true}
           />
           ) : (
-            <svg className="w-[40px] h-[40px]" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 8.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm-3.5 1.7a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z" clipRule="evenodd" /><path fillRule="evenodd" d="M12 2.1A9.872 9.872 0 0 0 5 5a9.872 9.872 0 0 0-2.9 7c0 2.733 1.11 5.21 2.9 7a9.872 9.872 0 0 0 7 2.9c2.733 0 5.21-1.11 7-2.9a9.872 9.872 0 0 0 2.9-7c0-2.734-1.11-5.21-2.9-7a9.872 9.872 0 0 0-7-2.9Zm4.382 16.713A7.067 7.067 0 0 0 12 17.3a7.066 7.066 0 0 0-4.382 1.513A8.06 8.06 0 0 0 12 20.1a8.06 8.06 0 0 0 4.382-1.287ZM6.272 6.273A8.072 8.072 0 0 1 12 3.9c2.237 0 4.26.906 5.727 2.372A8.072 8.072 0 0 1 20.1 12a8.07 8.07 0 0 1-2.297 5.651A8.868 8.868 0 0 0 12 15.5a8.869 8.869 0 0 0-5.803 2.151A8.07 8.07 0 0 1 3.9 12c0-2.237.906-4.26 2.372-5.728ZM8.5 10.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0ZM12 8.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Z" clipRule="evenodd" /></svg>
+              <div className="fl items-center justify-center w-[40px] h-[40px] bg-black rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M14.85 7.95A2.849 2.849 0 0 0 12 5.1a2.849 2.849 0 0 0-2.85 2.85A2.849 2.849 0 0 0 12 10.8a2.849 2.849 0 0 0 2.85-2.85Zm1.8 0A4.649 4.649 0 0 1 12 12.6a4.649 4.649 0 0 1-4.65-4.65A4.649 4.649 0 0 1 12 3.3a4.649 4.649 0 0 1 4.65 4.65ZM5.9 18.429c0 .768-.09.671.335.671h11.53c.426 0 .335.097.335-.671 0-1.893-2.778-3.029-6.1-3.029-3.322 0-6.1 1.136-6.1 3.029Zm-1.8 0c0-3.327 3.673-4.829 7.9-4.829s7.9 1.502 7.9 4.829c0 1.735-.685 2.471-2.135 2.471H6.235c-1.45 0-2.135-.736-2.135-2.471Z" /></svg>
+              </div>
           )}
           <div className="rpl-usrnm">{user?.username}</div>
         </div>
@@ -98,7 +94,9 @@ export default function Ranking() {
                     priority={true}
                   />
                 ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 8.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm-3.5 1.7a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z" clipRule="evenodd" /><path fillRule="evenodd" d="M12 2.1A9.872 9.872 0 0 0 5 5a9.872 9.872 0 0 0-2.9 7c0 2.733 1.11 5.21 2.9 7a9.872 9.872 0 0 0 7 2.9c2.733 0 5.21-1.11 7-2.9a9.872 9.872 0 0 0 2.9-7c0-2.734-1.11-5.21-2.9-7a9.872 9.872 0 0 0-7-2.9Zm4.382 16.713A7.067 7.067 0 0 0 12 17.3a7.066 7.066 0 0 0-4.382 1.513A8.06 8.06 0 0 0 12 20.1a8.06 8.06 0 0 0 4.382-1.287ZM6.272 6.273A8.072 8.072 0 0 1 12 3.9c2.237 0 4.26.906 5.727 2.372A8.072 8.072 0 0 1 20.1 12a8.07 8.07 0 0 1-2.297 5.651A8.868 8.868 0 0 0 12 15.5a8.869 8.869 0 0 0-5.803 2.151A8.07 8.07 0 0 1 3.9 12c0-2.237.906-4.26 2.372-5.728ZM8.5 10.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0ZM12 8.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Z" clipRule="evenodd" /></svg>
+                    <div className="fl items-center justify-center w-[40px] h-[40px] bg-black rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M14.85 7.95A2.849 2.849 0 0 0 12 5.1a2.849 2.849 0 0 0-2.85 2.85A2.849 2.849 0 0 0 12 10.8a2.849 2.849 0 0 0 2.85-2.85Zm1.8 0A4.649 4.649 0 0 1 12 12.6a4.649 4.649 0 0 1-4.65-4.65A4.649 4.649 0 0 1 12 3.3a4.649 4.649 0 0 1 4.65 4.65ZM5.9 18.429c0 .768-.09.671.335.671h11.53c.426 0 .335.097.335-.671 0-1.893-2.778-3.029-6.1-3.029-3.322 0-6.1 1.136-6.1 3.029Zm-1.8 0c0-3.327 3.673-4.829 7.9-4.829s7.9 1.502 7.9 4.829c0 1.735-.685 2.471-2.135 2.471H6.235c-1.45 0-2.135-.736-2.135-2.471Z" /></svg>
+                    </div>
                 )}
                 <div className="rpl-usrnm">{user.username}</div>
               </div>

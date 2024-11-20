@@ -5,10 +5,9 @@ interface HeaderProps {
     img_src: StaticImageData;
     title: string;
     desc: string;
-    res: string
 }
 
-const Header: React.FC<HeaderProps> = ({ img_src, title, desc, res }) => {
+const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
     return (
         <>
             <div className="header">
@@ -35,7 +34,6 @@ const Header: React.FC<HeaderProps> = ({ img_src, title, desc, res }) => {
                     {desc}
                 </div>
             </div>
-            <div className="pgres">{res}</div>
         </>
     )
 }
