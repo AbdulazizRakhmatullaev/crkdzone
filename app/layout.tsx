@@ -26,10 +26,13 @@ export default function RootLayout({
       if (window?.Telegram?.WebApp) {
         const webApp = window.Telegram?.WebApp;
 
-        webApp.expand();
-        webApp.disableVerticalSwipes();
+        webApp.ready(() => {
 
-        setPlatform(webApp.platform);
+          webApp.expand();
+          webApp.disableVerticalSwipes();
+
+          setPlatform(webApp.platform);
+        });
       }
     };
 
