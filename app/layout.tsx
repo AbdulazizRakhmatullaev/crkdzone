@@ -18,10 +18,6 @@ export default function RootLayout({
   const [platform, setPlatform] = useState<string | null>(null);
 
   useEffect(() => {
-    if (window?.Telegram?.WebApp) {
-      window.Telegram.WebApp.expand();
-    }
-
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js";
     script.async = true;
@@ -40,7 +36,7 @@ export default function RootLayout({
 
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 3000);
 
   }, []);
 

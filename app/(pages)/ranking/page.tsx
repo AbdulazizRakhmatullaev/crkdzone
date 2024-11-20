@@ -78,7 +78,9 @@ export default function Ranking() {
       </div>
       <div className="hr"></div>
       {loading ? (
-        <Spinner />
+        <div className="mt-5">
+          <Spinner />
+        </div>
       ) : (
         <div className="rts">
           {users.map((user) => (
