@@ -9,8 +9,7 @@ export default function Base() {
   const { setFullHeight } = useLayout();
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
-  const [balLoad, setBalLoad] = useState(true);
-  const [balance, setBalance] = useState<string | undefined>(undefined);
+  const [balance, setBalance] = useState("0");
 
   useEffect(() => {
     setFullHeight(true);
@@ -18,8 +17,9 @@ export default function Base() {
   }, [setFullHeight]);
 
   useEffect(() => {
-    setBalance(user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '))
-    setBalLoad(false);
+    if (user?.balance !== undefined) {
+      setBalance(user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '))
+    }
   }, [user?.balance])
 
   return (
@@ -29,11 +29,7 @@ export default function Base() {
       ) : (
           <div className="base flex flex-col items-center justify-center h-full w-full">
             <div className="flex flex-col items-center justify-center h-full">
-              {balLoad ? (
-                <div className="bal font-HitBld text-4xl text-center">0</div>
-              ) : (
-                <div className="bal font-HitBld text-4xl text-center">{balance}</div>
-              )}
+              <div className="bal font-HitBld text-4xl text-center">{balance}</div>
               <div className="cnN font-HitConBlk text-2xl">$CZP</div>
             </div>
             <div id="farm">
