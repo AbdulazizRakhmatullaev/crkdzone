@@ -7,7 +7,7 @@ const Loading = () => {
             <div className='loadcol flex flex-col gap-0 items-center justify-center'>
                 <div className="clcrd">
                     <Image
-                        src="/callcard-4.gif"
+                        src="/nuke.gif"
                         alt="img"
                         priority={true}
                         unoptimized={true}

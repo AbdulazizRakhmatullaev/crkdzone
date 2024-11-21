@@ -49,9 +49,10 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-
+        // Step 1: Exclude the logged-in user
         const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id);
 
+        // Step 2: Sort users by balance (descending) and authDate (ascending)
         const sortedUsers = otherUsers.sort((a, b) => {
           if (a.balance !== b.balance) {
             return b.balance - a.balance; // Higher balance first
@@ -80,8 +81,6 @@ export default function Ranking() {
 
         // Step 4: Sort by rank for consistent display
         const finalRankedUsers = [...rankedUsers].sort((a, b) => a.rank - b.rank);
-
-        console.log("Ranked Users (excluding logged-in user):", finalRankedUsers);
         setUsers(finalRankedUsers);
 
         // Step 5: Determine the current user's rank from the original data
@@ -94,7 +93,7 @@ export default function Ranking() {
           })
           .findIndex((u) => u.tg_id === user?.tg_id) + 1;
 
-        setUserRank(myRank || 0);
+        setUserRank(myRank);
       } catch (e) {
         console.error("Failed to fetch users", e);
       } finally {
