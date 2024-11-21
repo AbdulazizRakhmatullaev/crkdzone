@@ -44,7 +44,7 @@ export default function Ranking() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const tg_id = user?.tg_id === undefined ? 0 : user?.tg_id;
+      // const tg_id = user?.tg_id === undefined ? 0 : user?.tg_id;
 
       try {
         const res = await fetch(`/api/users`);
