@@ -4,9 +4,8 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
     try {
         const { tg_id, firstName, pic } = await req.json();
-        const dateTime = new Date().toISOString(); // Supabase uses strings for dates
+        const dateTime = new Date().toISOString();
 
-        // Check if the user already exists
         const { data: existingUser, error: fetchError } = await supabase
             .from('User')
             .select('*')
@@ -14,14 +13,12 @@ export async function POST(req: Request) {
             .single();
 
         if (fetchError && fetchError.code !== 'PGRST116') {
-            // Handle any errors that are not "Row not found" (PGRST116)
             throw new Error(fetchError.message);
         }
 
         let user = existingUser;
 
         if (!existingUser) {
-            // If user does not exist, create a new user
             const { data: newUser, error: createError } = await supabase
                 .from('User')
                 .insert([
@@ -35,7 +32,7 @@ export async function POST(req: Request) {
                     },
                 ])
                 .select()
-                .single(); // Ensure we return the created user
+                .single();
 
             if (createError) {
                 throw new Error(createError.message);
@@ -46,7 +43,6 @@ export async function POST(req: Request) {
 
         return NextResponse.json(user);
     } catch (e) {
-        // Use a more specific type for the error
         if (e instanceof Error) {
             return NextResponse.json(
                 { message: "Unable to check or create user", error: e.message },
@@ -54,7 +50,6 @@ export async function POST(req: Request) {
             );
         }
 
-        // Fallback for unexpected error types
         return NextResponse.json(
             { message: "An unexpected error occurred", error: String(e) },
             { status: 500 }
