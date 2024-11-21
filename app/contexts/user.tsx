@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import Spinner from '../components/spinner';
 
 interface User {
     id: number
@@ -19,7 +18,6 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
@@ -53,8 +51,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
                     setUser(user);
                 } catch (error) {
                     console.error(error);
-                } finally {
-                    setLoading(false);
                 }
             }
             
@@ -64,15 +60,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     return (
         <UserContext.Provider value={{ user }}>
-            {process.env.NODE_ENV === 'production' ? (
-                loading ? (
-                    <Spinner />
-                ) : (
-                    children
-                )
-            ) : (
-                children
-            )}
+            {children}
         </UserContext.Provider>
     );
 }
