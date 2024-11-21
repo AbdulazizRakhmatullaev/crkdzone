@@ -3,8 +3,8 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 interface User {
     id: number
     tg_id: bigint;
-    username: string;
-    avatar_url: string;
+    firstName: string;
+    pic: string;
     balance: number;
     friends: number;
     authDate: Date;
