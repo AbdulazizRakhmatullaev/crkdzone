@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const { tg_id, username, avatar_url } = await req.json();
+        const { tg_id, firstName, pic } = await req.json();
         const dateTime = new Date().toISOString(); // Supabase uses strings for dates
 
         // Check if the user already exists
@@ -27,8 +27,8 @@ export async function POST(req: Request) {
                 .insert([
                     {
                         tg_id,
-                        username,
-                        avatar_url,
+                        firstName,
+                        pic,
                         balance: 0,
                         friends: 0,
                         authDate: dateTime,

@@ -22,8 +22,8 @@ const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
                 <div className="flex gap-3 items-center mt-5 font-HitConBlk">
                     <div className='text-2xl uppercase'>{title}</div>
                     <Image
-                        src="/stripe.png"
                         alt="stripe"
+                        src="/stripe.png"
                         className='hdstp'
                         priority={true}
                         width={1000}

@@ -28,13 +28,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
             const params = new URLSearchParams(initData);
             const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
             const firstName = dataUnsafe.user?.first_name;
-            const lastName = dataUnsafe.user?.last_name;
-            const avatar_url = dataUnsafe?.user?.photo_url;
-            let username = params.get("user") ? JSON.parse(params.get("user")!).username : undefined;
-
-            if (username === undefined) {
-                username = firstName + " " + lastName
-            }
+            const pic = dataUnsafe?.user?.photo_url;
 
             const fetchUser = async () => {
                 try {
@@ -43,7 +37,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ tg_id, username, avatar_url })
+                        body: JSON.stringify({ tg_id, firstName, pic })
                     });
                     if (!res.ok) throw new Error("Unable to run check-user.");
 
