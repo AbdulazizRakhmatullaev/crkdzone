@@ -60,20 +60,25 @@ export default function RootLayout({
         {loading ? (
           <Loading />
         ) : (
-            <UserProvider>
             <LayoutProvider>
-                <Content setPlatformStyle={setPlatformStyle}>
+              <main id="main">
+                <UserProvider>
+                  <Main setPlatformStyle={setPlatformStyle}>
                   {children}
-                </Content>
+                  </Main>
+                </UserProvider>
+                <nav id="navbar" className={setPlatformStyle()}>
+                  <Navbar />
+                </nav>
+              </main>
             </LayoutProvider>
-          </UserProvider>
         )}
       </body>
     </html>
   );
 }
 
-function Content({
+function Main({
   setPlatformStyle,
   children,
 }: {
@@ -83,17 +88,12 @@ function Content({
   const { fullHeight } = useLayout();
 
   return (
-    <main id="main">
-      <div
+    <div
         id="mainCon"
         className={`${setPlatformStyle()}${fullHeight ? " h-full" : ""}`}
       >
         {children}
         <ToTopBtn className={setPlatformStyle()} />
-      </div>
-      <nav id="navbar" className={setPlatformStyle()}>
-        <Navbar />
-      </nav>
-    </main>
+    </div>
   );
 }
