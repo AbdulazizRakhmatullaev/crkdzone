@@ -26,6 +26,7 @@ export default function RootLayout({
       if (window?.Telegram?.WebApp) {
         const webApp = window.Telegram?.WebApp;
 
+        webApp.ready();
         webApp.expand();
         webApp.disableVerticalSwipes();
         setPlatform(webApp.platform);
