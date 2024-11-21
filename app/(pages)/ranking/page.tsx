@@ -47,7 +47,7 @@ export default function Ranking() {
       const tg_id = user?.tg_id === undefined ? 0 : user?.tg_id;
 
       try {
-        const res = await fetch(`/api/users?tg_id=${tg_id}`);
+        const res = await fetch(`/api/users`);
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
