@@ -35,9 +35,13 @@ export default function RootLayout({
 
     document.head.appendChild(script);
 
-    setTimeout(() => {
+    if (process.env.NODE_ENV === "production") {
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    } else {
       setLoading(false);
-    }, 3000);
+    }
 
   }, []);
 

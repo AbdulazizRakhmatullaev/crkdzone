@@ -44,32 +44,57 @@ export default function Ranking() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      // const tg_id = user?.tg_id === undefined ? 0 : user?.tg_id;
       try {
         const res = await fetch(`/api/users`);
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
 
-        // Assign ranks
-        const sortedUsers = fetchedUsers.sort((a, b) => b.balance - a.balance);
+        const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id);
 
-        // Assign ranks with handling for ties
+        const sortedUsers = otherUsers.sort((a, b) => {
+          if (a.balance !== b.balance) {
+            return b.balance - a.balance; // Higher balance first
+          }
+          return new Date(a.authDate).getTime() - new Date(b.authDate).getTime(); // Earlier authDate first
+        });
+
+        // Step 3: Assign ranks based on sorted order
         const rankedUsers = sortedUsers.map((u, index, arr) => {
           if (index === 0) {
-            return { ...u, rank: 1 };
+            return { ...u, rank: 1 }; // First user gets rank 1
           }
-          if (arr[index].balance === arr[index - 1].balance) {
-            return { ...u, rank: arr[index - 1].rank };
+
+          const previousUser = arr[index - 1];
+          // If balance and authDate match, assign the same rank
+          if (
+            u.balance === previousUser.balance &&
+            new Date(u.authDate).getTime() === new Date(previousUser.authDate).getTime()
+          ) {
+            return { ...u, rank: previousUser.rank };
           }
+
+          // Otherwise, assign a rank based on the current index
           return { ...u, rank: index + 1 };
         });
 
-        setUsers(rankedUsers);
+        // Step 4: Sort by rank for consistent display
+        const finalRankedUsers = [...rankedUsers].sort((a, b) => a.rank - b.rank);
 
-        // Compute your own rank
-        const myRank = rankedUsers.find((u) => u.tg_id === user?.tg_id)?.rank || 0;
-        setUserRank(myRank);
+        console.log("Ranked Users (excluding logged-in user):", finalRankedUsers);
+        setUsers(finalRankedUsers);
+
+        // Step 5: Determine the current user's rank from the original data
+        const myRank = fetchedUsers
+          .sort((a, b) => {
+            if (a.balance !== b.balance) {
+              return b.balance - a.balance;
+            }
+            return new Date(a.authDate).getTime() - new Date(b.authDate).getTime();
+          })
+          .findIndex((u) => u.tg_id === user?.tg_id) + 1;
+
+        setUserRank(myRank || 0);
       } catch (e) {
         console.error("Failed to fetch users", e);
       } finally {
