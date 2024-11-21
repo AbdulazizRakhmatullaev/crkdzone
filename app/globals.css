@@ -24,7 +24,7 @@
 }
 
 :root {
-  --bg: rgba(34, 34, 34, 0.6);
+  --bg: #22222299;
 }
 
 html,
@@ -46,7 +46,7 @@ body {
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
-  animation: moveBackground 70s linear infinite;
+  animation: moveBackground 80s linear infinite;
 }
 
 @keyframes moveBackground {
@@ -297,7 +297,6 @@ a {
   font-weight: 600;
   font-size: 25px;
   border-radius: 50%;
-  border: 1px solid rgb(47, 51, 54);
 }
 
 .header {
@@ -441,7 +440,8 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
+  padding: 0 10px;
+  height: 60px;
   margin-bottom: 10px;
   background: var(--bg);
   backdrop-filter: blur(22px);
