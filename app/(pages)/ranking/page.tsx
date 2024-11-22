@@ -52,7 +52,11 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-        const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id)
+
+        // Filter out the logged-in user
+        const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id);
+
+        // Assign leagues to remaining users
         const usersWithLeague = otherUsers.map((u) => ({
           ...u,
           league:
@@ -90,22 +94,27 @@ export default function Ranking() {
           });
         });
 
-        const myRankedUser = rankedUsers.find((u) => u.tg_id === user?.tg_id);
-        
-        setUsers(rankedUsers);
-        setUserRank(myRankedUser ? myRankedUser.rank : 0);
+        // Find the logged-in user's league and rank (if needed for display)
+        const myRank = fetchedUsers
+          .sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime())
+          .findIndex((u) => u.tg_id === user?.tg_id) + 1;
 
-        if (user?.balance !== undefined) {
-          if (user?.balance >= 0 && user?.balance <= 10000) {
-            setMyLeague("Bronze")
-          } else if (user?.balance > 10000 && user?.balance <= 25000) {
-            setMyLeague("Silver")
-          } else if (user?.balance > 25000 && user?.balance <= 50000) {
-            setMyLeague("Gold")
-          } else if (user?.balance > 50000) {
-            setMyLeague("Diamond")
-          }
-        }
+        setUserRank(myRank);
+
+        const myLeague = user?.balance
+          ? user.balance > 50000
+            ? "Diamond"
+            : user.balance > 25000
+              ? "Gold"
+              : user.balance > 10000
+                ? "Silver"
+                : "Bronze"
+          : "Bronze";
+
+        setMyLeague(myLeague);
+
+        // Update state
+        setUsers(rankedUsers);
       } catch (e) {
         console.error("Failed to fetch users", e);
       } finally {
