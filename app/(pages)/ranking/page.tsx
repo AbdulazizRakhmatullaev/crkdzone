@@ -52,33 +52,48 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-        const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id);
-        const sortedUsers = otherUsers.sort((a, b) => {
-          if (a.balance !== b.balance) {
-            return b.balance - a.balance; // Higher balance first
-          }
-          return new Date(a.authDate).getTime() - new Date(b.authDate).getTime(); // Earlier authDate first
+
+        const usersWithLeague = fetchedUsers.map((u) => ({
+          ...u,
+          league:
+            u.balance > 50000
+              ? "Diamond"
+              : u.balance > 25000
+                ? "Gold"
+                : u.balance > 10000
+                  ? "Silver"
+                  : "Bronze",
+        }));
+
+        // Group users by league
+        const leagues = ["Bronze", "Silver", "Gold", "Diamond"];
+        const rankedUsers: RankedUser[] = [];
+        leagues.forEach((league) => {
+          const usersInLeague = usersWithLeague
+            .filter((u) => u.league === league)
+            .sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime()); // Sort within league
+
+          // Assign ranks within the league
+          usersInLeague.forEach((user, index) => {
+            if (index === 0) {
+              rankedUsers.push({ ...user, rank: 1 });
+            } else {
+              const prevUser = usersInLeague[index - 1];
+              const rank =
+                user.balance === prevUser.balance &&
+                  new Date(user.authDate).getTime() === new Date(prevUser.authDate).getTime()
+                  ? prevUser.rank
+                  : index + 1;
+
+              rankedUsers.push({ ...user, rank });
+            }
+          });
         });
-        const rankedUsers = sortedUsers.map((u, index, arr) => {
-          if (index === 0) {
-            return { ...u, rank: 1 };
-          }
 
-          const previousUser = arr[index - 1];
-          if (
-            u.balance === previousUser.balance &&
-            new Date(u.authDate).getTime() === new Date(previousUser.authDate).getTime()
-          ) {
-            return { ...u, rank: previousUser.rank };
-          }
-
-          return { ...u, rank: index + 1 };
-        });
-        const finalRankedUsers = [...rankedUsers].sort((a, b) => a.rank - b.rank);
-        setUsers(finalRankedUsers);
-
-        const myRank = fetchedUsers.sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime()).findIndex((u) => u.tg_id === user?.tg_id) + 1;
-        setUserRank(myRank);
+        const myRankedUser = rankedUsers.find((u) => u.tg_id === user?.tg_id);
+        
+        setUsers(rankedUsers);
+        setUserRank(myRankedUser ? myRankedUser.rank : 0);
 
         if (user?.balance !== undefined) {
           if (user?.balance >= 0 && user?.balance <= 10000) {
@@ -142,11 +157,11 @@ export default function Ranking() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`tab flex items-center justify-center gap-3 grow ${activeTab === tab ? "actab" : ""}`}
+                className={`tab flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
               >
                 {tab}
                 {tab === myLeague ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-[18px] h-[20px]" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17.348 3.796a2.731 2.731 0 0 1 3.797-.056 2.708 2.708 0 0 1 .063 3.888l-4.735 4.747.662.66c.221.22.316.512.238.847-.04.164-.127.307-.228.441a6.633 6.633 0 0 1-.517.585c-1.079 1.118-2.264 2.139-3.435 3.157C11 20 9.033 20.438 6.977 20.8c-1.477.2-2.84.2-3.482.2-1.5 0-2-1.495-.9-2.592L11.97 9.16l.003-.002 5.374-5.36Zm-4.742 7.264S7.5 16 4.456 19.128C7.799 19.128 10 18.5 12.8 16c1.821-1.584 1.988-1.78 2.476-2.28l-2.67-2.66Zm2.594.047 4.731-4.744a.917.917 0 0 0-.021-1.318.927.927 0 0 0-1.288.02L13.88 9.792l1.319 1.314Z" clip-rule="evenodd" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-[16px] h-[16px]" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M7.9 2.998a.9.9 0 0 1 .9.9v.515l8.733 4.798a.9.9 0 0 1 0 1.578L8.8 15.587v5.515a.9.9 0 1 1-1.8 0V3.898a.9.9 0 0 1 .9-.9Z" /></svg>
                 ) : ("")}
               </button>
             ))}
