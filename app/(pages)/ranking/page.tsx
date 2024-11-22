@@ -18,7 +18,7 @@ type User = {
   authDate: Date;
 };
 
-type RankedUser = User & { rank: number };
+type RankedUser = User & { league: string, rank: number };
 
 export default function Ranking() {
   const [users, setUsers] = useState<RankedUser[]>([]);
@@ -31,6 +31,7 @@ export default function Ranking() {
   const [balance, setBalance] = useState("0");
   const [activeTab, setActiveTab] = useState("Bronze");
   const [myLeague, setMyLeague] = useState("Bronze");
+  const [reqs, setReqs] = useState("from 0");
 
   useEffect(() => {
     setFullHeight(false);
@@ -52,11 +53,7 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-
-        // Filter out the logged-in user
         const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id);
-
-        // Assign leagues to remaining users
         const usersWithLeague = otherUsers.map((u) => ({
           ...u,
           league:
@@ -75,7 +72,7 @@ export default function Ranking() {
         leagues.forEach((league) => {
           const usersInLeague = usersWithLeague
             .filter((u) => u.league === league)
-            .sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime()); // Sort within league
+            .sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime());
 
           // Assign ranks within the league
           usersInLeague.forEach((user, index) => {
@@ -95,13 +92,7 @@ export default function Ranking() {
         });
         setUsers(rankedUsers);
 
-        // Find the logged-in user's league and rank (if needed for display)
-        const myRank = rankedUsers
-          .sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime())
-          .findIndex((u) => u.tg_id === user?.tg_id) + 1;
-
-        setUserRank(myRank);
-
+        // Determine user's league and calculate rank within their league
         const myLeague = user?.balance
           ? user.balance > 50000
             ? "Diamond"
@@ -114,6 +105,17 @@ export default function Ranking() {
 
         setMyLeague(myLeague);
 
+        const myLeagueUsers = rankedUsers.filter((u) => u.league === myLeague);
+        const sortedMyLeagueUsers = [...myLeagueUsers].sort(
+          (a, b) =>
+            b.balance - a.balance ||
+            new Date(a.authDate).getTime() - new Date(b.authDate).getTime()
+        );
+
+        const myRank =
+          sortedMyLeagueUsers.findIndex((u) => u.tg_id === user?.tg_id) + 1;
+
+        setUserRank(myRank);
       } catch (e) {
         console.error("Failed to fetch users", e);
       } finally {
@@ -128,16 +130,20 @@ export default function Ranking() {
     const filterByTab = () => {
       switch (activeTab) {
         case "Bronze":
-          setFilteredUsers(users.filter((u) => u.balance >= 0 && u.balance <= 10000));
+          setFilteredUsers(users.filter((u) => u.balance >= 0 && u.balance <= 25000));
+          setReqs("from 0");
           break;
         case "Silver":
-          setFilteredUsers(users.filter((u) => u.balance > 10000 && u.balance <= 25000));
+          setFilteredUsers(users.filter((u) => u.balance > 25000 && u.balance <= 100000));
+          setReqs("from 25k");
           break;
         case "Gold":
-          setFilteredUsers(users.filter((u) => u.balance > 25000 && u.balance <= 50000));
+          setFilteredUsers(users.filter((u) => u.balance > 100000 && u.balance <= 250000));
+          setReqs("from 100k");
           break;
         case "Diamond":
-          setFilteredUsers(users.filter((u) => u.balance > 50000));
+          setFilteredUsers(users.filter((u) => u.balance > 250000));
+          setReqs("from 250k");
           break;
         default:
           setFilteredUsers(users);
@@ -159,21 +165,30 @@ export default function Ranking() {
           <Spinner />
         </div>
       ) : (
-        <div className="">
-          <div className="flex mb-5 w-full">
+          <div>
+            <div
+              className="flex mb-5 w-full overflow-x-auto"
+            >
             {["Bronze", "Silver", "Gold", "Diamond"].map((tab) => (
-              <button
+              <div
                 key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`tab flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
+                className="flex flex-col items-center w-full"
               >
-                {tab}
-                {tab === myLeague ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-[16px] h-[16px]" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M7.9 2.998a.9.9 0 0 1 .9.9v.515l8.733 4.798a.9.9 0 0 1 0 1.578L8.8 15.587v5.515a.9.9 0 1 1-1.8 0V3.898a.9.9 0 0 1 .9-.9Z" /></svg>
-                ) : ("")}
-              </button>
+                <button
+                  onClick={() => setActiveTab(tab)}
+                  className={`tab w-full uppercase font-HitConBlk flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
+                >
+                  {tab}
+                  {tab === myLeague ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-[14px] h-[14px]" fill="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M7.475 2.022a.594.594 0 0 1 1.06 0l1.74 3.397L14 6.011a.589.589 0 0 1 .473.413.589.589 0 0 1-.16.61l-2.658 2.49s.378 2.536.615 4.088a.578.578 0 0 1-.246.575.592.592 0 0 1-.624.039l-3.395-1.82s-2.1 1.122-3.414 1.826a.583.583 0 0 1-.615-.037.597.597 0 0 1-.255-.572c.227-1.551.596-4.099.596-4.099s-1.599-1.507-2.63-2.492a.586.586 0 0 1-.16-.608A.585.585 0 0 1 2 6.013l3.735-.594 1.74-3.397Z" clipRule="evenodd" /></svg>
+                  ) : null}
+                </button>
+                <div className={`text-xs mt-2 ${activeTab !== tab ? ("text-black") : ("")}`}>
+                    {reqs}
+                </div>
+              </div>
             ))}
-          </div>
+            </div>
 
           <div className="mpl mb-[15px]">
             <div className="rpl-usr">
@@ -200,7 +215,7 @@ export default function Ranking() {
                   <div className="fn">
                     {firstName}
                   </div>
-                  <div className="lg text-xs text-[#959595]">You • {myLeague}</div>
+                  <div className="lg text-xs uppercase text-[#959595]">level • {myLeague}</div>
                 </div>
               </div>
               <div className="rpl-txt">{balance}</div>

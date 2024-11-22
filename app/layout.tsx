@@ -62,6 +62,7 @@ export default function RootLayout({
         />
       </Head>
       <body>
+        <div className="grid-top"></div>
         {loading ? (
           <Loading />
         ) : (
@@ -78,6 +79,7 @@ export default function RootLayout({
               </main>
             </LayoutProvider>
         )}
+        <div className="grid-bottom"></div>
       </body>
     </html>
   );
