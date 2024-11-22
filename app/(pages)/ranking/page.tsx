@@ -93,9 +93,10 @@ export default function Ranking() {
             }
           });
         });
+        setUsers(rankedUsers);
 
         // Find the logged-in user's league and rank (if needed for display)
-        const myRank = fetchedUsers
+        const myRank = rankedUsers
           .sort((a, b) => b.balance - a.balance || new Date(a.authDate).getTime() - new Date(b.authDate).getTime())
           .findIndex((u) => u.tg_id === user?.tg_id) + 1;
 
@@ -113,8 +114,6 @@ export default function Ranking() {
 
         setMyLeague(myLeague);
 
-        // Update state
-        setUsers(rankedUsers);
       } catch (e) {
         console.error("Failed to fetch users", e);
       } finally {
