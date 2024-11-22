@@ -52,8 +52,8 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-
-        const usersWithLeague = fetchedUsers.map((u) => ({
+        const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id)
+        const usersWithLeague = otherUsers.map((u) => ({
           ...u,
           league:
             u.balance > 50000
