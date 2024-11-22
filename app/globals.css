@@ -75,23 +75,6 @@ a {
   height: 100%;
 }
 
-.hr {
-  right: 50%;
-  height: 1px;
-  width: 100%;
-  background-color: #fff;
-  margin: 15px 0;
-}
-
-.hrV {
-  position: fixed;
-  top: 0;
-  right: 50%;
-  width: 1px;
-  height: 100%;
-  background-color: red;
-}
-
 #main {
   position: relative;
   height: 100%;
@@ -197,8 +180,6 @@ a {
 .actlnk div {
   fill: #72cff0;
   color: #72cff0;
-  /* background: linear-gradient(to top, #446382b0, transparent); */
-    /* border-color: #ffffffd6; */
 }
 
 .lnktxt {
@@ -553,4 +534,15 @@ a {
 .aBtn {
   padding: 5px 15px;
   background: #00000050;
+}
+
+.tab {
+  padding: 10px 25px;
+  border-bottom: 1px solid transparent;
+}
+
+.actab {
+  color: #72cff0;
+  background: linear-gradient(to top, #446382b0, transparent);
+  border-color: #ffffffd6;
 }
