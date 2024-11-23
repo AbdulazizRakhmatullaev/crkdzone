@@ -22,7 +22,7 @@ export default function Missions() {
 
       <div className="p-[20px]">
         <div className="font-HitBld mb-[10px]">Essentials</div>
-        <div className="mis">
+        <div className="mis dv ">
           <div className="misInf">
             <div className="misT">TON mission</div>
             <div className="misDesc">1,000 $CZP</div>
@@ -31,7 +31,7 @@ export default function Missions() {
           <button className="misProg">Execute!</button>
         </div>
         <div className="misCat">Investigation</div>
-        <div className="mis">
+        <div className="mis dv ">
           <div className="misInf">
             <div className="misT">Subscribe to channel</div>
             <div className="misDesc">700 $CZP</div>
@@ -39,7 +39,7 @@ export default function Missions() {
 
           <button className="misProg">Execute!</button>
         </div>
-        <div className="mis">
+        <div className="mis dv ">
           <div className="misInf">
             <div className="misT">Subscribe to YouTube</div>
             <div className="misDesc">700 $CZP</div>
@@ -47,7 +47,7 @@ export default function Missions() {
 
           <button className="misProg">Execute!</button>
         </div>
-        <div className="mis">
+        <div className="mis dv ">
           <div className="misInf">
             <div className="misT">Subscribe to X</div>
             <div className="misDesc">700 $CZP</div>

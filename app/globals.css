@@ -23,10 +23,6 @@
   font-style: normal;
 }
 
-:root {
-  --bg: #22222299;
-}
-
 html,
 body {
   touch-action: pan-y;
@@ -41,7 +37,7 @@ body {
 }
 
 body {
-    background: #000;
+  background: #000;
   font-family: "Hitmarker Regular", Arial;
   font-size: 15px;
   color: #fff;
@@ -49,7 +45,8 @@ body {
   font-synthesis: none;
 }
 
-.grid-top, .grid-bottom {
+.grid-top,
+.grid-bottom {
   position: absolute;
   z-index: -1;
   height: 150px;
@@ -82,6 +79,14 @@ a {
   color: currentColor;
 }
 
+.dv {
+  background: linear-gradient(to bottom, #1b1b1b, #000 90%);
+  border: 1px solid #2d2d2d;
+}
+
+.dvb {
+  background: linear-gradient(to bottom, #1b1b1b, #000 90%);
+}
 .h100 {
   height: 100%;
 }
@@ -128,8 +133,8 @@ a {
   right: 0;
   width: 100%;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(22px);
+  background: linear-gradient(to bottom, #1b1b1b, #000 90%);
+  border-top: 1px solid #2d2d2d;
 }
 
 #navbar.dsk {
@@ -146,7 +151,7 @@ a {
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
-  padding: 5px 20px 10px;
+  padding: 0 20px;
 }
 
 #farm {
@@ -178,6 +183,7 @@ a {
   flex-grow: 1;
   color: #adabab;
   fill: #adabab;
+  padding: 8px 0 10px;
 }
 
 .lnk svg {
@@ -194,7 +200,7 @@ a {
 
 .lnktxt {
   font-size: 11px;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .homcon {
@@ -320,7 +326,6 @@ a {
 }
 
 .hd_desc {
-  margin-top: 12px;
   font-size: 13px;
 }
 
@@ -390,12 +395,12 @@ a {
   transition: 5s;
 }
 
-.loadcol div { 
+.loadcol div {
   width: 100%;
   height: 20%;
   display: flex;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .clcrd img {
@@ -433,7 +438,6 @@ a {
   padding: 0 10px;
   height: 60px;
   margin-bottom: 10px;
-  background: var(--bg);
   backdrop-filter: blur(22px);
 }
 
@@ -461,9 +465,8 @@ a {
   z-index: 1000;
   border: none;
   outline: none;
-  background: var(--bg);
-  backdrop-filter: blur(22px);
-  border: 1px solid rgb(47, 51, 54);
+  background: linear-gradient(to bottom, #1b1b1b, #000 70%);
+  border: 1px solid #2d2d2d;
   color: white;
   cursor: pointer;
   height: 42px;
@@ -503,8 +506,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
-  background: var(--bg);
+  padding: 5px 15px;
   backdrop-filter: blur(22px);
 }
 
@@ -518,8 +520,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
-  background: var(--bg);
+  padding: 5px 15px;
   backdrop-filter: blur(22px);
 }
 
@@ -546,12 +547,11 @@ a {
 }
 
 .tab {
-  padding: 10px 15px;
+  padding: 10px 12px;
   border-bottom: 1px solid transparent;
 }
 
-.actab {
-  color: #72cff0;
-  background: linear-gradient(to top, #446382b0, transparent);
-  border-color: #ffffffd6;
+.tab:hover {
+  background: black;
 }
+

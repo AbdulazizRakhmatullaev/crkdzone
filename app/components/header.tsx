@@ -11,17 +11,15 @@ const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
     return (
         <>
             <div className="header p-[20px]">
-                <div className='relative'>
-                    <Image
-                        src={img_src}
-                        alt="img"
-                        className="hd_img"
-                        priority={true}
-                        width={490}
-                        height={175}
-                    />
-                    <div className='bg-[#00000055] text-4xl uppercase font-HitConBlk absolute inset-0 flex items-center justify-center'>{title}</div>
-                </div>
+                <Image
+                    src={img_src}
+                    alt="img"
+                    className="hd_img"
+                    priority={true}
+                    width={490}
+                    height={175}
+                />
+                <div className='text-center my-3 text-3xl uppercase font-HitConBlk'>{title}</div>
                 <div className="hd_desc text-center">
                     {desc}
                 </div>

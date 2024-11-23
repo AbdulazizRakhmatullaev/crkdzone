@@ -20,7 +20,7 @@ const Navbar = () => {
     <div className="navrow">
       <Link
         href="/"
-        className={`lnk ${base ? "actlnk" : ""}`}
+        className={`lnk border-solid border-r border-[#2D2D2D] ${base ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         {base ? (
@@ -38,7 +38,7 @@ const Navbar = () => {
       </Link>
       <Link
         href="/missions"
-        className={`lnk ${missions ? "actlnk" : ""}`}
+        className={`lnk border-solid border-r border-[#2D2D2D] ${missions ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         {missions ? (
@@ -65,7 +65,7 @@ const Navbar = () => {
       </Link>
       <Link
         href="/ranking"
-        className={`lnk ${ranking ? "actlnk" : ""}`}
+        className={`lnk border-solid border-r border-[#2D2D2D] ${ranking ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         {ranking ? (

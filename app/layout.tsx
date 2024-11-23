@@ -38,7 +38,7 @@ export default function RootLayout({
     if (process.env.NODE_ENV === "production") {
       setTimeout(() => {
         setLoading(false);
-      }, 3000);
+      }, 1600);
     } else {
       setLoading(false);
     }
