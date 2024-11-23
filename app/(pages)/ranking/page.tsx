@@ -167,55 +167,59 @@ export default function Ranking() {
       ) : (
           <div>
             <div
-              className="flex mb-5 w-full overflow-x-auto"
+              className="flex mb-3 w-full overflow-x-auto"
             >
             {["Private", "Corporal", "Sergeant", "Major"].map((tab) => (
-              <div
+              <button
                 key={tab}
-                className="flex flex-col items-center w-full"
-              >
-                <button
-                  onClick={() => setActiveTab(tab)}
-                  className={`tab w-full text-[12px] font-HitConBlk flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
+                onClick={() => setActiveTab(tab)}
+                className={`tab w-full font-HitBld flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
                 >
                   {tab}
                   {tab === myLeague ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-[14px] h-[14px]" fill="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M7.475 2.022a.594.594 0 0 1 1.06 0l1.74 3.397L14 6.011a.589.589 0 0 1 .473.413.589.589 0 0 1-.16.61l-2.658 2.49s.378 2.536.615 4.088a.578.578 0 0 1-.246.575.592.592 0 0 1-.624.039l-3.395-1.82s-2.1 1.122-3.414 1.826a.583.583 0 0 1-.615-.037.597.597 0 0 1-.255-.572c.227-1.551.596-4.099.596-4.099s-1.599-1.507-2.63-2.492a.586.586 0 0 1-.16-.608A.585.585 0 0 1 2 6.013l3.735-.594 1.74-3.397Z" clipRule="evenodd" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-[12px] h-[12px]" fill="currentColor" viewBox="0 0 16 16"><path fillRule="evenodd" d="M7.475 2.022a.594.594 0 0 1 1.06 0l1.74 3.397L14 6.011a.589.589 0 0 1 .473.413.589.589 0 0 1-.16.61l-2.658 2.49s.378 2.536.615 4.088a.578.578 0 0 1-.246.575.592.592 0 0 1-.624.039l-3.395-1.82s-2.1 1.122-3.414 1.826a.583.583 0 0 1-.615-.037.597.597 0 0 1-.255-.572c.227-1.551.596-4.099.596-4.099s-1.599-1.507-2.63-2.492a.586.586 0 0 1-.16-.608A.585.585 0 0 1 2 6.013l3.735-.594 1.74-3.397Z" clipRule="evenodd" /></svg>
                   ) : null}
-                </button>
-                <div className={`text-xs mt-2 ${activeTab !== tab ? ("text-black") : ("")}`}>
-                    {reqs}
-                </div>
-              </div>
+              </button>
             ))}
             </div>
 
-          <div className="mpl mb-[15px]">
-            <div className="rpl-usr">
-              <div className="uspic relative text-xs">
-                {user?.pic ? (
-                  <Image
-                    src={user?.pic}
-                    alt="userpic"
-                    className="pp"
-                    width={50}
-                    height={50}
-                    priority={true}
-                  />
-                ) : (
-                  <div className="flex items-center justify-center w-[50px] h-[50px] bg-black rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-[28px] h-[28px]" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M14.85 7.95A2.849 2.849 0 0 0 12 5.1a2.849 2.849 0 0 0-2.85 2.85A2.849 2.849 0 0 0 12 10.8a2.849 2.849 0 0 0 2.85-2.85Zm1.8 0A4.649 4.649 0 0 1 12 12.6a4.649 4.649 0 0 1-4.65-4.65A4.649 4.649 0 0 1 12 3.3a4.649 4.649 0 0 1 4.65 4.65ZM5.9 18.429c0 .768-.09.671.335.671h11.53c.426 0 .335.097.335-.671 0-1.893-2.778-3.029-6.1-3.029-3.322 0-6.1 1.136-6.1 3.029Zm-1.8 0c0-3.327 3.673-4.829 7.9-4.829s7.9 1.502 7.9 4.829c0 1.735-.685 2.471-2.135 2.471H6.235c-1.45 0-2.135-.736-2.135-2.471Z" /></svg>
-                  </div>
-                )}
-                <div className="pl absolute right-[-5px] bottom-0 bg-black p-1 text-xs rounded-full h-[20px] w-[20px] flex items-center justify-center">
-                  {userRank}
+            <div className="reqs text-center mb-5">
+              {["Private", "Corporal", "Sergeant", "Major"].map((tab) => (
+                <div key={tab}>
+                  {activeTab === tab ? (
+                    reqs
+                  ) : ("")}
                 </div>
-              </div>
+              ))}
+            </div>
+
+
+            <div className="mpl mb-[15px]">
+              <div className="rpl-usr">
+                <div className="uspic relative text-xs">
+                  {user?.pic ? (
+                    <Image
+                      src={user?.pic}
+                      alt="userpic"
+                      className="pp"
+                      width={50}
+                      height={50}
+                      priority={true}
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center w-[50px] h-[50px] bg-black rounded-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-[28px] h-[28px]" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M14.85 7.95A2.849 2.849 0 0 0 12 5.1a2.849 2.849 0 0 0-2.85 2.85A2.849 2.849 0 0 0 12 10.8a2.849 2.849 0 0 0 2.85-2.85Zm1.8 0A4.649 4.649 0 0 1 12 12.6a4.649 4.649 0 0 1-4.65-4.65A4.649 4.649 0 0 1 12 3.3a4.649 4.649 0 0 1 4.65 4.65ZM5.9 18.429c0 .768-.09.671.335.671h11.53c.426 0 .335.097.335-.671 0-1.893-2.778-3.029-6.1-3.029-3.322 0-6.1 1.136-6.1 3.029Zm-1.8 0c0-3.327 3.673-4.829 7.9-4.829s7.9 1.502 7.9 4.829c0 1.735-.685 2.471-2.135 2.471H6.235c-1.45 0-2.135-.736-2.135-2.471Z" /></svg>
+                    </div>
+                  )}
+                  <div className="pl absolute right-[-5px] bottom-0 bg-black p-1 text-xs rounded-full h-[20px] w-[20px] flex items-center justify-center">
+                    {userRank}
+                  </div>
+                </div>
                 <div className="rpl-usrnm">
                   <div className="fn">
                     {firstName}
                   </div>
-                  <div className="lg text-xs uppercase text-[#959595]">level • {myLeague}</div>
+                  <div className="lg text-xs text-[#959595]">Level • {myLeague}</div>
                 </div>
               </div>
               <div className="rpl-txt">{balance}</div>

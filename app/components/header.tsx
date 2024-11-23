@@ -11,26 +11,18 @@ const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
     return (
         <>
             <div className="header">
-                <Image
-                    src={img_src}
-                    alt="img"
-                    className="hd_img"
-                    priority={true}
-                    width={490}
-                    height={190}
-                />
-                <div className="flex gap-3 items-center mt-5 font-HitConBlk">
-                    <div className='text-2xl uppercase'>{title}</div>
+                <div className='relative'>
                     <Image
-                        alt="stripe"
-                        src="/stripe.png"
-                        className='hdstp'
+                        src={img_src}
+                        alt="img"
+                        className="hd_img"
                         priority={true}
-                        width={1000}
-                        height={20}
+                        width={490}
+                        height={190}
                     />
+                    <div className='bg-[#00000055] text-4xl uppercase font-HitConBlk absolute inset-0 flex items-center justify-center'>{title}</div>
                 </div>
-                <div className="hd_desc">
+                <div className="hd_desc text-center">
                     {desc}
                 </div>
             </div>
