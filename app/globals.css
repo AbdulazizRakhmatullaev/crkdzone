@@ -37,10 +37,10 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden;
+  scrollbar-color: rgb(62, 65, 68) #131313;
 }
 
 body {
-  scrollbar-color: rgb(62, 65, 68) #131313;
     background: #000;
   font-family: "Hitmarker Regular", Arial;
   font-size: 15px;
