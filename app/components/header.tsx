@@ -10,7 +10,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
     return (
         <>
-            <div className="header">
+            <div className="header p-[20px]">
                 <div className='relative'>
                     <Image
                         src={img_src}
@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
                         className="hd_img"
                         priority={true}
                         width={490}
-                        height={190}
+                        height={175}
                     />
                     <div className='bg-[#00000055] text-4xl uppercase font-HitConBlk absolute inset-0 flex items-center justify-center'>{title}</div>
                 </div>

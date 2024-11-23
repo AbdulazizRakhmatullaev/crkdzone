@@ -23,7 +23,7 @@ export default function Base() {
   }, [user?.balance])
 
   return (
-    <div className="h-full flex flex-col items-center justify-center">
+    <div className="h-full flex flex-col items-center justify-center p-[20px]">
       {loading ? (
         <Spinner />
       ) : (

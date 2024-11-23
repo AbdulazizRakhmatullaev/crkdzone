@@ -40,6 +40,7 @@ body {
 }
 
 body {
+  scrollbar-color: rgb(62, 65, 68) #131313;
     background: #000;
   font-family: "Hitmarker Regular", Arial;
   font-size: 15px;
@@ -48,25 +49,24 @@ body {
   font-synthesis: none;
 }
 
-.grid-top {
+.grid-top, .grid-bottom {
   position: absolute;
   z-index: -1;
   height: 150px;
   width: 100%;
-  top: 0;
   background-image: url("/botGrid.png");
   background-repeat: no-repeat;
+  background-size: cover; /* Makes the background image responsive */
+  background-position: center; /* Centers the background image */
+}
+
+.grid-top {
+  top: 0;
   transform: rotate(180deg);
 }
+
 .grid-bottom {
-  position: absolute;
-  z-index: -1;
-  height: 150px;
-  width: 100%;
-  left: 0;
   bottom: 0;
-  background-image: url("/botGrid.png");
-  background-repeat: no-repeat;
 }
 
 * {
@@ -91,12 +91,12 @@ a {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  scrollbar-gutter: stable both-edges;
+  /* scrollbar-gutter: stable both-edges; */
   overflow-y: scroll;
   overscroll-behavior-y: none;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 12px;
 }
 
@@ -105,13 +105,12 @@ a {
   background-clip: padding-box;
   border-radius: 9999px;
   background-color: #787c7f8e;
-}
+} */
 
 #mainCon {
   position: relative;
   margin: 0 auto;
   max-width: 600px;
-  padding: 20px 20px 0;
 }
 
 #mainCon.dsk {
@@ -293,14 +292,13 @@ a {
 
 .header {
   display: flex;
-  align-items: left;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .hd_img {
   position: relative;
-  height: 190px;
+  height: 175px;
   width: 100%;
   object-fit: cover;
   border: 1px solid #fff;
@@ -548,7 +546,7 @@ a {
 }
 
 .tab {
-  padding: 10px 12px;
+  padding: 10px 15px;
   border-bottom: 1px solid transparent;
 }
 
