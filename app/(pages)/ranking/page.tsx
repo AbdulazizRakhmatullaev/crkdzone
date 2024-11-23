@@ -29,8 +29,8 @@ export default function Ranking() {
   const [firstName, setFirstName] = useState("Name");
   const [userRank, setUserRank] = useState(0);
   const [balance, setBalance] = useState("0");
-  const [activeTab, setActiveTab] = useState("Bronze");
-  const [myLeague, setMyLeague] = useState("Bronze");
+  const [activeTab, setActiveTab] = useState("Private");
+  const [myLeague, setMyLeague] = useState("Private");
   const [reqs, setReqs] = useState("from 0");
 
   useEffect(() => {
@@ -58,16 +58,16 @@ export default function Ranking() {
           ...u,
           league:
             u.balance > 50000
-              ? "Diamond"
+              ? "Major"
               : u.balance > 25000
-                ? "Gold"
+                ? "Sergeant"
                 : u.balance > 10000
-                  ? "Silver"
-                  : "Bronze",
+                  ? "Corporal"
+                  : "Private",
         }));
 
         // Group users by league
-        const leagues = ["Bronze", "Silver", "Gold", "Diamond"];
+        const leagues = ["Private", "Corporal", "Sergeant", "Major"];
         const rankedUsers: RankedUser[] = [];
         leagues.forEach((league) => {
           const usersInLeague = usersWithLeague
@@ -95,13 +95,13 @@ export default function Ranking() {
         // Determine user's league and calculate rank within their league
         const myLeague = user?.balance
           ? user.balance > 50000
-            ? "Diamond"
+            ? "Major"
             : user.balance > 25000
-              ? "Gold"
+              ? "Sergeant"
               : user.balance > 10000
-                ? "Silver"
-                : "Bronze"
-          : "Bronze";
+                ? "Corporal"
+                : "Private"
+          : "Private";
 
         setMyLeague(myLeague);
 
@@ -129,19 +129,19 @@ export default function Ranking() {
   useEffect(() => {
     const filterByTab = () => {
       switch (activeTab) {
-        case "Bronze":
+        case "Private":
           setFilteredUsers(users.filter((u) => u.balance >= 0 && u.balance <= 25000));
           setReqs("from 0");
           break;
-        case "Silver":
+        case "Corporal":
           setFilteredUsers(users.filter((u) => u.balance > 25000 && u.balance <= 100000));
           setReqs("from 25k");
           break;
-        case "Gold":
+        case "Sergeant":
           setFilteredUsers(users.filter((u) => u.balance > 100000 && u.balance <= 250000));
           setReqs("from 100k");
           break;
-        case "Diamond":
+        case "Major":
           setFilteredUsers(users.filter((u) => u.balance > 250000));
           setReqs("from 250k");
           break;
@@ -169,14 +169,14 @@ export default function Ranking() {
             <div
               className="flex mb-5 w-full overflow-x-auto"
             >
-            {["Bronze", "Silver", "Gold", "Diamond"].map((tab) => (
+            {["Private", "Corporal", "Sergeant", "Major"].map((tab) => (
               <div
                 key={tab}
                 className="flex flex-col items-center w-full"
               >
                 <button
                   onClick={() => setActiveTab(tab)}
-                  className={`tab w-full uppercase font-HitConBlk flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
+                  className={`tab w-full text-[12px] font-HitConBlk flex items-center justify-center gap-1 grow ${activeTab === tab ? "actab" : ""}`}
                 >
                   {tab}
                   {tab === myLeague ? (
