@@ -27,7 +27,7 @@ export default function Ranking() {
   const { user } = useUser();
   const { setFullHeight } = useLayout();
   const [firstName, setFirstName] = useState("Name");
-  const [userRank, setUserRank] = useState(0);
+  const [myRank, setMyRank] = useState(0);
   const [balance, setBalance] = useState("0");
   const [activeTab, setActiveTab] = useState("Private");
   const [myLeague, setMyLeague] = useState("Private");
@@ -55,15 +55,14 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-        const otherUsers = fetchedUsers.filter((u) => u.tg_id !== user?.tg_id);
-        const usersWithLeague = otherUsers.map((u) => ({
+        const usersWithLeague = fetchedUsers.map((u) => ({
           ...u,
           league:
-            u.balance > 50000
+            u.balance >= 250000
               ? "Major"
-              : u.balance > 25000
+              : u.balance >= 100000
                 ? "Sergeant"
-                : u.balance > 10000
+                : u.balance >= 25000
                   ? "Corporal"
                   : "Private",
         }));
@@ -80,32 +79,33 @@ export default function Ranking() {
                 new Date(a.authDate).getTime() - new Date(b.authDate).getTime(),
             );
 
-          // Assign ranks within the league
-          usersInLeague.forEach((user, index) => {
-            if (index === 0) {
-              rankedUsers.push({ ...user, rank: 1 });
-            } else {
-              const prevUser = usersInLeague[index - 1];
-              const rank =
-                user.balance === prevUser.balance &&
+        usersInLeague.forEach((user, index) => {
+          if (index === 0) {
+            rankedUsers.push({ ...user, rank: 1 });
+          } else {
+            const prevUser = usersInLeague[index - 1];
+            const rank =
+              user.balance === prevUser.balance &&
                 new Date(user.authDate).getTime() ===
-                  new Date(prevUser.authDate).getTime()
-                  ? prevUser.rank
-                  : index + 1;
+                new Date(prevUser.authDate).getTime()
+                ? prevUser.rank
+                : index + 1;
 
-              rankedUsers.push({ ...user, rank });
-            }
-          });
+            rankedUsers.push({ ...user, rank });
+          }
         });
-        setUsers(rankedUsers);
+      });
+
+        // Limit to top 10 users
+        const topRankedUsers = rankedUsers.slice(0, 10);
 
         // Determine user's league and calculate rank within their league
         const myLeague = user?.balance
-          ? user.balance > 50000
+          ? user.balance >= 250000
             ? "Major"
-            : user.balance > 25000
+            : user.balance >= 100000
               ? "Sergeant"
-              : user.balance > 10000
+              : user.balance >= 25000
                 ? "Corporal"
                 : "Private"
           : "Private";
@@ -113,16 +113,19 @@ export default function Ranking() {
         setMyLeague(myLeague);
 
         const myLeagueUsers = rankedUsers.filter((u) => u.league === myLeague);
-        const sortedMyLeagueUsers = [...myLeagueUsers].sort(
-          (a, b) =>
-            b.balance - a.balance ||
-            new Date(a.authDate).getTime() - new Date(b.authDate).getTime(),
-        );
-
         const myRank =
-          sortedMyLeagueUsers.findIndex((u) => u.tg_id === user?.tg_id) + 1;
+          myLeagueUsers.findIndex((u) => u.tg_id === user?.tg_id) + 1;
 
-        setUserRank(myRank);
+        setMyRank(myRank);
+
+        // Exclude current user from the list if myRank === 1
+        const filteredUsers =
+          myRank === 1
+            ? topRankedUsers.filter((u) => u.tg_id !== user?.tg_id)
+            : topRankedUsers;
+
+        setUsers(filteredUsers);
+
       } catch (e) {
         console.error("Failed to fetch users", e);
       } finally {
@@ -138,19 +141,19 @@ export default function Ranking() {
       switch (activeTab) {
         case "Private":
           setFilteredUsers(
-            users.filter((u) => u.balance >= 0 && u.balance <= 25000),
+            users.filter((u) => u.balance >= 0 && u.balance <= 24999),
           );
           setReqs("from 0");
           break;
         case "Corporal":
           setFilteredUsers(
-            users.filter((u) => u.balance > 25000 && u.balance <= 100000),
+            users.filter((u) => u.balance > 25000 && u.balance <= 99999),
           );
           setReqs("from 25k");
           break;
         case "Sergeant":
           setFilteredUsers(
-            users.filter((u) => u.balance > 100000 && u.balance <= 250000),
+            users.filter((u) => u.balance > 100000 && u.balance <= 249999),
           );
           setReqs("from 100k");
           break;
@@ -211,7 +214,7 @@ export default function Ranking() {
             ))}
           </div>
 
-          <div className="mpl dv mb-[15px]">
+          <div className="mpl border border-[#cecece] dvb mb-[15px]">
             <div className="rpl-usr">
               <div className="uspic relative text-xs w-[50px] h-[50px]">
                 {user?.pic ? (
@@ -238,13 +241,13 @@ export default function Ranking() {
                   </div>
                 )}
                 <div className="pl absolute right-[-5px] border-solid border border-[#2D2D2D] bottom-0 bg-black text-xs rounded-full h-[25px] w-[25px] flex items-center justify-center">
-                  {userRank}
+                    {myRank}
                 </div>
               </div>
               <div className="rpl-usrnm">
                 <div className="fn">{firstName}</div>
                 <div className="lg text-xs text-[#959595] uppercase">
-                  Rank • {myLeague}
+                  You • {myLeague}
                 </div>
               </div>
             </div>
