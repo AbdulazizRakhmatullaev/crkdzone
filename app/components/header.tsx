@@ -10,7 +10,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
     return (
         <>
-            <div className="header p-[20px]">
+            <div className="header">
                 <Image
                     src={img_src}
                     alt="img"

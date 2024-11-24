@@ -49,24 +49,22 @@ export function UserProvider({ children }: { children: ReactNode }) {
             }
             
             fetchUser();
-        } 
-        
-        // {
-        //     const fetchUser = async () => {
-        //         try {
-        //             const res = await fetch(`/api/user?tg_id=${336417426}`);
-        //             if (!res.ok) throw new Error("Unable to run check-user.");
+        } else {
+            const fetchUser = async () => {
+                try {
+                    const res = await fetch(`/api/user?tg_id=${336417426}`);
+                    if (!res.ok) throw new Error("Unable to run check-user.");
     
-        //             const [user] = await res.json();
-        //             console.log(user)
-        //             setUser(user);
-        //         } catch (error) {
-        //             console.error(error);
-        //         }
-        //     }
+                    const [user] = await res.json();
+                    console.log(user)
+                    setUser(user);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
     
-        //     fetchUser();
-        // }
+            fetchUser();
+        }
     }, [])
 
     return (

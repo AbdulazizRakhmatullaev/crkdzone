@@ -23,7 +23,7 @@ export default function Base() {
   }, [user?.balance])
 
   return (
-    <div className="h-full flex flex-col items-center justify-center p-[20px]">
+    <div className="h-full flex flex-col items-center justify-center">
       {loading ? (
         <Spinner />
       ) : (
@@ -34,11 +34,7 @@ export default function Base() {
             </div>
             <div id="farm">
               <div className="frmcol">
-                <div className="abt">
-                  <div className="aBtn">Store</div>
-                  <div className="aBtn">Profile</div>
-                </div>
-                <button className="btn">Farm</button>
+                <button className="frmbtn">Farm</button>
               </div>
             </div>
           </div>

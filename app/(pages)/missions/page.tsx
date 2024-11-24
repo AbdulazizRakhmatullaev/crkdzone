@@ -20,7 +20,7 @@ export default function Missions() {
         desc="Hit every objective like your life depends on it — no excuses, no delays, no second chances! Points don’t come easy, soldier, and this field isn’t forgiving. You either earn ‘em or watch yourself fall behind. Stay sharp and stay ready!"
       />
 
-      <div className="p-[20px]">
+      <div>
         <div className="font-HitBld mb-[10px]">Essentials</div>
         <div className="mis dv ">
           <div className="misInf">

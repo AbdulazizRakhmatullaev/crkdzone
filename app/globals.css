@@ -33,7 +33,6 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden;
-  scrollbar-color: rgb(62, 65, 68) #131313;
 }
 
 body {
@@ -49,8 +48,9 @@ body {
 .grid-bottom {
   position: absolute;
   z-index: -1;
-  height: 150px;
+  height: 140px;
   width: 100%;
+  opacity: .7;
   background-image: url("/botGrid.png");
   background-repeat: no-repeat;
   background-size: cover; /* Makes the background image responsive */
@@ -97,30 +97,32 @@ a {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  /* scrollbar-gutter: stable both-edges; */
+  /* scrollbar-color: rgb(62, 65, 68) #131313; */
+  scrollbar-gutter: stable both-edges;
   overflow-y: scroll;
   overscroll-behavior-y: none;
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
   border: 4px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
-  border-radius: 9999px;
+  /* border-radius: 9999px; */
   background-color: #787c7f8e;
-} */
+}
 
 #mainCon {
   position: relative;
   margin: 0 auto;
   max-width: 600px;
+  padding: 20px 8px 0;
 }
 
 #mainCon.dsk {
-  padding-bottom: 75px;
+  padding-bottom: 72px;
 }
 
 #mainCon.phn {
@@ -153,6 +155,7 @@ a {
   margin: 0 auto;
   max-width: 600px;
   padding: 0 20px;
+  height: 100%;
 }
 
 #farm {
@@ -165,26 +168,33 @@ a {
   backdrop-filter: blur(25px);
 }
 
-.btn {
-  background: #fff;
-  color: #000;
+.frmbtn {
+  background: #D80A0A;
+  color: #fff;
   padding: 10px 20px;
   width: 100%;
-  max-width: 600px;
   font-family: "Hitmarker Bold", Arial;
-  font-size: 17px;
-  border: none;
+  text-transform: uppercase;
+  border-top: 1px solid #ffffff60;
+  border-bottom: 1px solid #ffffff60;
+  border-right: 1px solid #d43d3d;
+  border-left: 1px solid #d43d3d;
+  box-shadow: 0px 0px 11px 1px #d80a0a;
+}
+
+.frmbtn:hover {
+  border-color: transparent;
 }
 
 .lnk {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-grow: 1;
   color: #adabab;
   fill: #adabab;
-  padding: 8px 0 10px;
+  padding: 15px 0;
 }
 
 .lnk svg {
@@ -200,8 +210,11 @@ a {
 }
 
 .lnktxt {
-  font-size: 11px;
+  font-size: 14px;
+  font-family: "Hitmarker Regular", Arial;
   text-transform: uppercase;
+  font-style: normal;
+    letter-spacing: 1px;
 }
 
 .homcon {
@@ -300,7 +313,7 @@ a {
 .header {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .hd_img {
@@ -463,7 +476,7 @@ a {
 
 #toTop {
   position: fixed;
-  right: 15px;
+  right: 20px;
   z-index: 1000;
   border: none;
   outline: none;
@@ -473,16 +486,14 @@ a {
   cursor: pointer;
   height: 42px;
   width: 42px;
-  border-radius: 50%;
   opacity: 0;
   display: grid;
   place-items: center;
-  transition: 0.2s;
   visibility: hidden;
 }
 
 #toTop.dsk {
-  bottom: 65px;
+  bottom: 62px;
 }
 
 #toTop.phn {
@@ -495,7 +506,7 @@ a {
 }
 
 #toTop:hover {
-  background: rgba(51, 51, 51, 0.7);
+  background: #000;
 }
 
 #toTop svg {
@@ -536,18 +547,6 @@ a {
   font-family: "Hitmarker Condensed Black", Arial;
 }
 
-.abt {
-  display: flex;
-  gap: 5px;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.aBtn {
-  padding: 5px 15px;
-  background: #00000050;
-}
-
 .tab {
   padding: 10px 12px;
   border-bottom: 1px solid transparent;
@@ -556,4 +555,3 @@ a {
 .tab:hover {
   background: black;
 }
-
