@@ -216,7 +216,7 @@ export default function Ranking() {
 
           <div className="mpl border border-[#cecece] dvb mb-[15px]">
             <div className="rpl-usr">
-              <div className="uspic relative text-xs w-[50px] h-[50px]">
+              <div className="uspic relative border-solid border border-[#2D2D2D] rounded-full">
                 {user?.pic ? (
                   <Image
                     src={user?.pic}
@@ -257,7 +257,7 @@ export default function Ranking() {
             {filteredUsers.map((user) => (
               <div className="rpl dv" key={user.id}>
                 <div className="rpl-usr">
-                  <div className="uspic relative">
+                  <div className="uspic relative border-solid border border-[#2D2D2D] rounded-full">
                     {user?.pic ? (
                       <Image
                         src={user?.pic}
