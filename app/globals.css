@@ -103,11 +103,11 @@ a {
   overscroll-behavior-y: none;
 }
 
-::-webkit-scrollbar {
+#main::-webkit-scrollbar {
   width: 12px;
 }
 
-::-webkit-scrollbar-thumb {
+#main::-webkit-scrollbar-thumb {
   border: 4px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
   /* border-radius: 9999px; */
@@ -550,8 +550,4 @@ a {
 .tab {
   padding: 10px 12px;
   border-bottom: 1px solid transparent;
-}
-
-.tab:hover {
-  background: black;
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 interface classProps {
-  className: string;
+  className: string | undefined;
 }
 
 const ToTopBtn: React.FC<classProps> = ({ className }) => {

@@ -1,106 +1,82 @@
-"use client";
+export const generateViewport = () => ({
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: "no",
+});
 
-import React, { useState, useEffect } from "react";
-import Head from "next/head";
-import Loading from "./components/loading";
 import Navbar from "./components/navbar";
 import ToTopBtn from "./components/toTopBtn";
 import "./globals.css";
 import { UserProvider } from "./contexts/user";
-import { LayoutProvider, useLayout } from "./contexts/layoutCon"; // Note: Removed useLayout here
+import { LayoutProvider } from "./contexts/layoutCon"; // Note: Removed useLayout here
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [loading, setLoading] = useState(true);
-  const [platform, setPlatform] = useState<string | null>(null);
+  // const fullHeight = useLayout();
+  // const [loading, setLoading] = useState(true);
+  // const [platform, setPlatform] = useState<string | null>(null);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://telegram.org/js/telegram-web-app.js";
-    script.async = true;
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://telegram.org/js/telegram-web-app.js";
+  //   script.async = true;
 
-    script.onload = () => {
-      if (window?.Telegram?.WebApp) {
-        const webApp = window.Telegram?.WebApp;
+  //   script.onload = () => {
+  //     if (window?.Telegram?.WebApp) {
+  //       const webApp = window.Telegram?.WebApp;
 
-        webApp.ready();
-        webApp.expand();
-        webApp.disableVerticalSwipes();
-        setPlatform(webApp.platform);
-      };
-    };
+  //       webApp.ready();
+  //       webApp.expand();
+  //       webApp.disableVerticalSwipes();
+  //       setPlatform(webApp.platform);
+  //     };
+  //   };
 
-    document.head.appendChild(script);
+  //   document.head.appendChild(script);
 
-    if (process.env.NODE_ENV === "production") {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1600);
-    } else {
-      setLoading(false);
-    }
+  //   if (process.env.NODE_ENV === "production") {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1600);
+  //   } else {
+  //     setLoading(false);
+  //   }
 
-  }, []);
+  // }, []);
 
-  const setPlatformStyle = () => {
-    return platform === "ios" || platform === "android" ? "phn" : "dsk";
-  };
+  // const setPlatformStyle = () => {
+  //   if (window.Telegram?.WebApp) {
+  //     const platform = window.Telegram.WebApp.platform;
+  //     return platform === "ios" || platform === "android" ? "phn" : "dsk";
+  //   }
+  // };
 
   return (
     <html lang="en">
-      <Head>
-        <meta
-          name="viewport"
-          content="
-            width=device-width, 
-            initial-scale=1.0, 
-            maximum-scale=1.0, 
-            user-scalable=no"
-        />
-      </Head>
       <body>
         <div className="grid-top"></div>
-        {loading ? (
-          <Loading />
-        ) : (
-            <LayoutProvider>
-              <main id="main">
-                <UserProvider>
-                  <Main setPlatformStyle={setPlatformStyle}>
-                  {children}
-                  </Main>
-                </UserProvider>
-                <nav id="navbar" className={setPlatformStyle()}>
-                  <Navbar />
-                </nav>
-              </main>
-            </LayoutProvider>
-        )}
+        <LayoutProvider>
+          <main id="main">
+            <UserProvider>
+              <div
+                id="mainCon"
+                className="phn"
+              >
+                {children}
+                <ToTopBtn className="phn" />
+              </div>
+            </UserProvider>
+            <nav id="navbar">
+              <Navbar />
+            </nav>
+          </main>
+        </LayoutProvider>
         <div className="grid-bottom"></div>
       </body>
     </html>
-  );
-}
-
-function Main({
-  setPlatformStyle,
-  children,
-}: {
-  setPlatformStyle: () => string;
-  children: React.ReactNode;
-}) {
-  const { fullHeight } = useLayout();
-
-  return (
-    <div
-        id="mainCon"
-        className={`${setPlatformStyle()}${fullHeight ? " h-full" : ""}`}
-      >
-        {children}
-        <ToTopBtn className={setPlatformStyle()} />
-    </div>
   );
 }
