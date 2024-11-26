@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Header from "@/app/components/header";
-import rnkimg from "@/public/ranking.jpeg";
-import { useUser } from "@/app/contexts/user";
-import { useLayout } from "@/app/contexts/layoutCon";
+import { useInitData } from "@/app/contexts/initData";
 import Spinner from "@/app/components/spinner";
 
 type User = {
@@ -24,18 +22,13 @@ export default function Ranking() {
   const [users, setUsers] = useState<RankedUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<RankedUser[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser();
-  const { setFullHeight } = useLayout();
+  const { user } = useInitData();
   const [firstName, setFirstName] = useState("Name");
   const [myRank, setMyRank] = useState(0);
   const [balance, setBalance] = useState("0");
   const [activeTab, setActiveTab] = useState("Private");
   const [myLeague, setMyLeague] = useState("Private");
   const [reqs, setReqs] = useState("from 0");
-
-  useEffect(() => {
-    setFullHeight(false);
-  }, [setFullHeight]);
 
   useEffect(() => {
     if (user?.firstName !== undefined) {
@@ -171,7 +164,6 @@ export default function Ranking() {
   return (
     <>
       <Header
-        img_src={rnkimg}
         title="Ranking"
         desc="Push hard, give it everything you’ve got, and don’t let up until the job’s done! Earn your stripes and make ‘em remember your name in the heat of battle. Prove you belong out here, where only the toughest survive!"
       />

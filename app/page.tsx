@@ -1,44 +1,55 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useUser } from "./contexts/user";
-import { useLayout } from "./contexts/layoutCon";
-import Spinner from "./components/spinner";
+import { useInitData } from "./contexts/initData";
 
 export default function Base() {
-  const { setFullHeight } = useLayout();
-  const [loading, setLoading] = useState(true);
-  const { user } = useUser();
+  const { user } = useInitData();
   const [balance, setBalance] = useState("0");
-
-  useEffect(() => {
-    setFullHeight(true);
-    setLoading(false);
-  }, [setFullHeight]);
+  const [dt, setDt] = useState("retrieving...");
 
   useEffect(() => {
     if (user?.balance !== undefined) {
       setBalance(user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '))
     }
-  }, [user?.balance])
+
+    if (user?.authDate !== undefined) {
+      const date = new Date();
+      setDt(`${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`)
+    }
+  }, [user?.balance, user?.authDate])
 
   return (
-    <div className="h-full flex flex-col items-center justify-center">
-      {loading ? (
-        <Spinner />
-      ) : (
-          <div className="base flex flex-col items-center justify-center h-full w-full">
-            <div className="flex flex-col items-center justify-center h-full">
-              <div className="bal font-HitBld text-4xl text-center">{balance}</div>
-              <div className="cnN font-HitConBlk text-2xl">$CZP</div>
-            </div>
-            <div id="farm">
-              <div className="frmcol">
-                <button className="frmbtn">Farm</button>
-              </div>
+    <div className="base flex flex-col items-center justify-between h-full w-full">
+      <div className="dt w-full">
+        <div className="ml-[10px]">Data</div>
+        <div className="mt-2 p-[10px] border border-[#2d2d2d] flex flex-col gap-2">
+          <div className="flex justify-between">
+            <div className="text-[#959595]">Balance</div>
+            <div>
+              {balance}
+              <span className="ml-1 text-[11px]">$CZP</span>
             </div>
           </div>
-      )}
+          <div className="flex justify-between">
+            <div className="text-[#959595]">Date joined</div>
+            <div className="">{dt}</div>
+          </div>
+          <div className="flex justify-between">
+            <div className="text-[#959595]">Rank</div>
+            <div className="">Private</div>
+          </div>
+          <div className="flex justify-between">
+            <div className="text-[#959595]">Squad</div>
+            <div className="">{user?.friends}</div>
+          </div>
+        </div>
+      </div>
+      <div id="farm">
+        <div className="frmcol">
+          <button className="frmbtn">Farm</button>
+        </div>
+      </div>
     </div>
   );
 };

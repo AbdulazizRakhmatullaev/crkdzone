@@ -1,26 +1,16 @@
 import React from 'react'
-import Image, { StaticImageData } from 'next/image';
 
 interface HeaderProps {
-    img_src: StaticImageData;
     title: string;
     desc: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ img_src, title, desc }) => {
+const Header: React.FC<HeaderProps> = ({ title, desc }) => {
     return (
         <>
             <div className="header">
-                <Image
-                    src={img_src}
-                    alt="img"
-                    className="hd_img"
-                    priority={true}
-                    width={490}
-                    height={175}
-                />
-                <div className='text-center my-3 text-3xl uppercase font-HitConBlk'>{title}</div>
-                <div className="hd_desc text-center">
+                <div className='mb-3 pl-[10px] text-2xl uppercase font-HitConBlk'>{title}</div>
+                <div className="hd_desc p-[10px] border-solid border border-[#2d2d2d]">
                     {desc}
                 </div>
             </div>

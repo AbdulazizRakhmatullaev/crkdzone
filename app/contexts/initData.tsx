@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import Loading from '../components/loading';
 
 interface User {
     id: number
@@ -12,14 +13,49 @@ interface User {
     authDate: Date;
 }
 
-interface UserContextType {
+interface InitContextType {
     user: User | null;
+    platform: string | undefined;
 }
 
-export const UserContext = createContext<UserContextType | undefined>(undefined);
+export const InitDataContext = createContext<InitContextType | undefined>(undefined);
 
-export function UserProvider({ children }: { children: ReactNode }) {
+export function InitDataProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [platform, setPlatform] = useState<string | undefined>(undefined);
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://telegram.org/js/telegram-web-app.js";
+        script.async = true;
+
+        script.onload = () => {
+            if (window?.Telegram?.WebApp) {
+                const webApp = window.Telegram?.WebApp;
+
+                webApp.ready();
+                webApp.expand();
+                webApp.disableVerticalSwipes();
+
+                if (webApp.platform === "ios" || platform === "android") {
+                    setPlatform("phn");
+                } else {
+                    setPlatform("dsk");
+                }
+            };
+        };
+
+        document.head.appendChild(script);
+
+        if (process.env.NODE_ENV === "production") {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1600);
+        } else {
+            setLoading(false);
+        }
+    }, [platform]);
 
     useEffect(() => {
         if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
@@ -51,7 +87,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
             }
             
             fetchUser();
-        } else {
+        } 
+        else {
             const fetchUser = async () => {
                 try {
                     const res = await fetch(`/api/user?tg_id=${336417426}`);
@@ -70,16 +107,20 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }, [])
 
     return (
-        <UserContext.Provider value={{ user }}>
-            {children}
-        </UserContext.Provider>
+        <InitDataContext.Provider value={{ user, platform }}>
+            {loading ? (
+              <Loading />  
+            ) : (
+                children
+            )}
+        </InitDataContext.Provider>
     );
 }
 
-export const useUser = () => {
-    const context = useContext(UserContext);
+export const useInitData = () => {
+    const context = useContext(InitDataContext);
     if (!context) {
-        throw new Error('useUser must be used within a UserProvider');
+        throw new Error('useInitData must be used within a InitDataProvider');
     }
     return context;
 };

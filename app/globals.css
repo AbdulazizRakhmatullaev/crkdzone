@@ -25,45 +25,18 @@
 
 html,
 body {
-  touch-action: pan-y;
-  user-select: none;
-  -ms-touch-action: pan-y;
-  -webkit-touch-callout: none;
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
 }
 
 body {
   background: #000;
   font-family: "Hitmarker Regular", Arial;
-  font-size: 15px;
+  font-size: 14px;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
-}
-
-.grid-top,
-.grid-bottom {
-  position: absolute;
-  z-index: -1;
-  height: 140px;
-  width: 100%;
-  opacity: .7;
-  background-image: url("/botGrid.png");
-  background-repeat: no-repeat;
-  background-size: cover; /* Makes the background image responsive */
-  background-position: center; /* Centers the background image */
-}
-
-.grid-top {
-  top: 0;
-  transform: rotate(180deg);
-}
-
-.grid-bottom {
-  bottom: 0;
 }
 
 * {
@@ -79,53 +52,25 @@ a {
   color: currentColor;
 }
 
-.dv {
-  background: linear-gradient(to bottom, #1b1b1b, #000 90%);
-  border: 1px solid #2d2d2d;
-}
-
-.dvb {
-  background: linear-gradient(to bottom, #1b1b1b, #000 90%);
-}
-
-.h100 {
-  height: 100%;
+::-webkit-scrollbar {
+  display: none;
 }
 
 #main {
   position: relative;
   height: 100%;
   width: 100%;
-  margin: 0 auto;
-  /* scrollbar-color: rgb(62, 65, 68) #131313; */
-  scrollbar-gutter: stable both-edges;
-  overflow-y: scroll;
-  overscroll-behavior-y: none;
-}
-
-#main::-webkit-scrollbar {
-  width: 12px;
-}
-
-#main::-webkit-scrollbar-thumb {
-  border: 4px solid rgba(0, 0, 0, 0);
-  background-clip: padding-box;
-  /* border-radius: 9999px; */
-  background-color: #787c7f8e;
-}
-
-#mainCon {
-  position: relative;
-  margin: 0 auto;
   max-width: 600px;
-  padding: 20px 8px 0;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-y: scroll;
 }
 
-#mainCon.dsk {
+#main.dsk {
   padding-bottom: 72px;
 }
 
-#mainCon.phn {
+#main.phn {
   padding-bottom: 100px;
 }
 
@@ -136,7 +81,7 @@ a {
   right: 0;
   width: 100%;
   z-index: 2;
-  background: linear-gradient(to bottom, #1b1b1b, #000 90%);
+  background: #000;
   border-top: 1px solid #2d2d2d;
 }
 
@@ -193,30 +138,18 @@ a {
   align-items: center;
   flex-grow: 1;
   color: #adabab;
-  fill: #adabab;
   padding: 15px 0;
-}
-
-.lnk svg {
-  height: 24px;
-  width: 24px;
-  vertical-align: middle;
-}
-
-.actlnk svg,
-.actlnk div {
-  fill: #72cff0;
-  color: #72cff0;
-}
-
-.lnktxt {
-  font-size: 14px;
-  font-family: "Hitmarker Regular", Arial;
+  font-size: 13px;
+    font-family: "Hitmarker Regular";
   text-transform: uppercase;
   font-style: normal;
     letter-spacing: 1px;
 }
 
+.actlnk {
+  color: #fff;
+  text-shadow: 0 0 4px #ffffffc8;
+}
 .homcon {
   display: flex;
   align-items: center;
@@ -443,6 +376,7 @@ a {
 .misCat {
   font-family: "Hitmarker Bold", Arial;
   margin: 30px 0 10px;
+  padding-left: 10px;
 }
 
 .mis {
@@ -452,7 +386,7 @@ a {
   padding: 0 10px;
   height: 60px;
   margin-bottom: 10px;
-  backdrop-filter: blur(22px);
+  border: 1px solid #2d2d2d;
 }
 
 .misT {
@@ -534,7 +468,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 5px 15px;
-  backdrop-filter: blur(22px);
+  border: 1px solid #2d2d2d;
 }
 
 .rpl-usr {
