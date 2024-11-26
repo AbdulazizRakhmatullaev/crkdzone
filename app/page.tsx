@@ -28,16 +28,11 @@ export default function Base() {
             <div className="text-[#959595]">Balance</div>
             <div>
               {balance}
-              <span className="ml-1 text-[11px]">$CZP</span>
             </div>
           </div>
           <div className="flex justify-between">
             <div className="text-[#959595]">Date joined</div>
             <div className="">{dt}</div>
-          </div>
-          <div className="flex justify-between">
-            <div className="text-[#959595]">Rank</div>
-            <div className="">Private</div>
           </div>
           <div className="flex justify-between">
             <div className="text-[#959595]">Squad</div>

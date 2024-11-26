@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/app/components/header";
+import Link from "next/link";
 
 export default function Missions() {
   return (
@@ -11,39 +12,15 @@ export default function Missions() {
       />
 
       <div>
-        <div className="font-HitBld mb-[10px] pl-[10px]">Essentials</div>
-        <div className="mis dv ">
+        <div className="mis">
           <div className="misInf">
-            <div className="misT">TON mission</div>
-            <div className="misDesc">1,000 $CZP</div>
+            <div className="misT">Subscribe to the channel</div>
+            <div className="text-xs text-[#959595]">+ 1 000</div>
           </div>
 
-          <button className="misProg">Execute</button>
-        </div>
-        <div className="misCat">Investigation</div>
-        <div className="mis dv ">
-          <div className="misInf">
-            <div className="misT">Subscribe to channel</div>
-            <div className="misDesc">700 $CZP</div>
-          </div>
-
-          <button className="misProg">Execute</button>
-        </div>
-        <div className="mis dv ">
-          <div className="misInf">
-            <div className="misT">Subscribe to YouTube</div>
-            <div className="misDesc">700 $CZP</div>
-          </div>
-
-          <button className="misProg">Execute</button>
-        </div>
-        <div className="mis dv ">
-          <div className="misInf">
-            <div className="misT">Subscribe to X</div>
-            <div className="misDesc">700 $CZP</div>
-          </div>
-
-          <button className="misProg">Execute</button>
+          <Link href={"https://t.me/crkdzone"}>
+            <button className="misProg">Execute</button>
+          </Link>
         </div>
       </div>
     </>
