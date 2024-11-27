@@ -12,10 +12,11 @@ export default function Missions() {
       />
 
       <div>
+        <div className="m-[10px] mt-[30px]">Essentials</div>
         <div className="mis">
-          <div className="misInf">
-            <div className="misT">Subscribe to the channel</div>
-            <div className="text-xs text-[#959595]">+ 1 000</div>
+          <div className="flex flex-col">
+            <div>Join telegram channel</div>
+            <div className="text-xs text-[#959595]">+1 000 Armor</div>
           </div>
 
           <Link href={"https://t.me/crkdzone"}>

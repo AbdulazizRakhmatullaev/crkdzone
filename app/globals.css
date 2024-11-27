@@ -68,11 +68,11 @@ a {
 }
 
 #main.dsk {
-  padding-bottom: 72px;
+  padding-bottom: 70px;
 }
 
 #main.phn {
-  padding-bottom: 100px;
+  padding-bottom: 90px;
 }
 
 #navbar {
@@ -91,7 +91,7 @@ a {
 }
 
 #navbar.phn {
-  height: 80px;
+  height: 70px;
 }
 
 .navrow {
@@ -100,7 +100,6 @@ a {
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
-  padding: 0 20px;
   height: 100%;
 }
 
@@ -197,7 +196,7 @@ a {
   font-weight: 400;
 }
 
-.title {
+/* .title {
   position: fixed;
   top: 0;
   left: 0;
@@ -208,7 +207,7 @@ a {
   z-index: 1;
   background: radial-gradient(#344d5fc7, #273842a1 80%);
   backdrop-filter: blur(22px);
-  /* box-shadow: inset 0px -2px 4px -1px #1e6fa7; */
+  box-shadow: inset 0px -2px 4px -1px #1e6fa7;
   border-bottom: 1px solid #72cff08a;
   font-family: "Hitmarker Condensed Black", Arial;
   font-size: 26px;
@@ -216,6 +215,8 @@ a {
   color: #72cff0;
   text-shadow: 0px 0px 1.5px #8ce1ffd4;
 }
+
+*/
 
 .grid {
   position: absolute;
@@ -464,13 +465,4 @@ background: #fff;
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-.rpl-txt {
-  font-family: "Hitmarker Condensed Black", Arial;
-}
-
-.tab {
-  padding: 10px 12px;
-  border-bottom: 1px solid transparent;
 }

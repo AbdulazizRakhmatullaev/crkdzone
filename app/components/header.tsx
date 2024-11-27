@@ -8,9 +8,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title, desc }) => {
     return (
         <>
-            <div className="header">
-                <div className='mb-3 pl-[10px] text-2xl uppercase font-HitConBlk'>{title}</div>
-                <div className="hd_desc p-[10px] border-solid border border-[#2d2d2d]">
+            <div className="p-[10px] header border border-[#2d2d2d]">
+                <div className='mb-3 text-xl uppercase font-HitConBlk'>{title}</div>
+                <div className="hd_desc text-[#959595]">
                     {desc}
                 </div>
             </div>

@@ -35,9 +35,7 @@ export default function Ranking() {
         user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "),
       );
     }
-  }, [user?.firstName, user?.balance]);
 
-  useEffect(() => {
     const fetchUsers = async () => {
       try {
         const res = await fetch(`/api/users`);
@@ -96,7 +94,7 @@ export default function Ranking() {
     };
 
     fetchUsers();
-  }, [user?.tg_id, user?.balance]);
+  }, [user?.tg_id, user?.firstName, user?.balance]);
 
   return (
     <>
@@ -111,7 +109,7 @@ export default function Ranking() {
         </div>
       ) : (
           <div>
-            <div className="pl-[10px] pb-[10px] text-[#959595]">Me</div>
+            <div className="pl-[10px] pb-[10px] text-[#959595]">Soldier&apos;s rank</div>
             <div className="mpl border border-[#cecece] dvb mb-[15px]">
               <div className="rpl-usr">
                 <div className="uspic relative border-solid border border-[#2D2D2D] rounded-full">
@@ -146,10 +144,10 @@ export default function Ranking() {
                   <div className="fn">{firstName}</div>
                 </div>
               </div>
-              <div className="rpl-txt">{balance}</div>
+              <div className="text-[13px]">{balance}</div>
             </div>
 
-            <div className="p-[10px] text-[#959595]">Top 100</div>
+            <div className="p-[10px] text-[#959595]">Top 100 Soldiers</div>
             <div className="rts">
               {users.map((user) => (
                 <div className="rpl dv" key={user.id}>
@@ -184,7 +182,7 @@ export default function Ranking() {
                       </div>
                       <div className="rpl-usrnm">{user.firstName}</div>
                     </div>
-                    <div className="rpl-txt">
+                    <div className="text-[13px]">
                       {user.balance
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
