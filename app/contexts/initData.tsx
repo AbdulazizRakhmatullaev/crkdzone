@@ -105,7 +105,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     
         //     fetchUser();
         // }
-    }, [])
+    }, [platform])
 
     return (
         <InitDataContext.Provider value={{ user, platform }}>
