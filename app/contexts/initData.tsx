@@ -27,7 +27,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const script = document.createElement("script");
-        script.src = "https://telegram.org/js/telegram-web-app.js";
+        script.src = "https://telegram.org/js/telegram-web-app.js?56";
         script.async = true;
 
         script.onload = () => {
@@ -58,35 +58,36 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     }, [platform]);
 
     useEffect(() => {
-        // if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
-        const webApp = window.Telegram.WebApp;
-        const initData = webApp.initData;
-        const dataUnsafe = webApp.initDataUnsafe;
+        if (window.Telegram?.WebApp) { // && process.env.NODE_ENV === "production") {
+            const webApp = window.Telegram.WebApp;
+            const initData = webApp.initData;
+            const dataUnsafe = webApp.initDataUnsafe;
 
-        const params = new URLSearchParams(initData);
-        const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-        const firstName = dataUnsafe.user?.first_name;
-        const pic = dataUnsafe?.user?.photo_url;
+            const params = new URLSearchParams(initData);
+            const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+            const firstName = dataUnsafe.user?.first_name;
+            const pic = dataUnsafe?.user?.photo_url;
 
-        const fetchUser = async () => {
-            try {
-                const res = await fetch("/api/check-user", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ tg_id, firstName, pic })
-                });
-                if (!res.ok) throw new Error("Unable to run check-user.");
+            const fetchUser = async () => {
+                try {
+                    const res = await fetch("/api/check-user", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ tg_id, firstName, pic })
+                    });
+                    if (!res.ok) throw new Error("Unable to run check-user.");
 
-                const user = await res.json();
-                setUser(user);
-            } catch (error) {
-                console.error(error);
+                    const user = await res.json();
+                    setUser(user);
+                } catch (error) {
+                    console.error(error);
+                }
             }
-        }
 
-        fetchUser();
+            fetchUser();
+        }
         // } 
         // else {
         //     const fetchUser = async () => {
