@@ -50,7 +50,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     }, [platform]);
 
     useEffect(() => {
-        if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
+        if (window.Telegram.WebApp) {
             const webApp = window.Telegram.WebApp;
             const initData = webApp.initData;
             const dataUnsafe = webApp.initDataUnsafe;
