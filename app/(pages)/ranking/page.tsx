@@ -100,20 +100,28 @@ export default function Ranking() {
     <>
       <Header
         title="Ranking"
-        desc="Push hard, give it everything you’ve got, and don’t let up until the job’s done! Earn your stripes and make ‘em remember your name in the heat of battle. Prove you belong out here, where only the toughest survive!"
+        desc="Put in the effort and prove your worth. Rank up and show them what you’re made of. Where only the toughest survive!"
       />
 
       {loading ? (
-        <div className="mt-5">
-          <Spinner />
-        </div>
+        <Spinner />
       ) : (
-          <div>
-            <div className="pl-[10px] pb-[10px] text-[#959595]">Soldier&apos;s rank</div>
-            <div className="mpl border border-[#cecece] dvb mb-[15px]">
-              <div className="rpl-usr">
-                <div className="uspic relative border-solid border border-[#2D2D2D] rounded-full">
-                  {user?.pic ? (
+          <table className="w-full">
+            <thead>
+              <tr className="text-[#959595]">
+                <th className="w-[40px]"></th>
+                <th></th>
+                <th className="text-left">Name</th>
+                <th>Cash</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="text-center">
+                  <span className="text-[13px] p-[2px] bg-[#FFD700] text-black">You</span> {myRank}
+                </td>
+                <td className="w-[50px]">
+                  {user?.pic && user?.pic.startsWith("https://t.me/") ? (
                     <Image
                       src={user?.pic}
                       alt="userpic"
@@ -123,7 +131,7 @@ export default function Ranking() {
                       priority={true}
                     />
                   ) : (
-                    <div className="flex items-center justify-center w-[45px] h-[45px] bg-black rounded-full">
+                      <div className="flex items-center justify-center w-[45px] h-[45px] bg-black">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-[28px] h-[28px]"
@@ -136,61 +144,44 @@ export default function Ranking() {
                       </svg>
                     </div>
                   )}
-                  <div className={`pl absolute right-[-5px] border-solid border border-[#2D2D2D] bottom-0 text-xs rounded-full h-[20px] w-[20px] flex items-center justify-center ${myRank === 1 ? "bg-[#FFD700] text-black" : ""} ${myRank === 2 ? "bg-[#c0c0c0] text-black" : ""} ${myRank === 3 ? "bg-[#CD7F32] text-black" : ""} ${myRank > 3 ? "bg-black" : ""}`}>
-                    {myRank}
-                  </div>
-                </div>
-                <div className="rpl-usrnm">
-                  <div className="fn">{firstName}</div>
-                </div>
-              </div>
-              <div className="text-[13px]">{balance}</div>
-            </div>
-
-            <div className="p-[10px] text-[#959595]">Top 100 Soldiers</div>
-            <div className="rts">
+                </td>
+                <td>{firstName}</td>
+                <td className="text-center">{balance}</td>
+              </tr>
               {users.map((user) => (
-                <div className="rpl dv" key={user.id}>
-                  <div className="rpl-usr">
-                    <div className="uspic relative border-solid border border-[#2D2D2D] rounded-full">
-                      {user?.pic && user?.pic.startsWith("https://t.me/") ? (
-                        <Image
-                          src={user?.pic}
-                          alt="userpic"
-                            className="pp w-[45px] h-[45px]"
-                            width={50}
-                            height={50}
-                            priority={true}
-                          />
-                        ) : (
-                          <div className="flex items-center justify-center w-[45px] h-[45px] bg-black rounded-full">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-[28px] h-[28px]"
-                              width="24"
-                              height="24"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M14.85 7.95A2.849 2.849 0 0 0 12 5.1a2.849 2.849 0 0 0-2.85 2.85A2.849 2.849 0 0 0 12 10.8a2.849 2.849 0 0 0 2.85-2.85Zm1.8 0A4.649 4.649 0 0 1 12 12.6a4.649 4.649 0 0 1-4.65-4.65A4.649 4.649 0 0 1 12 3.3a4.649 4.649 0 0 1 4.65 4.65ZM5.9 18.429c0 .768-.09.671.335.671h11.53c.426 0 .335.097.335-.671 0-1.893-2.778-3.029-6.1-3.029-3.322 0-6.1 1.136-6.1 3.029Zm-1.8 0c0-3.327 3.673-4.829 7.9-4.829s7.9 1.502 7.9 4.829c0 1.735-.685 2.471-2.135 2.471H6.235c-1.45 0-2.135-.736-2.135-2.471Z" />
-                            </svg>
-                          </div>
-                        )}
-                        <div className={`pl absolute right-[-5px] bottom-0 border-solid border border-[#2D2D2D] p-1 text-xs rounded-full h-[20px] w-[20px] flex items-center justify-center ${user.rank === 1 ? "bg-[#FFD700] text-black" : ""} ${user.rank === 2 ? "bg-[#c0c0c0] text-black" : ""} ${user.rank === 3 ? "bg-[#CD7F32] text-black" : ""} ${user.rank > 3 ? "bg-black" : ""}`}>
-                          {user.rank}
-                        </div>
+                <tr key={user.id} className={`${user.rank === 1 ? "text-[#FFD700]" : ""}${user.rank === 2 ? "text-[#c0c0c0]" : ""}${user.rank === 3 ? "text-[#CD7F32]" : ""}`}>
+                  <td className="text-center">{user.rank}</td>
+                  <td className="w-[45px]">
+                    {user?.pic && user?.pic.startsWith("https://t.me/") ? (
+                      <Image
+                        src={user?.pic}
+                        alt="userpic"
+                        className="pp w-[45px] h-[45px]"
+                        width={50}
+                        height={50}
+                        priority={true}
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center w-[45px] h-[45px] border border-[#2d2d2d]">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-[28px] h-[28px]"
+                          width="24"
+                          height="24"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M14.85 7.95A2.849 2.849 0 0 0 12 5.1a2.849 2.849 0 0 0-2.85 2.85A2.849 2.849 0 0 0 12 10.8a2.849 2.849 0 0 0 2.85-2.85Zm1.8 0A4.649 4.649 0 0 1 12 12.6a4.649 4.649 0 0 1-4.65-4.65A4.649 4.649 0 0 1 12 3.3a4.649 4.649 0 0 1 4.65 4.65ZM5.9 18.429c0 .768-.09.671.335.671h11.53c.426 0 .335.097.335-.671 0-1.893-2.778-3.029-6.1-3.029-3.322 0-6.1 1.136-6.1 3.029Zm-1.8 0c0-3.327 3.673-4.829 7.9-4.829s7.9 1.502 7.9 4.829c0 1.735-.685 2.471-2.135 2.471H6.235c-1.45 0-2.135-.736-2.135-2.471Z" />
+                        </svg>
                       </div>
-                      <div className="rpl-usrnm">{user.firstName}</div>
-                    </div>
-                    <div className="text-[13px]">
-                      {user.balance
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-                    </div>
-                  </div>
-                ))}
-            </div>
-        </div>
+                    )}
+                  </td>
+                  <td>{user.firstName}</td>
+                  <td className="text-center">{user.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
       )}
     </>
   );

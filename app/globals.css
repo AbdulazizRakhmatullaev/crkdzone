@@ -59,27 +59,21 @@ a {
 
 #main {
   position: relative;
-  height: 100%;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  overflow-y: scroll;
 }
 
 #main.dsk {
-  padding-bottom: 70px;
+  height: calc(100% - 51px);
 }
 
 #main.phn {
-  padding-bottom: 90px;
+  height: calc(100% - 80px);
 }
 
 #navbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   width: 100%;
   z-index: 2;
   background: #000;
@@ -148,8 +142,9 @@ a {
 
 .actlnk {
   color: #fff;
-  text-shadow: 0 0 4px #ffffffc8;
+  -webkit-text-stroke: 1px #fff;
 }
+
 .homcon {
   display: flex;
   align-items: center;
@@ -240,9 +235,6 @@ a {
   object-fit: cover;
   display: grid;
   place-items: center;
-  font-weight: 600;
-  font-size: 25px;
-  border-radius: 50%;
 }
 
 .header {
@@ -465,4 +457,12 @@ background: #fff;
   display: flex;
   align-items: center;
   gap: 15px;
+}
+th {
+  padding: 0 5px 5px;
+}
+
+td {
+  padding: 5px;
+  border: 1px solid #2d2d2d;
 }
