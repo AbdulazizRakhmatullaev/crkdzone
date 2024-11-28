@@ -14,14 +14,14 @@ interface User {
 }
 
 interface InitContextType {
-    user: User | null;
+    user: User | undefined;
     platform: string | undefined;
 }
 
 export const InitDataContext = createContext<InitContextType | undefined>(undefined);
 
 export function InitDataProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | undefined>(undefined);
     const [loading, setLoading] = useState(true);
     const [platform, setPlatform] = useState<string | undefined>(undefined);
 
