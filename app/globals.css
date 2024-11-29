@@ -28,7 +28,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
 }
 
 body {
@@ -38,6 +37,7 @@ body {
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
+  overflow-x: hidden;
 }
 
 * {
@@ -58,11 +58,11 @@ a {
 }
 
 #main {
-  position: relative;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  overflow-y: scroll;
 }
 
 #main.dsk {
@@ -74,6 +74,9 @@ a {
 }
 
 #navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
   z-index: 2;
   background: #000;
@@ -81,7 +84,7 @@ a {
 }
 
 #navbar.dsk {
-  height: auto;
+  height: 51px;
 }
 
 #navbar.phn {
@@ -95,10 +98,6 @@ a {
   margin: 0 auto;
   max-width: 600px;
   height: 100%;
-}
-
-#farm {
-  width: 100%;
 }
 
 .frmcol {
@@ -459,10 +458,9 @@ background: #fff;
   gap: 15px;
 }
 th {
-  padding: 0 5px 5px;
+  padding: 0 5px;
 }
 
 td {
   padding: 5px;
-  border: 1px solid #2d2d2d;
 }

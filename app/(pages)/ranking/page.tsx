@@ -42,10 +42,10 @@ export default function Ranking() {
         if (!res.ok) throw new Error("Unable to fetch users");
 
         const fetchedUsers: RankedUser[] = await res.json();
-        const wBalUsers = fetchedUsers.filter((u) => u.balance !== 0)
+        // const wBalUsers = fetchedUsers.filter((u) => u.balance !== 0)
 
         // Step 2: Sort users by balance (descending) and authDate (ascending)
-        const sortedUsers = wBalUsers.sort((a, b) => {
+        const sortedUsers = fetchedUsers.sort((a, b) => {
           if (a.balance !== b.balance) {
             return b.balance - a.balance;
           }
@@ -149,7 +149,7 @@ export default function Ranking() {
                 <td className="text-center">{balance}</td>
               </tr>
               {users.map((user) => (
-                <tr key={user.id} className={`${user.rank === 1 ? "text-[#FFD700]" : ""}${user.rank === 2 ? "text-[#c0c0c0]" : ""}${user.rank === 3 ? "text-[#CD7F32]" : ""}`}>
+                <tr key={user.id} className={`border border-[#2d2d2d] ${user.rank === 1 ? "text-[#FFD700]" : ""}${user.rank === 2 ? "text-[#c0c0c0]" : ""}${user.rank === 3 ? "text-[#CD7F32]" : ""}`}>
                   <td className="text-center">{user.rank}</td>
                   <td className="w-[45px]">
                     {user?.pic && user?.pic.startsWith("https://t.me/") ? (

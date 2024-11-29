@@ -20,10 +20,28 @@ interface InitContextType {
 
 export const InitDataContext = createContext<InitContextType | undefined>(undefined);
 
+interface WebAppUser {
+    id: number;
+    username: string;
+    first_name: string;
+    last_name?: string;
+    photo_url?: string;
+    language_code?: string;
+}
+
+interface DataUnsafe {
+    user?: WebAppUser;
+    query_id?: string;
+    auth_date?: number;
+    hash?: string;
+}
+
 export function InitDataProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
-    const [platform, setPlatform] = useState<string | undefined>(undefined);
+    const [initData, setInitData] = useState("");
+    const [dataUnsafe, setDataUnsafe] = useState<DataUnsafe | null>(null);
+    const [platform, setPlatform] = useState("phn");
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -38,6 +56,9 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
                 webApp.expand();
                 webApp.disableVerticalSwipes();
 
+                setInitData(webApp.initData);
+                setDataUnsafe(webApp.initDataUnsafe);
+
                 if (webApp.platform === "ios" || platform === "android") {
                     setPlatform("phn");
                 } else {
@@ -50,14 +71,10 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     }, [platform]);
 
     useEffect(() => {
-        if (window.Telegram?.WebApp) {
-            const webApp = window.Telegram.WebApp;
-            const initData = webApp.initData;
-            const dataUnsafe = webApp.initDataUnsafe;
-
+        if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
             const params = new URLSearchParams(initData);
             const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-            const firstName = dataUnsafe.user?.first_name;
+            const firstName = dataUnsafe?.user?.first_name;
             const pic = dataUnsafe?.user?.photo_url;
 
             const fetchUser = async () => {
@@ -79,28 +96,20 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
             }
 
             fetchUser();
+        } else {
+            setUser({ 
+                id: 1,
+                tg_id: BigInt(86425255181), // Use the 'n' suffix for bigint
+                firstName: "userLocal",
+                pic: "https://via.placeholder.com/150", // Example placeholder image
+                balance: 100,
+                friends: 5,
+                authDate: new Date(), // Current date and time
+            });
         }
-        // else {
-        //     const fetchUser = async () => {
-        //         try {
-        //             const res = await fetch(`/api/user?tg_id=${336417426}`);
-        //             if (!res.ok) throw new Error("Unable to run check-user.");
 
-        //             const [user] = await res.json();
-        //             console.log(user)
-        //             setUser(user);
-        //         } catch (error) {
-        //             console.error(error);
-        //         }
-        //     }
-
-        //     fetchUser();
-        // }
-
-        setTimeout(() => {
-            setLoading(false);
-        }, 1600);
-    }, [])
+        setLoading(false);
+    }, [initData, dataUnsafe])
 
     return (
         <InitDataContext.Provider value={{ user, platform }}>

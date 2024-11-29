@@ -1,13 +1,19 @@
+import "./globals.css";
+import { InitDataProvider } from "./contexts/initData";
+import LayoutContent from "./components/lytCon";
+
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'Crackedzone'
+}
+
 export const generateViewport = () => ({
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: "no",
 });
-
-import "./globals.css";
-import { InitDataProvider } from "./contexts/initData";
-import LayoutContent from "./components/lytCon";
 
 export default function RootLayout({
   children,

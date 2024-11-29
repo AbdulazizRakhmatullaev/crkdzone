@@ -58,7 +58,7 @@ export default function Base() {
           </div>
         </div>
       </div>
-      <div id="farm">
+      <div id="farm" className="w-full">
         <div className="frmcol">
           <button className="frmbtn">To war!</button>
         </div>
