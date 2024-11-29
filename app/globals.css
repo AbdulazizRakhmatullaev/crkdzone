@@ -28,6 +28,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -37,7 +38,6 @@ body {
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
-  overflow-x: hidden;
 }
 
 * {
@@ -63,6 +63,8 @@ a {
   margin: 0 auto;
   padding: 20px;
   overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 #main.dsk {
