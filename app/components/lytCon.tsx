@@ -11,9 +11,9 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
       <main id="main" className={platform}>
         {children}
       </main>
-      <nav id="navbar" className={platform}>
+      <footer id="navbar" className={platform}>
         <Navbar />
-      </nav>
+      </footer>
     </>
   );
 }
