@@ -7,7 +7,6 @@ interface User {
     id: number
     tg_id: bigint;
     firstName: string;
-    pic: string;
     balance: number;
     friends: number;
     authDate: Date;
@@ -68,7 +67,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
         };
 
         document.head.appendChild(script);
-    }, [platform]);
+    }, []);
 
     useEffect(() => {
         if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
@@ -97,19 +96,33 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
 
             fetchUser();
         } else {
-            setUser({ 
+            // const fetchUser = async () => {
+            //     try {
+            //         const res = await fetch(`/api/user?tg_id=${336417426}`);
+            //         if (!res.ok) throw new Error("Unable to run check-user.");
+
+            //         const [user] = await res.json();
+            //         setUser(user);
+            //     } catch (error) {
+            //         console.error(error);
+            //     }
+            // }
+
+            // fetchUser();
+            setUser({
                 id: 1,
-                tg_id: BigInt(86425255181), // Use the 'n' suffix for bigint
-                firstName: "userLocal",
-                pic: "https://via.placeholder.com/150", // Example placeholder image
-                balance: 100,
-                friends: 5,
-                authDate: new Date(), // Current date and time
-            });
+                tg_id: BigInt(129372),
+                firstName: "Abdulaziz",
+                balance: 11200000,
+                friends: 0,
+                authDate: new Date()
+            })
         }
 
-        setLoading(false);
-    }, [initData, dataUnsafe])
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000)
+    }, [])
 
     return (
         <InitDataContext.Provider value={{ user, platform }}>

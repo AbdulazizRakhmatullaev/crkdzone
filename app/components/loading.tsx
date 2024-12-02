@@ -4,7 +4,7 @@ import Image from 'next/image';
 const Loading = () => {
     return (
         <div className="h-full w-full bg-black">
-            <div className='loadcol flex flex-col p-[30px] gap-0 items-center justify-center'>
+            <div className='flex flex-col px-[20px] gap-5 h-full items-center justify-center'>
                 <Image
                         src="/nuke.gif"
                         alt="img"
@@ -12,49 +12,11 @@ const Loading = () => {
                         unoptimized={true}
                         width={600}
                         height={155}
-                        className='border-solid border border-white'
+                    className='border-solid border border-[#2d2d2d]'
                     />
-                {/* <div className="clcrd">
-                    <Image
-                        src="/callcard-2.gif"
-                        alt="img"
-                        priority={true}
-                        unoptimized={true}
-                        width={600}
-                        height={155}
-                    />
-                </div> */}
-                <div className='font-HitConBlk uppercase text-2xl'>
-                    Survive and earn your freedom.
+                <div className='font-HitConBlk uppercase text-[15px]'>
+                    Dangerour zone, this is crackedzone.
                 </div>
-                {/* <div className="font-HitConBlk text-4xl">
-                    <div className="animate-ping absolute">
-                        Survive and earn your freedom
-                    </div>
-                    <div>
-                        CRACKEDZONE
-                    </div>
-                </div> */}
-                {/* <div className="clcrd">
-                    <Image
-                        src="/callcard-1.webp"
-                        alt="img"
-                        priority={true}
-                        unoptimized={true}
-                        width={600}
-                        height={155}
-                    />
-                </div>
-                <div className="clcrd">
-                    <Image
-                        src="/callcard-3.gif"
-                        alt="img"
-                        priority={true}
-                        unoptimized={true}
-                        width={600}
-                        height={155}
-                    />
-                </div> */}
             </div>
         </div>
     )
