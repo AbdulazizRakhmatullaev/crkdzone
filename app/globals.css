@@ -86,7 +86,7 @@ a {
 }
 
 #navbar.dsk {
-  height: 51px;
+  height: 49px;
 }
 
 #navbar.phn {
@@ -121,7 +121,7 @@ a {
 .lnk {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-grow: 1;
   color: #adabab;
   padding: 15px 0;
