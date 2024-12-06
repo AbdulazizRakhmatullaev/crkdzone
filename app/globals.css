@@ -32,12 +32,17 @@ body {
 }
 
 body {
-  background: #000;
+  background: rgba(0, 0, 0, 0.69);
   font-family: "Hitmarker Regular", Arial;
   font-size: 14px;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
+  background-image: url("/dmcs.jpeg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
 }
 
 * {
@@ -424,6 +429,7 @@ background: #fff;
   align-items: center;
   gap: 15px;
 }
+
 th {
   padding: 5px 15px;
   text-transform: uppercase;

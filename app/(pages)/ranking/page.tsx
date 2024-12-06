@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Header from "@/app/components/header";
 import { useInitData } from "@/app/contexts/initData";
 import Spinner from "@/app/components/spinner";
 
 type User = {
   id: number;
   tg_id: bigint;
-  firstName: string;
+  name: string;
   balance: number;
   friends: number;
   authDate: Date;
@@ -20,75 +19,25 @@ export default function Ranking() {
   const [users, setUsers] = useState<RankedUser[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useInitData();
-  const [firstName, setFirstName] = useState("Name");
+  const [name, setName] = useState("Name");
   const [myRank, setMyRank] = useState(0);
 
   useEffect(() => {
-    if (user?.firstName !== undefined) {
-      setFirstName(user?.firstName);
+    if (user?.name !== undefined) {
+      setName(user?.name);
     }
 
     const fetchUsers = async () => {
       try {
-        // const res = await fetch(`/api/users`);
-        // if (!res.ok) throw new Error("Unable to fetch users");
+        const res = await fetch(`/api/users`);
+        if (!res.ok) throw new Error("Unable to fetch users");
 
-        const res = [
-          {
-            id: user?.id,
-            tg_id: user?.tg_id,
-            firstName: user?.firstName,
-            balance: user?.balance,
-            friends: user?.friends,
-            authDate: user?.authDate
-          },
-          {
-            id: 23,
-            tg_id: BigInt(129372),
-            firstName: "user 124",
-            balance: 99999,
-            friends: 0,
-            authDate: new Date()
-          },
-          {
-            id: 22,
-            tg_id: BigInt(129372),
-            firstName: "user 2",
-            balance: 100,
-            friends: 0,
-            authDate: new Date()
-          },
-          {
-            id: 3,
-            tg_id: BigInt(129372),
-            firstName: "user 3",
-            balance: 1020,
-            friends: 0,
-            authDate: new Date()
-          },
-          {
-            id: 4,
-            tg_id: BigInt(129372),
-            firstName: "user ",
-            balance: 102240,
-            friends: 0,
-            authDate: new Date()
-          },
-          {
-            id: 5,
-            tg_id: BigInt(129372),
-            firstName: "user 5",
-            balance: 1200200,
-            friends: 0,
-            authDate: new Date()
-          },
-        ]
-
-        const fetchedUsers: RankedUser[] = res as RankedUser[];
-        const wBalUsers = fetchedUsers.filter((u) => u.balance !== 0)
+        // const fetchedUsers: RankedUser[] = res as RankedUser[];
+        const fetchedUsers: RankedUser[] = await res.json();
+        // const wBalUsers = fetchedUsers.filter((u) => u.balance !== 0)
 
         // Step 2: Sort users by balance (descending) and authDate (ascending)
-        const sortedUsers = wBalUsers.sort((a, b) => {
+        const sortedUsers = fetchedUsers.sort((a, b) => {
           if (a.balance !== b.balance) {
             return b.balance - a.balance;
           }
@@ -116,7 +65,8 @@ export default function Ranking() {
 
         // Step 4: Sort by rank for consistent display
         const finalRankedUsers = [...rankedUsers].sort((a, b) => a.rank - b.rank);
-        setUsers(finalRankedUsers);
+        const topUsers = finalRankedUsers.slice(0, 150)
+        setUsers(topUsers);
 
         // Step 5: Determine the current user's rank from the original data
         const myRank = fetchedUsers
@@ -172,38 +122,44 @@ export default function Ranking() {
 
   return (
     <>
-      <Header
-        title="Ranking"
-        desc="Put in the effort and prove your worth. Rank up and show them what you’re made of. Where only the toughest survive!"
-      />
+      <div className="uppercase font-HitConBlk text-3xl text-center">Top 150</div>
+      <div className="uppercase font-HitConBlk text-[#888888] text-[13px] text-center mt-[-5px] mb-5">Ranked soldiers</div>
 
       {loading ? (
         <Spinner />
       ) : (
-          <table className="w-full">
+          <table className="w-full border-separate border-spacing-y-2">
             <thead>
               <tr>
-                <th className="w-[80px] text-left">Position</th>
-                <th className="text-left">Name</th>
-                <th className="text-center w-[80px]">Balance</th>
+                <th className="w-[80px] text-left py-0">Position</th>
+                <th className="text-left py-0">Name</th>
+                <th className="text-center w-[80px] py-0">Balance</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-[#161616]">
+              <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
                 <td className="text-left">
                   {myRank} <span className="text-[13px] ml-2 p-[2px] py-0 bg-[#FFD700] text-black">You</span>
                 </td>
-                <td>{firstName}</td>
+                <td>{name}</td>
                 {user?.balance !== undefined ? (
-                  <td className="text-center relative" onClick={user?.balance >= 100000 ? () => showBal(user?.tg_id) : () => ""}>
-                    <span id={`userBal-${user?.tg_id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user?.balance)} -</span> <span className="cursor-pointer">{allSprt(user?.balance)}</span>
-                  </td>
-                ) : null}
+                  user?.balance >= 100000 ? (
+                    <td className="text-center relative" onClick={() => showBal(user?.tg_id)}>
+                      <span id={`userBal-${user?.tg_id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user?.balance)} -</span> <span className="cursor-pointer">{allSprt(user?.balance)}</span>
+                    </td>
+                  ) : (
+                    <td className="text-center relative">
+                      <span id={`userBal-${user?.tg_id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user?.balance)} -</span> <span className="cursor-pointer">{allSprt(user?.balance)}</span>
+                    </td>
+                  )
+                ) : (
+                  <td className="text-center">0</td>
+                )}
               </tr>
               {users.map((user) => (
-                <tr key={user.id} className={`bg-[#161616] border-t-[8px] border-black ${user.rank === 1 ? "text-[#FFD700]" : ""}${user.rank === 2 ? "text-[#c0c0c0] " : ""}${user.rank === 3 ? "text-[#CD7F32]" : ""}`}>
+                <tr key={user.id} className={`bg-[#1c1c1c99] backdrop-blur-sm ${user.rank === 1 ? "text-[#FFD700]" : ""}${user.rank === 2 ? "text-[#c0c0c0] " : ""}${user.rank === 3 ? "text-[#CD7F32]" : ""}`}>
                   <td className="text-left">{user.rank}</td>
-                  <td>{user.firstName}</td>
+                  <td>{user.name}</td>
                   <td className="text-center relative" onClick={user.balance >= 100000 ? () => showBal(user.id) : () => ""}>
                     <span id={`userBal-${user.id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user.balance)} -</span> <span className="cursor-pointer">{allSprt(user.balance)}</span>
                   </td>

@@ -1,16 +1,10 @@
 "use client";
 
-import Header from "@/app/components/header";
 import Link from "next/link";
 
 export default function Missions() {
   return (
     <>
-      <Header
-        title="Missions"
-        desc="Hit every objective like your life depends on it — no excuses, no delays! Points don’t come easy, soldier. Stay sharp and stay ready!"
-      />
-
       <div>
         <div className="ml-[10px] mb-[5px] mt-[30px] text-[#959595]">Essentials</div>
         <div className="mis">

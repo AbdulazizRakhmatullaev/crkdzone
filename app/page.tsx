@@ -6,7 +6,7 @@ import { useInitData } from "./contexts/initData";
 export default function Base() {
   const { user } = useInitData();
   const [balance, setBalance] = useState("0");
-  const [firstName, setFirstName] = useState("Name#00000000");
+  const [name, setName] = useState("Name");
   const [dt, setDt] = useState("initializing...");
 
   useEffect(() => {
@@ -14,11 +14,11 @@ export default function Base() {
       setBalance(user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
     }
 
-    if (user?.firstName !== undefined) {
-      setFirstName(`${user?.firstName}`);
+    if (user?.name !== undefined) {
+      setName(`${user?.name}`);
     }
 
-    if (user?.authDate !== undefined) {
+    if (user?.joined_at !== undefined) {
       const date = new Date();
       setDt(`${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`)
     }
@@ -38,7 +38,7 @@ export default function Base() {
             <tbody>
               <tr className="border border-[#2d2d2d]">
                 <td>
-                  {firstName}<span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
+                  {name}<span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
                 </td>
               </tr>
             </tbody>

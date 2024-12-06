@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const { tg_id, firstName, pic } = await req.json();
+        const { tg_id, username, name } = await req.json();
         const dateTime = new Date().toISOString();
 
         const { data: existingUser, error: fetchError } = await supabase
-            .from('User')
+            .from('users')
             .select('*')
             .eq('tg_id', tg_id)
             .single();
@@ -20,12 +20,12 @@ export async function POST(req: Request) {
 
         if (!existingUser) {
             const { data: newUser, error: createError } = await supabase
-                .from('User')
+                .from('users')
                 .insert([
                     {
                         tg_id,
-                        firstName,
-                        pic,
+                        name,
+                        username,
                         balance: 0,
                         friends: 0,
                         authDate: dateTime,

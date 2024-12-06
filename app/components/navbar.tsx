@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   const base = pathname === "/";
+  const events = pathname === "/events";
   const missions = pathname === "/missions";
   const ranking = pathname === "/ranking";
   const store = pathname === "/store";
@@ -24,6 +25,13 @@ const Navbar = () => {
         onClick={trigHapticFdb}
       >
         Base
+      </Link>
+      <Link
+        href="/events"
+        className={`lnk border-solid border-r border-[#2D2D2D] ${events ? "actlnk" : ""}`}
+        onClick={trigHapticFdb}
+      >
+        Events
       </Link>
       <Link
         href="/missions"

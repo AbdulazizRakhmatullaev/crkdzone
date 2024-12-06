@@ -6,16 +6,17 @@ import Loading from '../components/loading';
 interface User {
     id: number
     tg_id: bigint;
-    firstName: string;
+    username: string;
+    name: string;
     balance: number;
     friends: number;
-    authDate: Date;
+    joined_at: Date;
 }
 
 interface InitContextType {
     user: User | null;
     platform: string | undefined;
-}
+} 
 
 export const InitDataContext = createContext<InitContextType | undefined>(undefined);
 
@@ -73,8 +74,8 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
         if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
             const params = new URLSearchParams(initData);
             const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-            const firstName = dataUnsafe?.user?.first_name;
-            const pic = dataUnsafe?.user?.photo_url;
+            const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
+            const name = dataUnsafe?.user?.first_name;
 
             const fetchUser = async () => {
                 try {
@@ -83,7 +84,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ tg_id, firstName, pic })
+                        body: JSON.stringify({ tg_id, username, name })
                     });
                     if (!res.ok) throw new Error("Unable to run check-user.");
 
@@ -96,27 +97,19 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
 
             fetchUser();
         } else {
-            // const fetchUser = async () => {
-            //     try {
-            //         const res = await fetch(`/api/user?tg_id=${336417426}`);
-            //         if (!res.ok) throw new Error("Unable to run check-user.");
+            const fetchUser = async () => {
+                try {
+                    const res = await fetch(`/api/user?tg_id=${336417426}`);
+                    if (!res.ok) throw new Error("Unable to run check-user.");
 
-            //         const [user] = await res.json();
-            //         setUser(user);
-            //     } catch (error) {
-            //         console.error(error);
-            //     }
-            // }
+                    const [user] = await res.json();
+                    setUser(user);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
 
-            // fetchUser();
-            setUser({
-                id: 1,
-                tg_id: BigInt(129372),
-                firstName: "Abdulaziz",
-                balance: 11200000,
-                friends: 0,
-                authDate: new Date()
-            })
+            fetchUser();
         }
 
         setTimeout(() => {
