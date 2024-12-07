@@ -28,7 +28,7 @@ export async function POST(req: Request) {
                         username,
                         balance: 0,
                         friends: 0,
-                        authDate: dateTime,
+                        joined_at: dateTime,
                     },
                 ])
                 .select()
