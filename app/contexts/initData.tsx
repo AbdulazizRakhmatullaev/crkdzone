@@ -99,7 +99,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
         } else {
             const fetchUser = async () => {
                 try {
-                    const res = await fetch(`/api/user?tg_id=${336417426}`);
+                    const res = await fetch(`/api/user?tg_id=${19236123125}`);
                     if (!res.ok) throw new Error("Unable to run check-user.");
 
                     const [user] = await res.json();
