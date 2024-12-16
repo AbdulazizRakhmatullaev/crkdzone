@@ -97,15 +97,15 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
 
             fetchUser();
         } 
-        setUser({
-            id: 1,
-            tg_id: BigInt(120401824),
-            username: "anonUser",
-            name: "Anonymous",
-            balance: 10000000,
-            friends: 0,
-            joined_at: new Date(),
-        });
+        // setUser({
+        //     id: 1,
+        //     tg_id: BigInt(120401824),
+        //     username: "anonUser",
+        //     name: "Anonymous",
+        //     balance: 10000000,
+        //     friends: 0,
+        //     joined_at: new Date(),
+        // });
 
         setTimeout(() => {
             setLoading(false);
