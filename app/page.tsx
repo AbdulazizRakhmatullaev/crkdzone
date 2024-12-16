@@ -41,7 +41,8 @@ export default function Base() {
               <tbody>
                 <tr className="border border-[#2d2d2d]">
                   <td>
-                    {name} <span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
+                    {name}
+                    <span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
                   </td>
                 </tr>
               </tbody>
@@ -57,7 +58,7 @@ export default function Base() {
               <tbody>
                 <tr className="text-center border border-[#2d2d2d]">
                   <td>
-                    {balance} <span className="text-xs text-[#6e6e6e]">CZ</span>
+                  <span className="text-xs text-[#6e6e6e]">CZ</span> {balance}
                   </td>
                 </tr>
               </tbody>

@@ -68,7 +68,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
         };
 
         document.head.appendChild(script);
-    }, []);
+    }, [platform]);
 
     useEffect(() => {
         if (window.Telegram?.WebApp) {
@@ -110,7 +110,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
         setTimeout(() => {
             setLoading(false);
         }, 2000)
-    }, [])
+    }, [initData, dataUnsafe?.user?.first_name])
 
     return (
         <InitDataContext.Provider value={{ user, platform }}>
