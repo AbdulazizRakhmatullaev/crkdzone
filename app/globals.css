@@ -108,11 +108,16 @@ a {
 }
 
 .frmbtn {
-  background: #bf0202;
+  background: #b30202;
   color: #fff;
   padding: 10px 20px;
   font-family: "Hitmarker Bold", Arial;
   text-transform: uppercase;
+    background-blend-mode: difference;
+      background-image: url("/dmcs.jpeg");
+      background-size: cover;
+      background-position: center left;
+      background-repeat: no-repeat;
 }
 
 .lnk {
