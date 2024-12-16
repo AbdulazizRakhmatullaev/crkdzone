@@ -32,17 +32,17 @@ body {
 }
 
 body {
-  background: rgba(0, 0, 0, 0.69);
+  background: #000;
   font-family: "Hitmarker Regular", Arial;
   font-size: 14px;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   font-synthesis: none;
-  background-image: url("/dmcs.jpeg");
+  /* background-image: url("/dmcs.jpeg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-blend-mode: multiply;
+  background-blend-mode: multiply; */
 }
 
 * {
@@ -91,7 +91,7 @@ a {
 }
 
 #navbar.dsk {
-  height: 49px;
+  height: auto;
 }
 
 #navbar.phn {
@@ -107,17 +107,10 @@ a {
   height: 100%;
 }
 
-.frmcol {
-  max-width: 600px;
-  margin: 0 auto;
-  backdrop-filter: blur(25px);
-}
-
 .frmbtn {
   background: #D80A0A;
   color: #fff;
   padding: 10px 20px;
-  width: 100%;
   font-family: "Hitmarker Bold", Arial;
   text-transform: uppercase;
   border: 1px solid #950000;
@@ -342,8 +335,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
-  height: 60px;
+  padding: 5px 15px;
   margin-bottom: 10px;
   border: 1px solid #2d2d2d;
 }

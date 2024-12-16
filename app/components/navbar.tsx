@@ -7,7 +7,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const base = pathname === "/";
   const events = pathname === "/events";
-  const missions = pathname === "/missions";
   const ranking = pathname === "/ranking";
   const store = pathname === "/store";
 
@@ -34,25 +33,18 @@ const Navbar = () => {
         Events
       </Link>
       <Link
-        href="/missions"
-        className={`lnk border-solid border-r border-[#2D2D2D] ${missions ? "actlnk" : ""}`}
-        onClick={trigHapticFdb}
-      >
-        Missions
-      </Link>
-      <Link
-        href="/ranking"
-        className={`lnk border-solid border-r border-[#2D2D2D] ${ranking ? "actlnk" : ""}`}
-        onClick={trigHapticFdb}
-      >
-        Ranking
-      </Link>
-      <Link
         href="/store"
-        className={`lnk ${store ? "actlnk" : ""}`}
+        className={`lnk border-solid border-r border-[#2D2D2D] ${store ? "actlnk" : ""}`}
         onClick={trigHapticFdb}
       >
         Store
+      </Link>
+      <Link
+        href="/ranking"
+        className={`lnk ${ranking ? "actlnk" : ""}`}
+        onClick={trigHapticFdb}
+      >
+        Ranking
       </Link>
     </div>
   );

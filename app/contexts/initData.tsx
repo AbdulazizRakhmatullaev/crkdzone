@@ -41,7 +41,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
     const [initData, setInitData] = useState("");
     const [dataUnsafe, setDataUnsafe] = useState<DataUnsafe | null>(null);
-    const [platform, setPlatform] = useState("phn");
+    const [platform, setPlatform] = useState("dsk");
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -71,7 +71,7 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     }, []);
 
     useEffect(() => {
-        if (window.Telegram?.WebApp && process.env.NODE_ENV === "production") {
+        if (window.Telegram?.WebApp) {
             const params = new URLSearchParams(initData);
             const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
             const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
@@ -97,21 +97,15 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
 
             fetchUser();
         } 
-        else {
-            const fetchUser = async () => {
-                try {
-                    const res = await fetch(`/api/user?tg_id=${86425255181}`);
-                    if (!res.ok) throw new Error("Unable to run check-user.");
-
-                    const [user] = await res.json();
-                    setUser(user);
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-
-            fetchUser();
-        }
+        setUser({
+            id: 1,
+            tg_id: BigInt(120401824),
+            username: "anonUser",
+            name: "Anonymous",
+            balance: 10000000,
+            friends: 0,
+            joined_at: new Date(),
+        });
 
         setTimeout(() => {
             setLoading(false);

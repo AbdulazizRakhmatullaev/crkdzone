@@ -19,7 +19,7 @@ export default function Ranking() {
   const [users, setUsers] = useState<RankedUser[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useInitData();
-  const [name, setName] = useState("Name");
+  const [name, setName] = useState("Unkown");
   const [myRank, setMyRank] = useState(0);
 
   useEffect(() => {

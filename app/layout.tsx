@@ -5,7 +5,8 @@ import LayoutContent from "./components/lytCon";
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
-  title: 'Crackedzone'
+  title: 'Crackedzone',
+  
 }
 
 export const generateViewport = () => ({
