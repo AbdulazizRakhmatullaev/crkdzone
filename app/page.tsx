@@ -17,58 +17,56 @@ export default function Base() {
 
     if (user?.joined_at !== undefined) {
       const date = new Date();
-      setDt(`${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`)
+      setDt(`${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`);
     }
 
     if (user?.balance !== undefined) {
-      setBalance(user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+      setBalance(
+        user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      );
     }
-  }, [])
+  }, [user]);
 
   return (
     <div className="base flex flex-col items-center h-full w-full">
-      <span className="fixed right-0 top-0 text-[10px] text-[#313131]">date joined {dt}</span>
+      <span className="fixed right-0 top-0 text-[10px] text-[#313131]">
+        date joined {dt}
+      </span>
       <div className="infos w-full">
-        <div className="pb-[5px] pl-[15px] text-[#959595] text-[12px] uppercase">Player&apos;s data</div>
-        <div className="w-full flex gap-[10px]">
+        <div className="w-full flex gap-[5px]">
           <div className="w-full flex flex-col gap-[10px]">
             <table className="w-full">
               <thead>
-                <tr className="bg-[#161616] border border-[#2d2d2d]">
+                <tr>
                   <th className="text-left">Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border border-[#2d2d2d]">
-                  <td>
-                    {name}
-                    <span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="w-[200px]">
-            <table className="w-full h-full">
-              <thead>
-                <tr className="bg-[#161616] border border-[#2d2d2d]">
+                  <th className="text-left">Armor</th>
+                  <th className="text-left">Stamina</th>
                   <th className="text-center">Balance</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="text-center border border-[#2d2d2d]">
+                <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
                   <td>
-                  <span className="text-[#6e6e6e]">CZ</span> {balance}
+                    {name}
+                    <span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
                   </td>
+                  <td className="text-left">1 000</td>
+                  <td className="text-left">2 000</td>
+                  <td className="text-center"><span className="text-[#6e6e6e]">CZ</span> {balance}</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
         <button className="frmbtn w-full mt-[10px]">To war</button>
+        <div className="flex justify-center">
+          <div className="text-center w-24 text-xs mt-[5px] bg-[#1c1c1c99] backdrop-blur-sm px-2 py-1 text-[#6e6e6e] cursor-pointer">How it works?</div>
+        </div>
       </div>
       <div className="w-full mt-[25px]">
-        <div className="pb-[5px] pl-[15px] text-[#959595] text-[12px] uppercase">Missions</div>
+        <div className="pb-[5px] pl-[15px] text-[#959595] text-[12px] uppercase">
+          Missions
+        </div>
         <div className="mis">
           <div className="flex flex-col">
             <div>Join telegram channel</div>
@@ -90,4 +88,4 @@ export default function Base() {
       </div>
     </div>
   );
-};
+}

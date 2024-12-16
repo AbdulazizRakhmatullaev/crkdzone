@@ -108,12 +108,11 @@ a {
 }
 
 .frmbtn {
-  background: #D80A0A;
+  background: #bf0202;
   color: #fff;
   padding: 10px 20px;
   font-family: "Hitmarker Bold", Arial;
   text-transform: uppercase;
-  border: 1px solid #950000;
 }
 
 .lnk {
@@ -345,7 +344,7 @@ a {
 }
 
 .misProg {
-background: #fff;
+background: #dcdcdc;
   padding: 3px 10px;
   border: 1px solid #000;
   text-transform: capitalize;

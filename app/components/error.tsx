@@ -8,6 +8,7 @@ export default function Error() {
                 src="/noUsername.jpg"
                 alt="img"
                 priority={true}
+                
                 width={250}
                 className='mb-10'
             />
