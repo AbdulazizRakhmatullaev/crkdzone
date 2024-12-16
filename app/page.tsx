@@ -46,10 +46,7 @@ export default function Base() {
               </thead>
               <tbody>
                 <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
-                  <td>
-                    {name}
-                    <span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
-                  </td>
+                  <td>{name}</td>
                   <td className="text-left">1 000</td>
                   <td className="text-left">2 000</td>
                   <td className="text-center"><span className="text-[#6e6e6e]">CZ</span> {balance}</td>
