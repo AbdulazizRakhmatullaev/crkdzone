@@ -7,8 +7,8 @@ import Link from "next/link";
 export default function Base() {
   const { user } = useInitData();
   const [balance, setBalance] = useState("0");
-  const [name, setName] = useState("Name");
-  const [dt, setDt] = useState("Initializing...");
+  const [name, setName] = useState("Unknown");
+  const [dt, setDt] = useState("00/00/00");
 
   useEffect(() => {
     if (user?.name !== undefined) {
@@ -58,7 +58,7 @@ export default function Base() {
               <tbody>
                 <tr className="text-center border border-[#2d2d2d]">
                   <td>
-                  <span className="text-xs text-[#6e6e6e]">CZ</span> {balance}
+                  <span className="text-[#6e6e6e]">CZ</span> {balance}
                   </td>
                 </tr>
               </tbody>
