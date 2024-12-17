@@ -9,7 +9,9 @@ interface User {
     username: string;
     name: string;
     balance: number;
-    friends: number;
+    armor: number;
+    stamina: number;
+    squad: number;
     joined_at: Date;
 }
 
@@ -71,41 +73,45 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
     }, []);
 
     useEffect(() => {
-        if (window.Telegram?.WebApp) {
-            const params = new URLSearchParams(initData);
-            const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
-            const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
-            const name = dataUnsafe?.user?.first_name;
+        // if (window.Telegram?.WebApp) {
+        //     const params = new URLSearchParams(initData);
+        //     const tg_id = params.get("user") ? JSON.parse(params.get("user")!).id : null;
+        //     const username = params.get("user") ? JSON.parse(params.get("user")!).username : null;
+        //     const name = dataUnsafe?.user?.first_name;
 
-            const fetchUser = async () => {
-                try {
-                    const res = await fetch("/api/check-user", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ tg_id, username, name })
-                    });
-                    if (!res.ok) throw new Error("Unable to run check-user.");
+        //     const fetchUser = async () => {
+        //         try {
+        //             const res = await fetch("/api/check-user", {
+        //                 method: "POST",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                 },
+        //                 body: JSON.stringify({ tg_id, username, name })
+        //             });
+        //             if (!res.ok) throw new Error("Unable to run check-user.");
 
-                    const user = await res.json();
-                    setUser(user);
-                } catch (error) {
-                    console.error(error);
-                }
+        //             const user = await res.json();
+        //             setUser(user);
+        //         } catch (error) {
+        //             console.error(error);
+        //         }
+        //     }
+
+        //     fetchUser();
+        // } 
+        const fetchUser = async () => {
+            try {
+                const res = await fetch("/api/user?tg_id=336417426");
+                if (!res.ok) throw new Error("Unable to run check-user.");
+
+                const [user] = await res.json();
+                setUser(user);
+            } catch (error) {
+                console.error(error);
             }
+        }
 
-            fetchUser();
-        } 
-        // setUser({
-        //     id: 1,
-        //     tg_id: BigInt(120401824),
-        //     username: "anonUser",
-        //     name: "Anonymous",
-        //     balance: 10000000,
-        //     friends: 0,
-        //     joined_at: new Date(),
-        // });
+        fetchUser();
 
         setTimeout(() => {
             setLoading(false);

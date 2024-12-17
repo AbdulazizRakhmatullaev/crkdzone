@@ -138,29 +138,29 @@ export default function Ranking() {
             </thead>
             <tbody>
               <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
-                <td className="text-left">
+                <td className="text-left border-r-0">
                   {myRank} <span className="text-[13px] ml-2 p-[2px] py-0 bg-[#FFD700] text-black">You</span>
                 </td>
-                <td>{name}</td>
+                <td className="border-x-0">{name}</td>
                 {user?.balance !== undefined ? (
                   user?.balance >= 100000 ? (
-                    <td className="text-center relative" onClick={() => showBal(user?.tg_id)}>
+                    <td className="border-l-0 text-center relative" onClick={() => showBal(user?.tg_id)}>
                       <span id={`userBal-${user?.tg_id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user?.balance)} -</span> <span className="cursor-pointer">{allSprt(user?.balance)}</span>
                     </td>
                   ) : (
-                    <td className="text-center relative">
+                    <td className="border-l-0 text-center relative">
                       <span id={`userBal-${user?.tg_id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user?.balance)} -</span> <span className="cursor-pointer">{allSprt(user?.balance)}</span>
                     </td>
                   )
                 ) : (
-                  <td className="text-center">0</td>
+                  <td className="text-center border-l-0">0</td>
                 )}
               </tr>
               {users.map((user) => (
                 <tr key={user.id} className={`bg-[#1c1c1c99] backdrop-blur-sm ${user.rank === 1 ? "text-[#FFD700]" : ""}${user.rank === 2 ? "text-[#c0c0c0] " : ""}${user.rank === 3 ? "text-[#CD7F32]" : ""}`}>
-                  <td className="text-left">{user.rank}</td>
-                  <td>{user.name}</td>
-                  <td className="text-center relative" onClick={user.balance >= 100000 ? () => showBal(user.id) : () => ""}>
+                  <td className="text-left border-r-0">{user.rank}</td>
+                  <td className="border-x-0">{user.name}</td>
+                  <td className="border-l-0 text-center relative" onClick={user.balance >= 100000 ? () => showBal(user.id) : () => ""}>
                     <span id={`userBal-${user.id}`} className="absolute opacity-0 w-full text-right right-[68px] text-[#494949]">{thdSprt(user.balance)} -</span> <span className="cursor-pointer">{allSprt(user.balance)}</span>
                   </td>
                 </tr>
