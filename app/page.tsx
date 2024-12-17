@@ -41,9 +41,9 @@ export default function Base() {
     }
   }, [user]);
 
-  const Farm = (status: string) => {
+  // const Farm = (status: string) => {
 
-  }
+  // }
 
   return (
     <div className="base flex flex-col items-center h-full w-full">
