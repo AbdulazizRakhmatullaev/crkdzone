@@ -7,13 +7,13 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
   const { platform } = useInitData();
 
   return (
-    <>
+    <section id="content">
       <main id="main" className={platform}>
         {children}
       </main>
-      <footer id="navbar" className={platform}>
+      <nav id="navbar" className={platform}>
         <Navbar />
-      </footer>
-    </>
+      </nav>
+    </section>
   );
 }
