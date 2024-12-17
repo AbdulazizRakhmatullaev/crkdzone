@@ -29,8 +29,8 @@ export default function Base() {
 
   return (
     <div className="base flex flex-col items-center h-full w-full">
-      <span className="fixed right-0 top-0 text-[10px] text-[#313131]">
-        date joined {dt}
+      <span className="fixed right-0 top-0 text-[9px] text-[#313131]">
+        {dt}
       </span>
       <div className="infos w-full">
         <div className="w-full flex gap-[5px]">
@@ -39,17 +39,30 @@ export default function Base() {
               <thead>
                 <tr>
                   <th className="text-left">Name</th>
-                  <th className="text-left">Armor</th>
-                  <th className="text-left">Stamina</th>
-                  <th className="text-center">Balance</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
-                  <td>{name}</td>
+                  <td>
+                    {name}
+                    <span className="text-xs text-[#6e6e6e]">#{user?.tg_id}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table className="w-full">
+              <thead>
+                <tr>
+                  <th className="text-left">Balance</th>
+                  <th className="text-left">Armor</th>
+                  <th className="text-left">Stamina</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
+                  <td className="text-left"><span className="text-[#6e6e6e]">CZ</span> {balance}</td>
                   <td className="text-left">1 000</td>
                   <td className="text-left">2 000</td>
-                  <td className="text-center"><span className="text-[#6e6e6e]">CZ</span> {balance}</td>
                 </tr>
               </tbody>
             </table>
