@@ -1,7 +1,7 @@
 "use client";
 
 import { useInitData } from "../contexts/initData";
-// import Navbar from "./navbar";
+import Navbar from "./navbar";
 
 export default function LayoutContent({ children }: { children: React.ReactNode }) {
   const { platform } = useInitData();
@@ -11,9 +11,9 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
       <main id="main" className={platform}>
         {children}
       </main>
-      {/* <nav id="navbar" className={platform}>
+      <nav id="navbar" className={platform}>
         <Navbar />
-      </nav> */}
+      </nav>
     </section>
   );
 }
