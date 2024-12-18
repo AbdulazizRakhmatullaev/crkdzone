@@ -104,12 +104,12 @@ a {
 .frmbtn {
   background: #b30202;
   color: #fff;
-  padding: 5px 20px;
+  padding: 3px 20px;
+  font-size: 17px;
   font-family: "Hitmarker Bold", Arial;
   text-transform: uppercase;
   background-blend-mode: difference;
-  background-image: url("/dmcs.jpeg");
-  background-repeat: no-repeat; 
+  background-image: url("/dmcs.png");
   background-size: cover;
 }
 
