@@ -61,7 +61,7 @@ export default function Base() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
+                <tr className="bg-[#1c1c1c99]">
                   <td className="border-r-0">
                     {name}
                     <span className="text-[8px] text-[#6e6e6e]">#{`${user?.tg_id === undefined ? "00000000" : user?.tg_id}`}</span>
@@ -81,7 +81,7 @@ export default function Base() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-[#1c1c1c99] backdrop-blur-sm">
+                <tr className="bg-[#1c1c1c99]">
                   <td className="text-left border-r-0">{arm}</td>
                   <td className="text-left border-l-0">{sta}</td>
                 </tr>

@@ -27,7 +27,9 @@ export async function POST(req: Request) {
                         name,
                         username,
                         balance: 0,
-                        friends: 0,
+                        armor: 1000,
+                        stamina: 1000,
+                        squad: 0,
                         joined_at: dateTime,
                     },
                 ])
