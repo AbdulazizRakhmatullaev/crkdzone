@@ -99,19 +99,19 @@ export function InitDataProvider({ children }: { children: ReactNode }) {
 
             fetchUser();
         } 
-        // const fetchUser = async () => {
-        //     try {
-        //         const res = await fetch("/api/user?tg_id=336417426");
-        //         if (!res.ok) throw new Error("Unable to run check-user.");
+        const fetchUser = async () => {
+            try {
+                const res = await fetch("/api/user?tg_id=336417426");
+                if (!res.ok) throw new Error("Unable to run check-user.");
 
-        //         const [user] = await res.json();
-        //         setUser(user);
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // }
+                const [user] = await res.json();
+                setUser(user);
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
-        // fetchUser();
+        fetchUser();
 
         setTimeout(() => {
             setLoading(false);
